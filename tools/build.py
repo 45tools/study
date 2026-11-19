@@ -80,7 +80,9 @@ open(S("manifest.json"), "w", encoding="utf-8").write(json.dumps({
     "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
               {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}, ensure_ascii=False, indent=1))
 
-files = ["./", "index.html", "data.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"]
+import shutil
+shutil.copy(S("src", "math.js"), S("math.js"))
+files = ["./", "index.html", "data.js", "math.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"]
 sw = f'''const C="study-{ver}";
 const FILES={json.dumps(files)};
 self.addEventListener("install",e=>{{e.waitUntil(caches.open(C).then(c=>c.addAll(FILES.map(u=>new Request(u,{{cache:"reload"}})))).catch(()=>{{}}));self.skipWaiting();}});
