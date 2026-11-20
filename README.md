@@ -12,4 +12,4 @@
 - 編集するのは `src/shell.html`（画面とゲーム）と `src/data/reasons.csv`（まちがえた理由：問題ID・選択肢・理由）
 - 素材（CSV・音声・動画の記録）は `~/projects/勉強動画/入試2027/` から `python3 tools/import_data.py` で取り込む（投稿が進んだら取り込み直すと「動画」ボタンが各ショートに直接つながる）
 - `python3 tools/build.py` → `index.html`・`data.js`・`manifest.json`・`sw.js` を書き出す（`src/shell.html` の `APP_VER` を上げてから）
-- アイコンは `python3 tools/icons.py`（Playwright）
+- アイコンは `python3 tools/icons.py`（Playwright）。Playwright がないときは、同じ SVG を `~/Library/Caches/ms-playwright` の chrome-headless-shell で `--screenshot` しても作れる
