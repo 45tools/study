@@ -477,7 +477,225 @@ function coin(){ const t=pick(["c2a","c2b","c3a","c3b","c3c","b1","b2"]);
   const c2=k=>k*(k-1)/2, N=c2(n), ans=frc(c2(r),N), q=`赤玉 ${r} 個、白玉 ${w} 個の袋から同時に2個取り出すとき、2個とも赤玉の確率は？`;
   return {q,ans,wrongs:W(ans,[{v:frc(r*r,n*n),why:"同時に取り出すので、同じ玉を2回は取れません。組み合わせを数えます。"},{v:frc(r*w,N),why:"それは赤と白が1個ずつの確率です。"},{v:frc(N-c2(r),N),why:"それは2個とも赤にならない確率です。"},{v:w>=2?frc(c2(w),N):null,why:"それは2個とも白の確率です。"}]),exp:`取り出し方は全部で ${N} 通り、2個とも赤は ${c2(r)} 通り → ${ans}`,tf:v=>`${q.replace("確率は？","確率は ")}${v}`,kind:"word"}; }
 
-/* ========== 単元（学習指導要領 数学 第1学年・第2学年 A 数と式・B 図形・C 関数・D データの活用） ========== */
+/* ==================== 3年 ==================== */
+const RT=n=>`<span class="rt">√<span>${n}</span></span>`;
+// a√b（b=1 なら整数）
+const SR=(a,b)=>{ if(!a) return "0"; if(b===1) return num(a); return (a===1?"":a===-1?M:num(a))+RT(b); };
+function simp(n){ let a=1,b=n; for(let k=Math.floor(Math.sqrt(n));k>1;k--) if(n%(k*k)===0){ a=k; b=n/(k*k); break; } return [a,b]; }
+const SS=(n,c=1)=>{ const [a,b]=simp(n); return SR(c*a,b); };   // c√n を簡単にした形
+const SQF=[2,3,5,6,7];
+const NSQ=[2,3,5,6,7,8,10,11,12,13,14,15];
+const P2=(a,b,c,v="x")=>poly([[a,v+"²"],[b,v],[c,""]]);
+const XX=V("x");
+const RTS=(...r)=>`${XX} = ${[...new Set(r)].sort((p,q)=>p-q).map(num).join(", ")}`;
+
+/* ---------- A(1) 平方根 ---------- */
+function sq1(){ const t=pick(["root","val","neg","pow"]);
+  if(t==="root"){ const n=R(2,13),q=`${n*n} の平方根は？`,ans=`±${n}`;
+    return {q,ans,wrongs:W(ans,[{v:num(n),why:"平方根は正と負の2つあります。"},{v:M+n,why:"正の平方根もあります（2つ）。"},{v:`±${n*n*2}`,why:`2乗して ${n*n} になる数です。`},{v:`±${RT(n)}`,why:`${n}² = ${n*n} なので、√ はつきません。`}]),exp:`${n}² = ${n*n}、(${M}${n})² = ${n*n} → ±${n}`,tf:v=>`${n*n} の平方根は ${v}`,kind:"calc"}; }
+  if(t==="val"){ const n=R(2,13),Q0=RT(n*n);
+    return {q:Q0,ans:num(n),wrongs:W(n,[{v:`±${n}`,why:"√a は、正の方の平方根だけを表します。"},{v:n*n,why:`√ は「2乗して ${n*n} になる正の数」です。`}],n),exp:`${n}² = ${n*n} → ${Q0} = ${n}`,tf:v=>`${Q0} = ${v}`,kind:"calc"}; }
+  if(t==="neg"){ const n=R(2,13),Q0=M+RT(n*n);
+    return {q:Q0,ans:num(-n),wrongs:W(-n,[{v:n,why:`前に ${M} がついています。`},{v:`±${n}`,why:`${M}√a は負の方の平方根だけです。`},{v:-n*n,why:`√${n*n} = ${n} です。`}],-n),exp:`${RT(n*n)} = ${n} → ${M}${n}`,tf:v=>`${Q0} = ${v}`,kind:"calc"}; }
+  const k=pick(NSQ),neg=Math.random()<.5,Q0=`(${neg?M:""}${RT(k)})²`;
+  return {q:Q0,ans:num(k),wrongs:W(k,[{v:-k,why:neg?"負の数の2乗は正の数です。":"(√a)² = a です。"},{v:2*k,why:"2乗は2倍ではありません。"},{v:k*k,why:`(√${k})² は √ がはずれて ${k} です。`}],k),exp:`(√a)² = a → ${k}`,tf:v=>`${Q0} = ${v}`,kind:"calc"}; }
+function sq2(){ const t=pick(["simp","simp","mul","mul2","div"]); const a=R(2,5),b=pick(SQF),n=a*a*b;
+  const alt=b!==a?SR(b,a):SR(a+1,b);
+  if(t==="simp"){ const Q0=RT(n);
+    return {q:`${Q0} を ${V("a")}${RT(V("b"))} の形にすると？`,ans:SR(a,b),wrongs:W(SR(a,b),[{v:SR(a*a,b),why:`${a*a} = ${a}² なので、√ の外には ${a} を出します。`},{v:alt,why:`√ の外に出せるのは、2乗になっている数（${a*a}）だけです。`},{v:SR(a+1,b),why:`${n} = ${a*a}×${b} に分けて確かめよう。`}]),exp:`${RT(n)} = ${RT(`${a*a}×${b}`)} = ${SR(a,b)}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  if(t==="mul"){ const ds=[]; for(let x=2;x<n;x++) if(n%x===0&&x*x!==n) ds.push(x); if(!ds.length) return sq2(); const x=pick(ds),y=n/x,Q0=`${RT(x)} × ${RT(y)}`;
+    return {q:Q0,ans:SR(a,b),wrongs:W(SR(a,b),[{v:SR(1,x+y),why:"√a × √b = √(a×b)。たし算ではありません。"},{v:SR(a*a,b),why:`${n} = ${a}²×${b} なので、外に出るのは ${a}。`},{v:alt,why:`${n} = ${a*a}×${b} に分けて確かめよう。`}]),exp:`${RT(`${x}×${y}`)} = ${RT(n)} = ${SR(a,b)}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  if(t==="mul2"){ const m=R(2,5),k=R(2,5),Q0=`${SR(m,b)} × ${SR(k,b)}`,ans=m*k*b;
+    return {q:Q0,ans:num(ans),wrongs:W(ans,[{v:SR(m*k,b),why:`${RT(b)} × ${RT(b)} = ${b} です。`},{v:(m+k)*b,why:"係数どうしはかけ算です。"},{v:m*k*b*b,why:`${RT(b)} × ${RT(b)} は ${b}² ではなく ${b}。`}],ans),exp:`${m}×${k}×${RT(b)}×${RT(b)} = ${m*k}×${b} = ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"calc"}; }
+  const x=pick(SQF),Q0=`${RT(x*n)} ÷ ${RT(x)}`;
+  return {q:Q0,ans:SR(a,b),wrongs:W(SR(a,b),[{v:SR(1,x*n-x),why:"√ の中どうしを「わり」ます。"},{v:SR(a*a,b),why:`${n} = ${a}²×${b} なので、外に出るのは ${a}。`},{v:SR(a*x,b),why:`${RT(x)} でわるのを確かめよう。`},{v:alt,why:"√ の外に出せるのは、2乗になっている数だけです。"}]),exp:`${RT(`${x*n}÷${x}`)} = ${RT(n)} = ${SR(a,b)}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function sq3(){ const b=pick(SQF);
+  if(Math.random()<.5){ const p=NZ(-6,6),q=NZ(-6,6); if(p+q===0||p===q) return sq3(); const Q0=`${SR(p,b)} ${q<0?M:"+"} ${SR(Math.abs(q),b)}`,ans=SR(p+q,b);
+    return {q:Q0,ans,wrongs:W(ans,[{v:SR(p+q,2*b),why:"√ の中はそのまま。係数だけをたします。"},{v:SR(p-q,b),why:"符号を確かめよう。"},{v:SR(p*q,b),why:"係数どうしは「たし算」です。"},{v:SR(-(p+q),b),why:"符号を確かめよう。"}]),exp:`(${num(p)} ${q<0?M:"+"} ${Math.abs(q)})${RT(b)} = ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  const a1=R(1,5),a2=R(1,5); if(a1===a2) return sq3(); const sub=Math.random()<.5,s=sub?-1:1,c=a1+s*a2,op=sub?M:"+"; const n1=a1*a1*b,n2=a2*a2*b,Q0=`${RT(n1)} ${op} ${RT(n2)}`,ans=SR(c,b);
+  return {q:Q0,ans,wrongs:W(ans,[{v:n1+s*n2>0?SR(1,n1+s*n2):null,why:`√ の中どうしは${sub?"ひけ":"たせ"}ません。先に ${V("a")}${RT(V("b"))} の形にします。`},{v:SR(a1*a2,b),why:"係数どうしは、かけずに" +(sub?"ひきます。":"たします。")},{v:SR(a1-s*a2,b),why:"符号を確かめよう。"},{v:SR(c+1,b),why:`${RT(n1)} = ${SR(a1,b)}、${RT(n2)} = ${SR(a2,b)} から確かめよう。`}]),exp:`${SR(a1,b)} ${op} ${SR(a2,b)} = ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function sq4(){ const b=pick(SQF),k=R(1,12),g=gcd(k,b),nk=k/g,d=b/g; const ans=d===1?SR(nk,b):fr(SR(nk,b),d),Q0=fr(k,RT(b));
+  return {q:`${Q0} の分母を有理化すると？`,ans,wrongs:W(ans,[{v:SR(k,b),why:`分母と分子に ${RT(b)} をかけると、分母は ${b} になります。`},{v:frc(k,b),why:`分子にも ${RT(b)} がつきます。`},{v:k>1?fr(RT(b),k):null,why:"分母と分子が入れかわっています。"},{v:fr(SR(nk,b),d*2),why:`分母は ${RT(b)}×${RT(b)} = ${b} です。`},{v:d===1?fr(SR(nk,b),b):SR(nk,b),why:"約分を確かめよう。"}]),exp:`分母と分子に ${RT(b)} をかける：${fr(SR(k,b),b)}${g>1?` = ${ans}`:""}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function sq5(){ if(Math.random()<.5){ let n; do{ n=R(5,99); }while(Number.isInteger(Math.sqrt(n))); const f=Math.floor(Math.sqrt(n)),h=Math.floor(n/2); const ans=`${f} と ${f+1} の間`;
+    return {q:`${RT(n)} は、どの2つの整数の間にある？`,ans,wrongs:W(ans,[{v:`${f-1} と ${f} の間`,why:`${f}² = ${f*f} は ${n} より小さいので、${RT(n)} は ${f} より大きい。`},{v:`${f+1} と ${f+2} の間`,why:`${f+1}² = ${(f+1)**2} は ${n} より大きいので、${RT(n)} は ${f+1} より小さい。`},{v:h>f+1?`${h} と ${h+1} の間`:null,why:`${RT(n)} は ${n}÷2 ではありません。2乗してくらべよう。`},{v:`${f+2} と ${f+3} の間`,why:"2乗してくらべよう。"}]),exp:`${f}² = ${f*f}、${f+1}² = ${(f+1)**2} → ${f*f} < ${n} < ${(f+1)**2}`,tf:v=>`${RT(n)} は ${v}`,kind:"word"}; }
+  const C=[]; for(let k=2;k<=7;k++) C.push([num(k),k*k]); for(let a=1;a<=3;a++) for(const b of SQF) if(a*a*b<=50) C.push([SR(a,b),a*a*b]);
+  const pk=[],seen=new Set(); for(const c of shuffle(C)){ if(seen.has(c[1])) continue; seen.add(c[1]); pk.push(c); if(pk.length===4) break; }
+  const big=Math.random()<.6, s=pk.slice().sort((x,y)=>big?y[1]-x[1]:x[1]-y[1]); const lab=c=>`${c[0]} = ${RT(c[1])}`;
+  return {q:`いちばん${big?"大きい":"小さい"}数は？<br>${pk.map(c=>c[0]).join("、 ")}`,ans:s[0][0],wrongs:s.slice(1).map(c=>({v:c[0],why:`${lab(c)}、${lab(s[0])}。√ の形にしてくらべよう。`})),exp:`すべて √ の形にする：${pk.map(lab).join("、")}`,tf:v=>`${pk.map(c=>c[0]).join("、 ")} でいちばん${big?"大きい":"小さい"}のは ${v}`,kind:"word"}; }
+
+/* ---------- A(2) 展開と因数分解 ---------- */
+function ex1(){ const a=NZ(-7,7),b=NZ(-7,7); if(a+b===0) return ex1(); const Q0=`(${lin(1,a)})(${lin(1,b)})`,ans=P2(1,a+b,a*b);
+  return {q:Q0,ans,wrongs:W(ans,[{v:P2(1,0,a*b),why:`${XX} の項（${num(a)}${XX} と ${num(b)}${XX}）を忘れています。`},{v:P2(1,a*b,a+b),why:`${XX} の係数は「和」、数の項は「積」です。`},{v:P2(1,a+b,-a*b),why:"数の項の符号を確かめよう。"},{v:P2(1,-(a+b),a*b),why:`${XX} の項の符号を確かめよう。`}]),exp:`(x + a)(x + b) = x² + (a + b)x + ab → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function ex2(){ const t=pick(["sq","sq","k","diff"]);
+  if(t==="sq"){ const a=NZ(-9,9),Q0=`(${lin(1,a)})²`,ans=P2(1,2*a,a*a);
+    return {q:Q0,ans,wrongs:W(ans,[{v:P2(1,0,a*a),why:`まん中の項 ${mono(2*a,"x")} を忘れています（2乗は2つの項をそれぞれ2乗するだけではありません）。`},{v:P2(1,a,a*a),why:`まん中の項は 2×${par(a)}×${XX} です。`},{v:P2(1,2*a,-a*a),why:`${par(a)}² は正の数です。`},{v:P2(1,-2*a,a*a),why:"まん中の項の符号を確かめよう。"}]),exp:`(x + a)² = x² + 2ax + a² → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  if(t==="k"){ const k=R(2,4),a=NZ(-6,6),Q0=`(${lin(k,a)})²`,ans=P2(k*k,2*k*a,a*a);
+    return {q:Q0,ans,wrongs:W(ans,[{v:P2(k,2*k*a,a*a),why:`(${mono(k,"x")})² = ${mono(k*k,"x²")} です。`},{v:P2(k*k,0,a*a),why:"まん中の項を忘れています。"},{v:P2(k*k,k*a,a*a),why:`まん中の項は 2×${mono(k,"x")}×${par(a)} です。`},{v:P2(k*k,2*k*a,-a*a),why:"最後の項は正の数です。"}]),exp:`(${mono(k,"x")})² + 2×${mono(k,"x")}×${par(a)} + ${par(a)}² = ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  const a=R(1,9),Q0=`(${lin(1,a)})(${lin(1,-a)})`,ans=P2(1,0,-a*a);
+  return {q:Q0,ans,wrongs:W(ans,[{v:P2(1,0,a*a),why:`${a}×(${M}${a}) で、数の項は負になります。`},{v:P2(1,-2*a,-a*a),why:`${XX} の項は ${mono(a,"x")} と ${mono(-a,"x")} で打ち消し合います。`},{v:P2(1,0,-2*a),why:`${a}×${a} = ${a*a} です。`},{v:P2(1,2*a,-a*a),why:`${XX} の項は打ち消し合って 0 になります。`}]),exp:`(x + a)(x − a) = x² − a² → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function ex3(){ if(Math.random()<.5){ const k=pick([2,3,4,5,6,-2,-3]),b=NZ(-7,7); if(Math.abs(b)===1&&false) return ex3(); const Q0=P2(k,k*b,0),ans=`${mono(k,"x")}(${lin(1,b)})`;
+    return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:`${num(k)}(${P2(1,b,0)})`,why:`${XX} も共通因数です。`},{v:`${XX}(${lin(k,k*b)})`,why:`数の共通因数 ${num(k)} もくくり出します。`},{v:`${mono(k,"x")}(${lin(1,k*b)})`,why:`かっこの中は、各項を ${mono(k,"x")} でわった式です。`},{v:`${mono(k,"x")}(${lin(1,-b)})`,why:"かっこの中の符号を確かめよう。"}]),exp:`共通因数 ${mono(k,"x")} をくくり出す → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  const k=R(2,6),p=R(1,5),q=NZ(-7,7); if(gcd(p,q)!==1) return ex3(); const Q0=poly([[k*p,"ab"],[k*q,"b"]]),ans=`${mono(k,"b")}(${lin(p,q,"a")})`;
+  return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:`${k}(${poly([[p,"ab"],[q,"b"]])})`,why:`${V("b")} も共通因数です。`},{v:`${V("b")}(${lin(k*p,k*q,"a")})`,why:`数の共通因数 ${k} もくくり出します。`},{v:`${mono(k,"b")}(${lin(p,k*q,"a")})`,why:`かっこの中は、各項を ${mono(k,"b")} でわった式です。`},{v:`${mono(k,"ab")}(${lin(p,q,"")})`,why:`${V("a")} は2つ目の項にありません。`}]),exp:`共通因数 ${mono(k,"b")} をくくり出す → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+const FP=(p,q,k=1)=>{ const [x,y]=[p,q].sort((m,n)=>n-m); return x===y?`(${lin(k,x)})²`:`(${lin(k,x)})(${lin(k,y)})`; };
+function ex4(){ const a=NZ(-8,8),b=NZ(-8,8); if(a===b||a===-b) return ex4(); const Q0=P2(1,a+b,a*b),ans=FP(a,b);
+  const pr=[]; const P=a*b; for(let c=-Math.abs(P);c<=Math.abs(P);c++){ if(!c||P%c) continue; const d=P/c; if(c<=d&&c+d!==a+b) pr.push([c,d]); } const o=pr.length?pick(pr):null;
+  return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:FP(-a,-b),why:`符号を確かめよう。たして ${num(a+b)}、かけて ${num(a*b)} になる2数を探します。`},{v:o?FP(o[0],o[1]):null,why:o?`かけると ${num(a*b)} ですが、たすと ${num(o[0]+o[1])} になります。`:""},{v:FP(a,-b),why:`かけると ${num(-a*b)} になってしまいます。`},{v:FP(-a,b),why:`かけると ${num(-a*b)} になってしまいます。`}]),exp:`たして ${num(a+b)}、かけて ${num(a*b)} になる2数は ${num(a)} と ${num(b)} → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+function ex5(){ const t=pick(["sq","diff","k"]);
+  if(t==="sq"){ const a=NZ(-8,8),Q0=P2(1,2*a,a*a),ans=FP(a,a);
+    return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:FP(-a,-a),why:"かっこの中の符号は、まん中の項の符号と同じです。"},{v:FP(a,-a),why:`それを展開すると ${P2(1,0,-a*a)} です。`},{v:FP(2*a,2*a),why:`かっこの中は ${num(a)}（${num(2*a)} は 2×${par(a)} の部分）。`}]),exp:`x² + 2ax + a² = (x + a)² → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  if(t==="diff"){ const a=R(2,9),Q0=P2(1,0,-a*a),ans=FP(a,-a);
+    return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:FP(-a,-a),why:`それを展開すると ${P2(1,-2*a,a*a)} です。`},{v:FP(a,a),why:`それを展開すると ${P2(1,2*a,a*a)} です。`},{v:FP(a*a,-1),why:`${a*a} = ${a}² を使って x² − a² = (x + a)(x − a)。`}]),exp:`x² − a² = (x + a)(x − a) → ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+  const k=R(2,5),a=R(1,9); if(gcd(k,a)!==1) return ex5(); const Q0=P2(k*k,0,-a*a),ans=FP(a,-a,k);
+  return {q:`${Q0} を因数分解すると？`,ans,wrongs:W(ans,[{v:FP(a,-a,k*k),why:`${mono(k*k,"x²")} = (${mono(k,"x")})² です。`},{v:FP(-a,-a,k),why:`それを展開すると ${P2(k*k,-2*k*a,a*a)} です。`},{v:FP(a,a,k),why:`それを展開すると ${P2(k*k,2*k*a,a*a)} です。`}]),exp:`(${mono(k,"x")})² − ${a}² = ${ans}`,tf:v=>`${Q0} = ${v}`,kind:"expr"}; }
+
+/* ---------- A(3) 2次方程式 ---------- */
+function qe1(){ const t=pick(["sq","sqr","shift"]); const X2=P2(1,0,0);
+  if(t==="sq"){ const n=R(2,12),Q0=`${X2} = ${n*n}`,ans=`${XX} = ±${n}`;
+    return {q:Q0,ans,wrongs:W(ans,[{v:`${XX} = ${n}`,why:`${M}${n} も2乗すると ${n*n}。解は2つです。`},{v:`${XX} = ±${RT(n)}`,why:`${n*n} = ${n}² なので √ はつきません。`},{v:`${XX} = ±${n*n}`,why:"両辺の平方根をとります。"}]),exp:`${XX} は ${n*n} の平方根 → ±${n}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+  if(t==="sqr"){ const k=pick(NSQ),a=R(1,4),Q0=`${P2(a,0,0)} = ${a*k}`,ans=`${XX} = ±${SS(k)}`;
+    return {q:Q0,ans,wrongs:W(ans,[{v:`${XX} = ${SS(k)}`,why:"解は正と負の2つあります。"},{v:`${XX} = ±${k}`,why:`${XX}² = ${k} なので、${XX} = ±${RT(k)} です。`},{v:a>1?`${XX} = ±${SS(a*k)}`:`${XX} = ±${k*k}`,why:a>1?`先に両辺を ${a} でわります。`:"両辺の平方根をとります。"}]),exp:`${a>1?`両辺を ${a} でわって ${XX}² = ${k} → `:""}${XX} = ±${RT(k)}${simp(k)[0]>1?` = ±${SS(k)}`:""}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+  const a=NZ(-6,6),n=R(1,6),Q0=`(${lin(1,a)})² = ${n*n}`,ans=RTS(-a+n,-a-n);
+  return {q:Q0,ans,wrongs:W(ans,[{v:RTS(a+n,a-n),why:`${lin(1,a)} = ±${n} → ${XX} = ${num(-a)} ± ${n}。符号に注意。`},{v:RTS(-a+n),why:`${lin(1,a)} = ${M}${n} の場合もあります。解は2つ。`},{v:RTS(-a+n*n,-a-n*n),why:`両辺の平方根をとると ${lin(1,a)} = ±${n}。`}]),exp:`${lin(1,a)} = ±${n} → ${XX} = ${num(-a)} ± ${n}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+function qe2(){ if(Math.random()<.25){ const b=NZ(-9,9),Q0=`${P2(1,b,0)} = 0`,ans=RTS(0,-b);
+    return {q:Q0,ans,wrongs:W(ans,[{v:RTS(-b),why:`${XX} = 0 も解です。両辺を ${XX} でわってはいけません。`},{v:RTS(0,b),why:`${XX}(${lin(1,b)}) = 0 → ${XX} = ${num(-b)}。符号に注意。`},{v:RTS(b),why:`${XX}(${lin(1,b)}) = 0 から、解は2つです。`}]),exp:`${XX}(${lin(1,b)}) = 0 → ${ans}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+  const r1=NZ(-8,8),r2=NZ(-8,8); if(r1===r2||r1===-r2) return qe2(); const Q0=`${P2(1,-(r1+r2),r1*r2)} = 0`,ans=RTS(r1,r2);
+  return {q:Q0,ans,wrongs:W(ans,[{v:RTS(-r1,-r2),why:`(${lin(1,-r1)})(${lin(1,-r2)}) = 0 の解は ${XX} = ${num(r1)}, ${num(r2)}。符号に注意。`},{v:RTS(r1,-r2),why:"符号を確かめよう。"},{v:RTS(-r1,r2),why:"符号を確かめよう。"}]),exp:`(${lin(1,-r1)})(${lin(1,-r2)}) = 0 → ${ans}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+function qfmt(nb,s,r,den){ const g=gcd(gcd(Math.abs(nb),s),Math.abs(den))||1; let n1=nb/g,s1=s/g,d1=den/g; if(d1<0){ n1=-n1; d1=-d1; }
+  const top=(n1?`${num(n1)} ± `:"±")+SR(s1,r); return `${XX} = ${d1===1?top:fr(top,d1)}`; }
+function qe3(){ const a=pick([1,1,2,3]),b=NZ(-7,7),c=NZ(-6,6),D=b*b-4*a*c; if(D<=0) return qe3(); const [s,r]=simp(D); if(r===1) return qe3();
+  const Q0=`${P2(a,b,c)} = 0`,ans=qfmt(-b,s,r,2*a); const alt=d=>{ if(d<=0) return null; const [s2,r2]=simp(d); return r2>1?qfmt(-b,s2,r2,2*a):null; };
+  return {q:Q0,ans,wrongs:W(ans,[{v:qfmt(b,s,r,2*a),why:`分子は ${M}${V("b")}、つまり ${num(-b)} です。`},{v:qfmt(-b,s,r,a),why:`分母は 2${V("a")} = ${2*a} です。`},{v:alt(b*b+4*a*c),why:`√ の中は ${V("b")}² ${M} 4${V("a")}${V("c")}。符号に注意。`},{v:alt(b*b-a*c),why:`√ の中は ${V("b")}² ${M} 4${V("a")}${V("c")}（4 を忘れずに）。`}]),
+    exp:`解の公式：${XX} = ${fr(`${num(-b)} ± ${RT(`${par(b)}² ${M} 4×${a}×${par(c)}`)}`,`2×${a}`)} = ${fr(`${num(-b)} ± ${RT(D)}`,2*a)}${s>1||gcd(Math.abs(b),2*a)>1?` → ${ans.replace(XX+" = ","")}`:""}`,tf:v=>`${Q0} の解は ${v}`,kind:"eq"}; }
+function qe4(){ const r=NZ(-6,6),s=NZ(-6,6); if(r===s||r*s===0) return qe4(); const c=r*s,a=-(r+s); if(!a) return qe4();
+  const Q0=`${P2(1,0,0)} + ${V("a")}${XX} ${c<0?M:"+"} ${Math.abs(c)} = 0`;
+  if(Math.random()<.55) return {q:`${Q0} の解の1つが ${XX} = ${num(r)} のとき、${V("a")} の値は？`,ans:num(a),wrongs:W(a,[{v:r+s,why:"符号を確かめよう。"},{v:s,why:"それはもう1つの解です。"},{v:-(r*r+c),why:`代入した式を ${V("a")} について解きます（${num(r)} でわる）。`}],a),exp:`${XX} = ${num(r)} を代入：${par(r)}² + ${V("a")}×${par(r)} ${c<0?M:"+"} ${Math.abs(c)} = 0 → ${V("a")} = ${num(a)}`,tf:v=>`${Q0} の解の1つが ${XX} = ${num(r)} のとき、${V("a")} = ${v}`,kind:"word"};
+  return {q:`${Q0} の解の1つが ${XX} = ${num(r)} のとき、もう1つの解は？`,ans:num(s),wrongs:W(s,[{v:-s,why:"符号を確かめよう。"},{v:a,why:`それは ${V("a")} の値です。式に入れて解きます。`},{v:-r,why:`${V("a")} を求めて、もとの方程式を解こう。`}],s),exp:`代入して ${V("a")} = ${num(a)} → ${P2(1,a,c)} = 0 → (${lin(1,-r)})(${lin(1,-s)}) = 0 → ${XX} = ${num(s)}`,tf:v=>`${Q0} の解の1つが ${XX} = ${num(r)} のとき、もう1つの解は ${v}`,kind:"word"}; }
+
+/* ---------- B(1) 相似 ---------- */
+const RATS=[[1,2],[1,3],[2,3],[3,4],[2,5],[3,5],[4,5],[3,7]];
+function sim1(){ const [m,n]=pick(RATS),u=R(1,4),v=R(2,5); if(u===v) return sim1();
+  if(Math.random()<.6){ const pre=`△ABC ∽ △DEF で、AB = ${m*u}cm、DE = ${n*u}cm、BC = ${m*v}cm のとき、`,ans=n*v+"cm";
+    return {q:`${pre}EF の長さは？`,ans,wrongs:W(ans,[{v:(m*v+(n-m)*u)+"cm",why:"差をたすのではなく、相似比（比）を使います。"},{v:(m*m*v)%n===0?(m*m*v/n)+"cm":null,why:"相似比の向きが逆です。"},{v:n*u+"cm",why:"それは DE の長さです。"},{v:(m*u+m*v)+"cm",why:"相似比を使って求めます。"},{v:2*n*v+"cm",why:"相似比を確かめよう。"}]),exp:`相似比は AB : DE = ${m} : ${n} → EF = ${m*v}×${fr(n,m)} = ${n*v}`,tf:x=>`${pre}EF = ${x}`,kind:"word"}; }
+  const pre=`△ABC ∽ △DEF で、AB = ${m*u}cm、DE = ${n*u}cm のとき、`,ans=`${m} : ${n}`;
+  return {q:`${pre}△ABC と △DEF の相似比は？`,ans,wrongs:W(ans,[{v:`${n} : ${m}`,why:"△ABC が先なので AB : DE の順です。"},{v:u>1?`${m*u} : ${n*u}`:`${m**3} : ${n**3}`,why:u>1?"もっとも簡単な整数の比にします。":"それは体積比です。"},{v:`${m*m} : ${n*n}`,why:"それは面積比です。"}]),exp:`AB : DE = ${m*u} : ${n*u} = ${m} : ${n}`,tf:x=>`${pre}相似比は ${x}`,kind:"word"}; }
+const S_AA="2組の角がそれぞれ等しい",S_SSS="3組の辺の比がすべて等しい",S_SAS="2組の辺の比とその間の角がそれぞれ等しい";
+const simB=bank([
+ ["∠A = ∠D、∠B = ∠E のとき、△ABC ∽ △DEF となる相似条件は？",S_AA,[[S_SSS,"辺の長さは分かっていません。"],[S_SAS,"辺の比は分かっていません。"],["1組の辺とその両端の角がそれぞれ等しい","それは合同条件です。"]],"角が2組等しい → 2組の角がそれぞれ等しい"],
+ ["AB : DE = BC : EF = CA : FD = 2 : 3 のとき、△ABC ∽ △DEF となる相似条件は？",S_SSS,[[S_AA,"角は分かっていません。"],[S_SAS,"3組すべての辺の比が分かっています。"],["3組の辺がそれぞれ等しい","それは合同条件です。"]],"3組の辺の比が等しい"],
+ ["AB : DE = AC : DF = 3 : 5、∠A = ∠D のとき、△ABC ∽ △DEF となる相似条件は？",S_SAS,[[S_SSS,"BC と EF の比は分かっていません。"],[S_AA,"等しい角は1組だけです。"],["2組の辺とその間の角がそれぞれ等しい","それは合同条件です。"]],"∠A は AB と AC の間の角"],
+ ["△ABC と △ADE で、∠A が共通、DE∥BC のとき、使う相似条件は？",S_AA,[[S_SSS,"辺の比は分かっていません。"],[S_SAS,"辺の比は分かっていません。"],["3組の辺がそれぞれ等しい","それは合同条件です。"]],"∠A が共通、平行線の同位角で ∠ADE = ∠ABC → 2組の角"],
+ ["相似な2つの図形で、対応する角の大きさは？","等しい",[["相似比の分だけ大きくなる","形が同じなので、角は変わりません。"],["相似比の2乗になる","2乗になるのは面積比です。"],["180° から引いた大きさになる","対応する角は等しくなります。"]],"相似 → 対応する角は等しく、対応する辺の比は等しい"],
+ ["記号「∽」の意味は？","相似（形が同じ。大きさはちがってもよい）",[["合同（形も大きさも同じ）","合同の記号は ≡ です。"],["平行","平行の記号は ∥ です。"],["垂直","垂直の記号は ⊥ です。"]],"∽ は相似の記号"],
+]);
+function triDE(t,L,nm=["D","E"]){ const A=[120,15],B=[30,135],C=[210,135],D=[A[0]+(B[0]-A[0])*t,A[1]+(B[1]-A[1])*t],E=[A[0]+(C[0]-A[0])*t,A[1]+(C[1]-A[1])*t];
+  const mid=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2]; const T=(p,s,dx,anc,cl)=>s?`<text x="${(p[0]+dx).toFixed(0)}" y="${(p[1]+4).toFixed(0)}" class="${cl||"lb"}" text-anchor="${anc}">${s}</text>`:"";
+  return SV(250,158,`<polygon points="${A} ${B} ${C}" class="f1"/><line x1="${D[0]}" y1="${D[1]}" x2="${E[0]}" y2="${E[1]}" class="ln"/>
+  <text x="114" y="11" class="lb">A</text><text x="16" y="146" class="lb">B</text><text x="214" y="146" class="lb">C</text><text x="${D[0]-16}" y="${D[1]+2}" class="lb">${nm[0]}</text><text x="${E[0]+6}" y="${E[1]+2}" class="lb">${nm[1]}</text>
+  ${T(mid(A,D),L.AD,-10,"end")}${T(mid(D,B),L.DB,-10,"end")}${T(mid(A,E),L.AE,10,"start")}${T(mid(E,C),L.EC,10,"start")}${T([120,D[1]-6],L.DE,0,"middle")}${T([120,148],L.BC,0,"middle")}`); }
+function sim3(){ if(Math.random()<.5){ const a=R(2,6),b=R(2,6),w=R(1,3); if(a===b) return sim3(); const c=a*w,ans=b*w,f=triDE(a/(a+b),{AD:a,DB:b,AE:c,EC:XI});
+    return {q:`DE∥BC のとき、${V("x")} の値は？${f}`,ans:num(ans),wrongs:W(ans,[{v:(c*a)%b===0?c*a/b:null,why:"AD : DB = AE : EC の対応を確かめよう。"},{v:c+b-a,why:"差ではなく比を使います。"},{v:c,why:"AE と EC が等しいとはかぎりません。"},{v:a+b,why:"AD : DB = AE : EC を使います。"}],ans),exp:`AD : DB = AE : EC → ${a} : ${b} = ${c} : ${V("x")} → ${V("x")} = ${ans}`,tf:v=>`${V("x")} = ${v}${f}`,kind:"fig"}; }
+  const a=R(2,5),b=R(1,5),w=R(1,3); if(a===b) return sim3(); const bc=(a+b)*w,ans=a*w,f=triDE(a/(a+b),{AD:a,DB:b,DE:XI,BC:bc});
+  return {q:`DE∥BC のとき、${V("x")} の値は？${f}`,ans:num(ans),wrongs:W(ans,[{v:(bc*a)%b===0?bc*a/b:null,why:"AD : DB ではなく AD : AB = DE : BC を使います。"},{v:bc%2===0?bc/2:null,why:"D は中点とはかぎりません。"},{v:bc-b,why:"差ではなく比を使います。"},{v:b*w,why:"AD : AB = DE : BC。DB ではなく AD を使います。"}],ans),exp:`AD : AB = DE : BC → ${a} : ${a+b} = ${V("x")} : ${bc} → ${V("x")} = ${ans}`,tf:v=>`${V("x")} = ${v}${f}`,kind:"fig"}; }
+function sim4(){ const k=R(3,12);
+  if(Math.random()<.55){ const f=triDE(.5,{BC:2*k+"cm",DE:XI},["M","N"]);
+    return {q:`M、N は AB、AC の中点。${V("x")}（MN）の長さは？${f}`,ans:k+"cm",wrongs:W(k+"cm",[{v:2*k+"cm",why:"MN は BC の半分です。"},{v:4*k+"cm",why:"中点連結定理：MN = ½BC。"},{v:(k+2)+"cm",why:"中点連結定理：MN = ½BC。"},{v:(2*k-2)+"cm",why:"中点連結定理：MN = ½BC。"}]),exp:`中点連結定理：MN∥BC、MN = ½BC = ${k}cm`,tf:v=>`MN = ${v}${f}`,kind:"fig"}; }
+  const f=triDE(.5,{BC:XI,DE:k+"cm"},["M","N"]);
+  return {q:`M、N は AB、AC の中点。${V("x")}（BC）の長さは？${f}`,ans:2*k+"cm",wrongs:W(2*k+"cm",[{v:k+"cm",why:"BC は MN の2倍です。"},{v:k%2===0?k/2+"cm":(4*k)+"cm",why:"中点連結定理：MN = ½BC。"},{v:(k+2)+"cm",why:"中点連結定理：BC = 2MN。"}]),exp:`中点連結定理：BC = 2MN = ${2*k}cm`,tf:v=>`BC = ${v}${f}`,kind:"fig"}; }
+function sim5(){ const [m,n]=pick(RATS.filter(([a,b])=>a>1||b<4)),t=pick(["ar","vol","arv","volv"]);
+  if(t==="ar") return {q:`相似比が ${m} : ${n} の2つの図形の面積比は？`,ans:`${m*m} : ${n*n}`,wrongs:[{v:`${m} : ${n}`,why:"面積比は相似比の2乗です。"},{v:`${m**3} : ${n**3}`,why:"それは体積比です（3乗）。"},{v:`${2*m} : ${2*n}`,why:"2倍ではなく2乗します。"}],exp:`面積比 = ${m}² : ${n}² = ${m*m} : ${n*n}`,tf:v=>`相似比 ${m} : ${n} の図形の面積比は ${v}`,kind:"word"};
+  if(t==="vol") return {q:`相似比が ${m} : ${n} の2つの立体の体積比は？`,ans:`${m**3} : ${n**3}`,wrongs:[{v:`${m} : ${n}`,why:"体積比は相似比の3乗です。"},{v:`${m*m} : ${n*n}`,why:"それは面積比（表面積の比）です。"},{v:`${3*m} : ${3*n}`,why:"3倍ではなく3乗します。"}],exp:`体積比 = ${m}³ : ${n}³ = ${m**3} : ${n**3}`,tf:v=>`相似比 ${m} : ${n} の立体の体積比は ${v}`,kind:"word"};
+  const w=R(1,4); if(t==="arv"){ const S1=m*m*w,ans=n*n*w,q=`相似比 ${m} : ${n} の図形 P、Q がある。P の面積が ${S1}cm² のとき、Q の面積は？`;
+    return {q,ans:ans+"cm²",wrongs:W(ans+"cm²",[{v:(S1*n)%m===0?S1*n/m+"cm²":null,why:"面積比は相似比の2乗です。"},{v:n**3*w+"cm²",why:"面積比は2乗（3乗は体積比）。"},{v:(S1+n*n-m*m)+"cm²",why:"面積比は相似比の2乗です。"},{v:2*ans+"cm²",why:"面積比は相似比の2乗です。"}]),exp:`面積比 ${m*m} : ${n*n} → ${S1}×${fr(n*n,m*m)} = ${ans}`,tf:v=>`${q.replace("面積は？","面積は ")}${v}`,kind:"word"}; }
+  const V1=m**3*w,ans=n**3*w,q=`相似比 ${m} : ${n} の立体 P、Q がある。P の体積が ${V1}cm³ のとき、Q の体積は？`;
+  return {q,ans:ans+"cm³",wrongs:W(ans+"cm³",[{v:(V1*n)%m===0?V1*n/m+"cm³":null,why:"体積比は相似比の3乗です。"},{v:(V1*n*n)%(m*m)===0?V1*n*n/(m*m)+"cm³":null,why:"体積比は2乗ではなく3乗です。"},{v:2*ans+"cm³",why:"体積比は相似比の3乗です。"},{v:(V1+n**3-m**3)+"cm³",why:"体積比は相似比の3乗です。"}]),exp:`体積比 ${m**3} : ${n**3} → ${V1}×${fr(n**3,m**3)} = ${ans}`,tf:v=>`${q.replace("体積は？","体積は ")}${v}`,kind:"word"}; }
+
+/* ---------- B(2) 円周角 ---------- */
+const CC=[120,92],CR=68; const CP=d=>[CC[0]+CR*Math.cos(d*Math.PI/180),CC[1]-CR*Math.sin(d*Math.PI/180)];
+function angL(Vx,P1,P2,d){ const u=p=>{ const x=p[0]-Vx[0],y=p[1]-Vx[1],l=Math.hypot(x,y); return [x/l,y/l]; }; const a=u(P1),b=u(P2); let x=a[0]+b[0],y=a[1]+b[1]; const l=Math.hypot(x,y)||1; return [Vx[0]+x/l*d,Vx[1]+y/l*d+5]; }
+function cfig(pts,segs,labs){ const P={O:CC}; for(const k in pts) P[k]=CP(pts[k]); const f=n=>n.toFixed(1);
+  let b=`<circle cx="${CC[0]}" cy="${CC[1]}" r="${CR}" class="ax" fill="none"/>`;
+  for(const [a,c] of segs) b+=`<line x1="${f(P[a][0])}" y1="${f(P[a][1])}" x2="${f(P[c][0])}" y2="${f(P[c][1])}" class="ln"/>`;
+  for(const k in P){ const [x,y]=P[k]; const o=k==="O"; b+=`<circle cx="${f(x)}" cy="${f(y)}" r="3" class="pt"/><text x="${f(o?x-12:x+(x-CC[0])/CR*15)}" y="${f(o?y-4:y+(y-CC[1])/CR*15+5)}" class="lb" text-anchor="middle">${k}</text>`; }
+  for(const [t,V0,A,B] of labs){ const [x,y]=angL(P[V0],P[A],P[B],V0==="O"?20:30); b+=`<text x="${f(x)}" y="${f(y)}" class="nm" text-anchor="middle" font-weight="700">${t}</text>`; }
+  return SV(240,182,b); }
+function cir1(){ const c=2*R(25,80),pd=R(70,110),pts={A:270-c/2,B:270+c/2,P:pd},segs=[["P","A"],["P","B"],["O","A"],["O","B"]];
+  if(Math.random()<.55){ const ans=c/2,f=cfig(pts,segs,[[DEG(c),"O","A","B"],[XI,"P","A","B"]]);
+    return {q:`O は円の中心。∠${V("x")} の大きさは？${f}`,ans:DEG(ans),wrongs:W(DEG(ans),[{v:DEG(c),why:"円周角は、同じ弧に対する中心角の半分です。"},{v:DEG(2*c),why:"円周角は中心角の「半分」です。"},{v:DEG(180-ans),why:"円周角 = 中心角 ÷ 2 を使います。"},{v:DEG(180-c>0?180-c:360-c),why:"円周角 = 中心角 ÷ 2 を使います。"}]),exp:`円周角 = 中心角 ÷ 2 → ${c}÷2 = ${ans}`,tf:v=>`∠${V("x")} = ${v}${f}`,kind:"fig"}; }
+  const y=c/2,f=cfig(pts,segs,[[XI,"O","A","B"],[DEG(y),"P","A","B"]]);
+  return {q:`O は円の中心。∠${V("x")}（∠AOB）の大きさは？${f}`,ans:DEG(c),wrongs:W(DEG(c),[{v:DEG(y),why:"中心角は、円周角の2倍です。"},{v:y%2===0?DEG(y/2):DEG(180-y),why:"中心角 = 円周角 × 2 です。"},{v:DEG(180-y),why:"中心角 = 円周角 × 2 です。"},{v:DEG(360-c),why:"それは反対側の角です。"}]),exp:`中心角 = 円周角 × 2 → ${y}×2 = ${c}`,tf:v=>`∠${V("x")} = ${v}${f}`,kind:"fig"}; }
+function cir2(){ const a=5*R(5,13),pts={A:180,B:0,P:2*a},segs=[["A","B"],["P","A"],["P","B"]];
+  if(Math.random()<.75){ const ans=90-a,f=cfig(pts,segs,[[DEG(a),"A","P","B"],[XI,"B","P","A"]]);
+    return {q:`AB は円 O の直径。∠${V("x")} の大きさは？${f}`,ans:DEG(ans),wrongs:W(DEG(ans),[{v:DEG(180-a),why:"直径に対する円周角 ∠APB = 90° も使います。"},{v:DEG(a),why:"∠APB = 90° なので、残りの2つの角の和が 90°。"},{v:DEG(90+a),why:"三角形の内角の和は 180°、∠APB = 90°。"},{v:DEG(2*a),why:"∠APB = 90° を使います。"}]),exp:`直径に対する円周角 ∠APB = 90° → 180 ${M} 90 ${M} ${a} = ${ans}`,tf:v=>`∠${V("x")} = ${v}${f}`,kind:"fig"}; }
+  const f=cfig(pts,segs,[[XI,"P","A","B"]]);
+  return {q:`AB は円 O の直径。∠${V("x")}（∠APB）の大きさは？${f}`,ans:"90°",wrongs:[{v:"180°",why:"180° は直径（半円の弧）に対する中心角です。円周角はその半分。"},{v:"60°",why:"直径に対する円周角は、いつも 90° です。"},{v:"45°",why:"直径に対する円周角は、いつも 90° です。"}],exp:"直径に対する円周角は 90°（中心角 180° の半分）",tf:v=>`∠${V("x")} = ${v}${f}`,kind:"fig"}; }
+function cir3(){ const a=5*R(5,15),pts={A:270-a,B:270+a,P:R(115,140),Q:R(45,70)},segs=[["P","A"],["P","B"],["Q","A"],["Q","B"]];
+  const f=cfig(pts,segs,[[DEG(a),"P","A","B"],[XI,"Q","A","B"]]);
+  return {q:`∠${V("x")}（∠AQB）の大きさは？${f}`,ans:DEG(a),wrongs:W(DEG(a),[{v:DEG(2*a),why:"同じ弧 AB に対する円周角は、すべて等しくなります。"},{v:DEG(180-a),why:"同じ弧に対する円周角は等しい、を使います。"},{v:a%2===0?DEG(a/2):DEG(90-a>0?90-a:a+10),why:"同じ弧に対する円周角は等しくなります。"}]),exp:`弧 AB に対する円周角は等しい → ∠AQB = ∠APB = ${a}°`,tf:v=>`∠${V("x")} = ${v}${f}`,kind:"fig"}; }
+
+/* ---------- B(3) 三平方の定理 ---------- */
+function rtFig(la,lb,lc){ return SV(260,150,`<polygon points="40,25 40,128 228,128" class="f1"/><path d="M40 114 H54 V128" class="ax" fill="none"/><text x="30" y="20" class="lb">A</text><text x="24" y="142" class="lb">C</text><text x="232" y="142" class="lb">B</text>
+  <text x="30" y="82" class="lb" text-anchor="end">${la}</text><text x="134" y="146" class="lb" text-anchor="middle">${lb}</text><text x="142" y="68" class="lb" text-anchor="middle">${lc}</text>`); }
+function py1(){ let a,b; if(Math.random()<.35){ [a,b]=pick([[3,4],[6,8],[5,12],[8,15],[9,12]]); } else { a=R(1,8); b=R(2,9); if(a===b&&Math.random()<.5) return py1(); }
+  const n=a*a+b*b,ans=SS(n),f=rtFig(a,b,XI);
+  return {q:`∠C = 90° の直角三角形。${V("x")}（斜辺）の長さは？${f}`,ans,wrongs:W(ans,[{v:num(a+b),why:`たし算ではなく、${V("x")}² = ${a}² + ${b}² を使います。`},{v:a!==b?SS(Math.abs(a*a-b*b)):null,why:"斜辺はいちばん長い辺です。2乗をたします。"},{v:num(n),why:`${V("x")}² = ${n}。最後に √ をとります。`},{v:SS(2*n),why:`${V("x")}² = ${a}² + ${b}² を確かめよう。`}]),exp:`${V("x")}² = ${a}² + ${b}² = ${n} → ${V("x")} = ${RT(n)}${simp(n)[0]>1||Number.isInteger(Math.sqrt(n))?` = ${ans}`:""}`,tf:v=>`${V("x")} = ${v}${f}`,kind:"fig"}; }
+function py2(){ const c=R(4,12),a=R(2,c-1),n=c*c-a*a,ans=SS(n),f=rtFig(a,XI,c);
+  return {q:`∠C = 90° の直角三角形。${V("x")} の長さは？${f}`,ans,wrongs:W(ans,[{v:SS(c*c+a*a),why:`斜辺は ${c} です。${V("x")}² = ${c}² ${M} ${a}²。`},{v:num(c-a),why:`ひき算ではなく、${V("x")}² = ${c}² ${M} ${a}² を使います。`},{v:num(n),why:`${V("x")}² = ${n}。最後に √ をとります。`},{v:SS(n+2),why:"2乗の計算を確かめよう。"}]),exp:`${V("x")}² = ${c}² ${M} ${a}² = ${n} → ${V("x")} = ${ans}`,tf:v=>`${V("x")} = ${v}${f}`,kind:"fig"}; }
+function py3(){ const k=R(2,8),t=pick(["45h","45l","30h","30l","30s"]); const T45="直角二等辺三角形（45°・45°・90°）",T30="30°・60°・90° の直角三角形";
+  const C={"45h":[`${T45}で、等しい2辺が ${k}cm のとき、斜辺は？`,SR(k,2),[[SR(k,3),"直角二等辺三角形の辺の比は 1 : 1 : √2 です。"],[num(2*k),"2倍になるのは 30°・60°・90° の斜辺です。"],[num(k),"斜辺は、いちばん長い辺です。"]],"1 : 1 : √2"],
+   "45l":[`${T45}で、斜辺が ${2*k}cm のとき、等しい2辺の長さは？`,SR(k,2),[[num(k),"斜辺 : 辺 = √2 : 1 です。"],[SR(2*k,2),"それは斜辺より長くなってしまいます。"],[SR(k,3),"辺の比は 1 : 1 : √2 です。"]],`辺 = ${2*k}÷√2 = ${SR(k,2)}`],
+   "30h":[`${T30}で、いちばん短い辺が ${k}cm のとき、斜辺は？`,num(2*k),[[SR(k,3),"それは残りの辺（60° の角と向かい合わない辺）です。"],[SR(k,2),"√2 は直角二等辺三角形の比です。"],[num(3*k),"辺の比は 1 : 2 : √3 です。"]],"1 : 2 : √3（斜辺は短い辺の2倍）"],
+   "30l":[`${T30}で、いちばん短い辺が ${k}cm のとき、残りの辺（斜辺でない方）は？`,SR(k,3),[[num(2*k),"それは斜辺です。"],[SR(k,2),"√2 は直角二等辺三角形の比です。"],[SR(2*k,3),"辺の比は 1 : 2 : √3 です。"]],"1 : 2 : √3"],
+   "30s":[`${T30}で、斜辺が ${2*k}cm のとき、いちばん短い辺は？`,num(k),[[SR(k,3),"それは残りの辺です。いちばん短い辺は斜辺の半分。"],[num(4*k),"短い辺は斜辺より短くなります。"],[SR(k,2),"辺の比は 1 : 2 : √3 です。"]],"短い辺 = 斜辺 ÷ 2"]};
+  const [q,ans,ws,ex]=C[t]; return {q,ans,wrongs:ws.map(([v,why])=>({v,why})),exp:ex,tf:v=>`${q.replace(/は？$/,"は ")}${v}`,kind:"word"}; }
+function py4(){ const x1=R(-5,5),y1=R(-5,5),x2=R(-5,5),y2=R(-5,5),dx=x2-x1,dy=y2-y1; if(!dx||!dy||Math.abs(dx)+Math.abs(dy)<3) return py4();
+  const n=dx*dx+dy*dy,ans=SS(n),f=coord({pts:[[x1,y1,"A"],[x2,y2,"B"]]});
+  return {q:`2点 A${PAIR(x1,y1)}、B${PAIR(x2,y2)} の距離は？${f}`,ans,wrongs:W(ans,[{v:num(Math.abs(dx)+Math.abs(dy)),why:"横と縦の長さをたすのではなく、三平方の定理を使います。"},{v:num(n),why:`AB² = ${n}。最後に √ をとります。`},{v:Math.abs(dx)!==Math.abs(dy)?SS(Math.abs(dx*dx-dy*dy)):null,why:"2乗を「たし」ます。"},{v:SS(n+2),why:"横と縦の長さを確かめよう。"}]),exp:`横 ${Math.abs(dx)}、縦 ${Math.abs(dy)} → AB² = ${dx*dx} + ${dy*dy} = ${n} → AB = ${ans}`,tf:v=>`AB = ${v}${f}`,kind:"fig"}; }
+function py5(){ if(Math.random()<.25){ const a=R(2,8),ans=SR(a,3); return {q:`1辺 ${a}cm の立方体の対角線の長さは？`,ans,wrongs:W(ans,[{v:SR(a,2),why:"それは面の対角線です。"},{v:num(3*a),why:"3辺をたすのではなく、2乗の和の √ です。"},{v:num(3*a*a),why:"最後に √ をとります。"}]),exp:`√(${a}² + ${a}² + ${a}²) = ${RT(3*a*a)} = ${ans}`,tf:v=>`1辺 ${a}cm の立方体の対角線は ${v}`,kind:"word"}; }
+  const a=R(2,8),b=R(2,8),c=R(2,9); if(a===b&&b===c) return py5(); const n=a*a+b*b+c*c,ans=SS(n),q=`縦 ${a}cm、横 ${b}cm、高さ ${c}cm の直方体の対角線の長さは？`;
+  return {q,ans,wrongs:W(ans,[{v:SS(a*a+b*b),why:"それは底面の対角線です。高さも使います。"},{v:num(a+b+c),why:"3辺をたすのではなく、2乗の和の √ です。"},{v:num(n),why:"最後に √ をとります。"}]),exp:`√(${a}² + ${b}² + ${c}²) = ${RT(n)}${simp(n)[0]>1||Number.isInteger(Math.sqrt(n))?` = ${ans}`:""}`,tf:v=>`${q.replace("長さは？","長さは ")}${v}`,kind:"word"}; }
+
+/* ---------- C(1) 関数 y=ax² ---------- */
+const QF=(p,q)=>`${V("y")} = ${coef(p,q)}${V("x²")}`;
+const QA=[[1,1],[2,1],[3,1],[-1,1],[-2,1],[-3,1],[1,2],[-1,2],[1,3],[-1,3]];
+function qf1(){ const [n,d]=pick(QA),p=d*NZ(-3,3)*(d>1?1:1); const pp=d>1?d*pick([1,2,-1,-2]):NZ(-4,4); const q=n*pp*pp/d; if(!Number.isInteger(q)) return qf1();
+  const pre=`${V("y")} は ${V("x")} の2乗に比例し、${V("x")} = ${num(pp)} のとき ${V("y")} = ${num(q)}。`,ans=frc(n,d);
+  return {q:`${pre}比例定数は？`,ans,wrongs:W(ans,[{v:frc(q,pp),why:`${V("y")} = ${V("a")}${V("x²")} なので、${V("x")} を2乗して代入します。`},{v:frc(pp*pp,q),why:`${V("a")} = ${V("y")} ÷ ${V("x")}² です（逆にわっています）。`},{v:frc(-n,d),why:"符号を確かめよう。2乗すると正になります。"},{v:frc(q,2*pp),why:`${V("x")}² は 2${V("x")} ではありません。`}]),exp:`${num(q)} = ${V("a")}×${par(pp)}² → ${V("a")} = ${num(q)}÷${pp*pp} = ${ans}`,tf:v=>`${pre}比例定数は ${v}`,kind:"word"}; }
+function qf2(){ const [n,d]=pick(QA),p=d>1?d*pick([1,2,-1,-2]):NZ(-5,5),ans=n*p*p/d,f=QF(n,d);
+  return {q:`${f} で、${V("x")} = ${num(p)} のときの ${V("y")} の値は？`,ans:num(ans),wrongs:W(ans,[{v:Number.isInteger(n*2*p/d)?n*2*p/d:null,why:`${V("x")}² は 2${V("x")} ではありません。`},{v:-ans,why:p<0?`${par(p)}² は正の数です。`:"符号を確かめよう。"},{v:Number.isInteger(n*n*p*p/(d*d))&&n*n!==n*d?n*n*p*p/(d*d):null,why:`2乗するのは ${V("x")} だけです。`}],ans),exp:`${coef(n,d)}×${par(p)}² = ${num(ans)}`,tf:v=>`${f} で ${V("x")} = ${num(p)} のとき ${V("y")} = ${v}`,kind:"word"}; }
+function qf3(){ const a=NZ(-3,3),p=R(-4,3),q=p+R(1,4); const f=QF(a,1),ans=a*(p+q),pre=`${f} で、${V("x")} が ${num(p)} から ${num(q)} まで増加するとき、`;
+  return {q:`${pre}変化の割合は？`,ans:num(ans),wrongs:W(ans,[{v:a*(q*q-p*p),why:`それは ${V("y")} の増加量です。÷（${V("x")} の増加量）をします。`},{v:a,why:`${V("y")} = ${V("a")}${V("x²")} の変化の割合は一定ではありません。`},{v:a*(q-p),why:`(${V("y")} の増加量) ÷ (${V("x")} の増加量) で求めます。`},{v:-ans,why:"符号を確かめよう。"}],ans),exp:`${V("y")} の増加量 ${num(a*q*q)} ${M} ${par(a*p*p)} = ${num(a*(q*q-p*p))}、${V("x")} の増加量 ${q-p} → ${num(ans)}`,tf:v=>`${pre}変化の割合は ${v}`,kind:"word"}; }
+function qf4(){ const a=NZ(-3,3),p=R(-4,2),q=R(p+1,4); const f=QF(a,1),yp=a*p*p,yq=a*q*q; let lo,hi; if(p<=0&&q>=0){ const m=a*Math.max(p*p,q*q); lo=Math.min(0,m); hi=Math.max(0,m); } else { lo=Math.min(yp,yq); hi=Math.max(yp,yq); }
+  const RG=(l,h)=>`${num(l)} ≦ ${V("y")} ≦ ${num(h)}`,ans=RG(lo,hi),pre=`${f} で、${V("x")} の変域が ${num(p)} ≦ ${V("x")} ≦ ${num(q)} のとき、`;
+  return {q:`${pre}${V("y")} の変域は？`,ans,wrongs:W(ans,[{v:RG(Math.min(yp,yq),Math.max(yp,yq)),why:p<0&&q>0?`${V("x")} = 0 のとき ${V("y")} = 0 になります。グラフをかいて確かめよう。`:"グラフをかいて確かめよう。"},{v:yp<=yq?null:RG(yp,yq),why:"小さい方を左に書きます。"},{v:RG(Math.min(a*p,a*q),Math.max(a*p,a*q)),why:`${V("x")} を2乗するのを忘れています。`},{v:RG(-hi,-lo),why:`${V("a")} の符号から、グラフが上に開くか下に開くかを考えよう。`},{v:RG(lo,hi+Math.abs(a)),why:"端の値を代入して確かめよう。"}]),exp:`${V("x")} = ${num(p)} のとき ${num(yp)}、${V("x")} = ${num(q)} のとき ${num(yq)}${p<=0&&q>=0?`、${V("x")} = 0 のとき 0`:""} → ${ans}`,tf:v=>`${pre}${V("y")} の変域は ${v}`,kind:"word"}; }
+const qfB=bank([
+ [`${V("y")} = ${V("a")}${V("x²")} のグラフについて正しいのは？`,"原点を通り、y 軸について対称",[["x 軸について対称","対称の軸は y 軸です。"],["原点を通らない","x = 0 のとき y = 0 なので、原点を通ります。"],["直線になる","放物線になります。"]],"y = ax² のグラフは原点を頂点とする放物線、y 軸について対称"],
+ [`${V("a")} > 0 のとき、${V("y")} = ${V("a")}${V("x²")} のグラフは？`,"上に開いた形",[["下に開いた形","a < 0 のときです。"],["右上がりの直線","それは一次関数（傾きが正）のグラフです。"],["双曲線","それは反比例のグラフです。"]],"a > 0 → 上に開く、a < 0 → 下に開く"],
+ [`${V("y")} = ${V("a")}${V("x²")} で、${V("a")} の絶対値が大きいほど、グラフは？`,"開き方が小さい（細くなる）",[["開き方が大きい（太くなる）","絶対値が大きいほど細くなります。"],["上に動く","頂点はいつも原点です。"],["変わらない","a によって開き方が変わります。"]],"|a| が大きい → 細い"],
+ [`${V("y")} = 2${V("x²")} のグラフと x 軸について対称なグラフの式は？`,`${V("y")} = ${M}2${V("x²")}`,[[`${V("y")} = 2${V("x")}`,"一次関数ではありません。"],[`${V("y")} = ${fr(1,2)}${V("x²")}`,"それは開き方がちがうグラフです。"],[`${V("y")} = 2${V("x²")} + 1`,"x 軸について対称 → 係数の符号が変わります。"]],"x 軸について対称 → y = −ax²"],
+ [`${V("y")} = 3${V("x²")} で、${V("x")} < 0 の範囲では、${V("x")} が増加すると ${V("y")} は？`,"減少する",[["増加する","x > 0 の範囲では増加します。"],["変わらない","グラフをかいて確かめよう。"],["いつも 0","y = 0 になるのは x = 0 のときだけです。"]],"a > 0 のとき：x < 0 で減少、x > 0 で増加"],
+ [`${V("y")} = ${M}${V("x²")} の ${V("y")} の値として、あてはまらないものは？`,"1",[["0","x = 0 のとき y = 0 です。"],[`${M}4`,"x = ±2 のとき y = −4 です。"],[`${M}9`,"x = ±3 のとき y = −9 です。"]],"a < 0 なので y ≦ 0（正の値はとらない）"],
+]);
+
+/* ---------- D(1) 標本調査 ---------- */
+const ZEN=[["国勢調査","日本に住むすべての人を調べる全数調査です。"],["学校の健康診断","全員の健康を確かめるので全数調査です。"],["高校の入学試験","受験者全員を調べる全数調査です。"],["クラスの出欠確認","全員を確かめる全数調査です。"],["飛行機に乗る前の手荷物検査","安全のため全員を調べる全数調査です。"]];
+const HYO=[["電球の寿命の検査","全部調べると製品がなくなってしまうので標本調査です。"],["テレビの視聴率調査","全世帯を調べるのは大変なので標本調査です。"],["缶詰の品質検査","開けると売れなくなるので標本調査です。"],["新聞社の世論調査","一部の人に聞いて全体を推定する標本調査です。"],["川の水質調査","川の水全部は調べられないので標本調査です。"]];
+function sv1(){ const h=Math.random()<.5,[A,B]=h?[HYO,ZEN]:[ZEN,HYO]; const a=pick(A),bs=shuffle(B).slice(0,3),kd=h?"標本調査":"全数調査";
+  return {q:`${kd}が適しているのは？`,ans:a[0],wrongs:bs.map(([v,why])=>({v,why})),exp:`${a[0]}：${a[1]}`,tf:v=>`${kd}が適しているのは ${v}`,kind:"word"}; }
+function sv2(){ if(Math.random()<.5){ const k=pick([20,30,50,100]),m=R(2,6),r=R(3,12),n=m*(1+r),ans=k*r;
+    const q=`袋の中に白い玉がたくさん入っている。黒い玉 ${k} 個を入れてよく混ぜ、${n} 個取り出したら黒い玉が ${m} 個だった。白い玉はおよそ何個？`;
+    return {q,ans:`およそ ${ans} 個`,wrongs:W(`およそ ${ans} 個`,[{v:`およそ ${k*(1+r)} 個`,why:"それは黒い玉もふくめた全体の数です。"},{v:`およそ ${k*m*r} 個`,why:`黒 : 白 = ${m} : ${n-m} = ${k} : ${V("x")} の比を使います。`},{v:`およそ ${k+n-m} 個`,why:"たし算ではなく比で考えます。"},{v:`およそ ${n-m} 個`,why:"それは取り出した中の白い玉の数です。"}]),exp:`取り出した中は 黒 ${m} : 白 ${n-m} → ${m} : ${n-m} = ${k} : ${V("x")} → ${V("x")} = ${ans}`,tf:v=>`${q.replace("およそ何個？","")}→ 白い玉は ${v}`,kind:"word"}; }
+  const T=pick([1000,2000,5000,10000]),n=pick([50,100,200]),m=R(1,8),ans=T*m/n; const q=`ある工場で作った製品 ${T} 個から ${n} 個を無作為に取り出したら、不良品が ${m} 個あった。全体の不良品はおよそ何個？`;
+  return {q,ans:`およそ ${ans} 個`,wrongs:W(`およそ ${ans} 個`,[{v:`およそ ${T-ans} 個`,why:"それは不良品でない製品の数です。"},{v:`およそ ${m} 個`,why:"それは標本の中の不良品の数です。全体を推定します。"},{v:`およそ ${ans*10} 個`,why:`${m}/${n} の割合を全体 ${T} 個にかけます。`},{v:`およそ ${Math.round(ans/2)} 個`,why:`${m}/${n} の割合を全体 ${T} 個にかけます。`}]),exp:`${T}×${fr(m,n)} = ${ans}`,tf:v=>`${q.replace("およそ何個？","")}→ ${v}`,kind:"word"}; }
+const svB=bank([
+ ["標本調査で、調べたい集団全体のことを何という？","母集団",[["標本","標本は、母集団から取り出した一部です。"],["標本の大きさ","標本の大きさは、取り出したデータの個数です。"],["全数調査","全数調査は、集団全体をすべて調べる方法です。"]],"調べたい集団全体 = 母集団"],
+ ["母集団から取り出した一部を何という？","標本",[["母集団","母集団は、調べたい集団全体です。"],["度数","度数は、階級に入るデータの個数です。"],["全数調査","全数調査は、すべてを調べる方法です。"]],"取り出した一部 = 標本"],
+ ["中学生 300 人から 40 人を選んで調べた。標本の大きさは？","40",[["300","それは母集団の大きさです。"],["260","それは選ばれなかった人数です。"],["340","たし算はしません。"]],"標本の大きさ = 取り出したデータの個数"],
+ ["標本を選ぶとき、かたよりがないようにする方法は？","無作為に抽出する（くじ・乱数など）",[["自分の好きな人を選ぶ","かたよりが出ます。"],["同じクラスの人だけを選ぶ","かたよりが出ます。"],["先着順に選ぶ","早く来る人にかたよるかもしれません。"]],"無作為に抽出 → 母集団の性質を推定できる"],
+ ["標本調査の結果について正しいのは？","母集団の性質を推定できるが、誤差がある",[["母集団の値と必ず同じになる","一部を調べるので誤差があります。"],["標本が小さいほど正確になる","標本が大きいほど、推定は正確になりやすいです。"],["母集団のことは何も分からない","無作為に選べば、母集団の性質を推定できます。"]],"標本調査 → 推定（誤差あり）"],
+]);
+
+/* ========== 単元（学習指導要領 数学 第1〜3学年 A 数と式・B 図形・C 関数・D データの活用） ========== */
 const units=[
  {id:"int",s:"math",g:"A1",n:{ja:"正の数・負の数","en":"Positive & negative numbers","zh-Hant":"正數・負數"},gr:"1",k:"math",ref:"(1) 正の数・負の数",
   parts:[1,2,3,4,5],pn:{1:"2数の加法・減法",2:"3数以上の加法・減法",3:"乗法・除法",4:"累乗",5:"四則の混じった計算"},sk:{1:[addsub],2:[addsub3],3:[muldiv],4:[power],5:[mixed]}},
@@ -505,6 +723,22 @@ const units=[
   parts:[1,2,3,4,5],pn:{1:"変化の割合",2:"傾きと切片",3:"グラフから式",4:"直線の式を求める",5:"2直線の交点"},sk:{1:[lf1],2:[lf2],3:[lf3],4:[lf4],5:[lf5]}},
  {id:"data2",s:"math",g:"D2",n:{ja:"箱ひげ図と確率","en":"Box plots & probability","zh-Hant":"盒狀圖與機率"},gr:"2",k:"math",ref:"2年 D(1) データの分布・D(2) 不確定な事象の起こりやすさ",
   parts:[1,2,3,4,5],pn:{1:"四分位数",2:"四分位範囲",3:"箱ひげ図",4:"確率（さいころ）",5:"確率（硬貨・玉）"},sk:{1:[quart],2:[iqr],3:[boxRead],4:[dice],5:[coin]}},
+ {id:"sqrt",s:"math",g:"A3",n:{ja:"平方根","en":"Square roots","zh-Hant":"平方根"},gr:"3",k:"math",ref:"3年 A(1) 正の数の平方根",
+  parts:[1,2,3,4,5],pn:{1:"平方根の意味",2:"根号のついた数の乗除",3:"根号のついた数の加減",4:"分母の有理化",5:"大小と近似"},sk:{1:[sq1],2:[sq2],3:[sq3],4:[sq4],5:[sq5]}},
+ {id:"fact",s:"math",g:"A3",n:{ja:"展開と因数分解","en":"Expanding & factoring","zh-Hant":"展開與因式分解"},gr:"3",k:"math",ref:"3年 A(2) 簡単な多項式",
+  parts:[1,2,3,4,5],pn:{1:"式の展開",2:"乗法公式",3:"共通因数",4:"因数分解（和と積）",5:"因数分解（公式）"},sk:{1:[ex1],2:[ex2],3:[ex3],4:[ex4],5:[ex5]}},
+ {id:"qeq",s:"math",g:"A3",n:{ja:"2次方程式","en":"Quadratic equations","zh-Hant":"一元二次方程式"},gr:"3",k:"math",ref:"3年 A(3) 二次方程式",
+  parts:[1,2,3,4],pn:{1:"平方根の考えで解く",2:"因数分解で解く",3:"解の公式",4:"解と係数"},sk:{1:[qe1],2:[qe2],3:[qe3],4:[qe4]}},
+ {id:"sim",s:"math",g:"B3",n:{ja:"相似な図形","en":"Similar figures","zh-Hant":"相似形"},gr:"3",k:"math",ref:"3年 B(1) 図形の相似",
+  parts:[1,2,3,4,5],pn:{1:"相似比",2:"相似条件",3:"平行線と線分の比",4:"中点連結定理",5:"面積比・体積比"},sk:{1:[sim1],2:[simB],3:[sim3],4:[sim4],5:[sim5]}},
+ {id:"circ",s:"math",g:"B3",n:{ja:"円周角","en":"Inscribed angles","zh-Hant":"圓周角"},gr:"3",k:"math",ref:"3年 B(2) 円周角と中心角",
+  parts:[1,2,3],pn:{1:"円周角と中心角",2:"直径と円周角",3:"同じ弧の円周角"},sk:{1:[cir1],2:[cir2],3:[cir3]}},
+ {id:"pyth",s:"math",g:"B3",n:{ja:"三平方の定理","en":"Pythagorean theorem","zh-Hant":"畢氏定理"},gr:"3",k:"math",ref:"3年 B(3) 三平方の定理",
+  parts:[1,2,3,4,5],pn:{1:"斜辺を求める",2:"ほかの辺を求める",3:"特別な直角三角形",4:"2点間の距離",5:"直方体の対角線"},sk:{1:[py1],2:[py2],3:[py3],4:[py4],5:[py5]}},
+ {id:"sqf",s:"math",g:"C3",n:{ja:"関数 y=ax²","en":"Functions y = ax²","zh-Hant":"函數 y=ax²"},gr:"3",k:"math",ref:"3年 C(1) 関数 y=ax²",
+  parts:[1,2,3,4,5],pn:{1:"比例定数を求める",2:"y の値",3:"変化の割合",4:"変域",5:"グラフの性質"},sk:{1:[qf1],2:[qf2],3:[qf3],4:[qf4],5:[qfB]}},
+ {id:"samp",s:"math",g:"D3",n:{ja:"標本調査","en":"Sampling","zh-Hant":"抽樣調查"},gr:"3",k:"math",ref:"3年 D(1) 標本調査",
+  parts:[1,2,3],pn:{1:"全数調査と標本調査",2:"母集団の推定",3:"標本調査のことば"},sk:{1:[sv1],2:[sv2],3:[svB]}},
 ];
 // 問題を作る（変な選択肢や答えが出ないよう、作り直しつき）
 function make(fn){ for(let i=0;i<20;i++){ try{ const g=fn(); if(g&&g.wrongs.length>=3&&!g.wrongs.some(w=>w.v===g.ans)) return g; }catch(e){} } return fn(); }
