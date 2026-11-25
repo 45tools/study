@@ -283,7 +283,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
   <label class="mi"><span data-i="langLbl"></span>
     <select id="lang" aria-label="Language"><option value="ja">日本語</option><option value="en">English</option><option value="zh-Hant">繁體中文</option><option value="zh">简体中文</option></select></label>
   <button class="mi" id="srcBtn" style="font-size:13px"><span data-i="srcTitle"></span></button>
-  <div class="mi" style="min-height:30px;font-size:12px;color:var(--muted)">45tools · ver 2026.11.21-3</div>
+  <div class="mi" style="min-height:30px;font-size:12px;color:var(--muted)">45tools · ver 2026.11.26-1</div>
   <a class="mi accent" id="supportLink" target="_blank" rel="noopener"><i class="ic" data-ic="heart"></i><span data-i="support"></span></a>
 </div>
 
@@ -370,12 +370,12 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
 <div class="toast" id="toast"></div>
 <audio id="au" preload="auto" playsinline></audio>
 
-<script src="data.js?v=2026.11.21-3"></script>
-<script src="math.js?v=2026.11.21-3"></script>
+<script src="data.js?v=2026.11.26-1"></script>
+<script src="math.js?v=2026.11.26-1"></script>
 <script>
 /* ===== 設定 ===== */
-const APP_VER="2026.11.21-3";
-const RELEASE="2026-12-26T20:00:00+09:00";   // この時刻まではお知らせだけ（?preview=1 で中を見られる）
+const APP_VER="2026.11.26-1";
+const RELEASE="2026-11-29T07:00:00+09:00";   // この時刻まではお知らせだけ（?preview=1 で中を見られる）
 const SUPPORT_URL="https://ofuse.me/45tools";
 const CHANNEL_URL="https://www.youtube.com/@Isensei_Lab";
 const GUIDE={ ja:"", en:"", zh:"" };   // 使い方（日本語→note、英語・繁体字→ショート）。公開後に入れる
@@ -440,7 +440,7 @@ const I18N={
   helpLong:"使い方・このアプリについて",channel:"伊先生Lab（YouTube）",guide:"使い方の記事",optRev:"日本語→英語で出す",optTimer:"制限時間（クイズ）",optTimerInf:"制限時間（無限モード）",tlQuiz:"制限時間",tlInf:"無限モード",tl_video:"動画のテンポ",tl_x2:"ゆっくり（2倍）",tl_x3:"もっとゆっくり（3倍）",tl_off:"なし",optExam:"入試日",
   exKuma:"3/4（熊本 一般選抜）",exFeb:"2/25",exMar:"3/10",sound:"効果音",on:"ON",off:"OFF",resetRec:"記録をリセット",resetAsk:"もう一度押すと、すべての記録を消します",resetDone:"記録を消しました",
   langLbl:"言語",support:"このアプリを応援する",srcTitle:"出典・データについて",copied:"コピーしました",
-  notyet:"<b>45 Study は 12月26日（土）20:00 に公開します</b><br>伊先生Labの動画と同じ単語・例文で、1日1分の英語学習ゲーム。",
+  notyet:"<b>45 Study は 11月29日（日）朝7:00 に公開します</b><br>伊先生Labの動画と同じ単語・例文で、1日1分の英語学習ゲーム。",
   rev:"日本語→英語",
   howTitle:"45 Study の使い方",
   how:"<p>YouTube「伊先生Lab」の英語ショートと<b>同じ番号・同じ文</b>で遊べる、1日1分の学習ゲームです。登録はいらず、記録はこの端末の中だけに保存されます。</p><h3>⚡ 2秒クイズ</h3>単語を見て、2秒で意味を選びます。動画と同じテンポで「すぐ思い出せる」まで練習できます。前回の自分の結果（○×）が上に出るので、前回の自分と勝負しよう。<h3>🎧 聞いて埋める</h3>英文を聞いて（　）に入る語句を選びます。まちがえると、えらんだ答えがなぜちがうのかが出ます。<h3>🃏 反対語めくり</h3>big ⇔ small のような反対の意味の2枚をそろえる神経衰弱です。<h3>∞ 無限モード・入試ミックス</h3>まちがえるまで続きます。入試ミックスは、遊んだことのある単元をまぜて出します（入試ではどの文法を使うか自分で見分ける力が必要です）。<h3>今日の1分・1周プラン・復習</h3>ホームには、その日に動画で公開された回、入試日から逆算した「今日やる単元」、まちがえた問題の復習（1日・3日・1週間後）が出ます。<h3>苦手マップ・スタンプ</h3>「単元で選ぶ」の色は正答率です。8割以上とれたPartにはスタンプ（★）がつきます。<h3>日本語→英語</h3>メニューで切り替えると、日本語を見て英語を選ぶ問題になります。<h3>記録のバックアップ</h3>記録はこの端末の中だけにあります。メニューの「記録のバックアップ」で、コードやファイルに保存して、機種変更のときにもどせます。",
@@ -468,7 +468,7 @@ const I18N={
   helpLong:"How to use · about",channel:"Isensei Lab (YouTube)",guide:"How-to video",optRev:"Japanese → English",optTimer:"Time limit (quizzes)",optTimerInf:"Time limit (Endless)",tlQuiz:"Time limit",tlInf:"Endless",tl_video:"Video pace",tl_x2:"Slow (×2)",tl_x3:"Slower (×3)",tl_off:"None",optExam:"Exam date",
   exKuma:"Mar 4 (Kumamoto)",exFeb:"Feb 25",exMar:"Mar 10",sound:"Sound effects",on:"ON",off:"OFF",resetRec:"Reset records",resetAsk:"Tap again to erase all records",resetDone:"Records erased",
   langLbl:"Language",support:"Support this app",srcTitle:"Sources & data",copied:"Copied",
-  notyet:"<b>45 Study opens on Sat, Dec 26, 20:00 (JST)</b><br>1-minute English study games with the same words and sentences as the Isensei Lab videos.",
+  notyet:"<b>45 Study opens on Sun, Nov 29, 7:00 (JST)</b><br>1-minute English study games with the same words and sentences as the Isensei Lab videos.",
   rev:"JA → EN",
   howTitle:"How to use 45 Study",
   how:"<p>1-minute study games that use <b>the same numbers and sentences</b> as the Isensei Lab English Shorts on YouTube. Explanations and meanings are in Japanese (made for junior high students in Japan). No sign-up; records stay on this device.</p><h3>⚡ 2-sec Quiz</h3>See a word and pick its meaning in 2 seconds. Your last result is shown on top — beat your past self.<h3>🎧 Listen & Fill</h3>Listen to a sentence and choose the words for the blank. Wrong answers show why.<h3>🃏 Opposites</h3>A memory game: match pairs like big ⇔ small.<h3>∞ Endless · Exam mix</h3>Keep going until you miss. Exam mix mixes every unit you have played.<h3>Today · plan · review</h3>Home shows today's video Parts, a plan that finishes every unit once before your exam date, and reviews of missed questions after 1, 3 and 7 days.",
@@ -496,7 +496,7 @@ const I18N={
   helpLong:"使用方法・關於本程式",channel:"伊先生Lab（YouTube）",guide:"使用方法影片",optRev:"日文→英文出題",optTimer:"時間限制（測驗）",optTimerInf:"時間限制（無限模式）",tlQuiz:"時間限制",tlInf:"無限模式",tl_video:"影片節奏",tl_x2:"慢（2倍）",tl_x3:"更慢（3倍）",tl_off:"無",optExam:"考試日",
   exKuma:"3/4（熊本）",exFeb:"2/25",exMar:"3/10",sound:"音效",on:"開",off:"關",resetRec:"清除紀錄",resetAsk:"再按一次會清除所有紀錄",resetDone:"已清除紀錄",
   langLbl:"語言",support:"支持這個程式",srcTitle:"出處・資料說明",copied:"已複製",
-  notyet:"<b>45 Study 將於 12月26日（六）20:00（日本時間）公開</b><br>用和伊先生Lab影片相同的單字・例句，每天1分鐘的英文學習遊戲。",
+  notyet:"<b>45 Study 將於 11月29日（日）早上7:00（日本時間）公開</b><br>用和伊先生Lab影片相同的單字・例句，每天1分鐘的英文學習遊戲。",
   rev:"日→英",
   howTitle:"45 Study 使用方法",
   how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同編號・相同句子</b>的每天1分鐘學習遊戲。說明與中文意思以日文顯示（為日本國中生製作）。免註冊，紀錄只存在這台裝置。</p><h3>⚡ 2秒測驗</h3>看到單字，在2秒內選出意思。上方會顯示上次的結果，和過去的自己比賽吧。<h3>🎧 聽音填空</h3>聽英文句子，選出填入（　）的詞語。答錯時會說明原因。<h3>🃏 反義詞翻牌</h3>把 big ⇔ small 這種意思相反的兩張牌湊成一對。<h3>∞ 無限模式・考試綜合</h3>一直出題直到答錯。考試綜合會混合你玩過的單元。<h3>今天・計畫・複習</h3>首頁會顯示當天影片的Part、從考試日倒推的「今天要做的單元」，以及答錯題目的複習（1天・3天・1週後）。",
@@ -523,7 +523,7 @@ const I18N={
   helpLong:"使用方法・关于本程序",channel:"伊先生Lab（YouTube）",guide:"使用方法视频",optRev:"日文→英文出题",optTimer:"时间限制（测验）",optTimerInf:"时间限制（无限模式）",tlQuiz:"时间限制",tlInf:"无限模式",tl_video:"视频节奏",tl_x2:"慢（2倍）",tl_x3:"更慢（3倍）",tl_off:"无",optExam:"考试日",
   exKuma:"3/4（熊本）",exFeb:"2/25",exMar:"3/10",sound:"音效",on:"开",off:"关",resetRec:"清除纪录",resetAsk:"再按一次会清除所有纪录",resetDone:"已清除纪录",
   langLbl:"语言",support:"支持这个程序",srcTitle:"出处・数据说明",copied:"已拷贝",
-  notyet:"<b>45 Study 将于 12月26日（六）20:00（日本时间）公开</b><br>用和伊先生Lab视频相同的单字・例句，每天1分钟的英文学习游戏。",
+  notyet:"<b>45 Study 将于 11月29日（日）早上7:00（日本时间）公开</b><br>用和伊先生Lab视频相同的单字・例句，每天1分钟的英文学习游戏。",
   rev:"日→英",
   howTitle:"45 Study 使用方法",
   how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同编号・相同句子</b>的每天1分钟学习游戏。说明与中文意思以日文显示（为日本国中生制作）。免注册，纪录只存在这台设备。</p><h3>⚡ 2秒测验</h3>看到单字，在2秒内选出意思。上方会显示上次的结果，和过去的自己比赛吧。<h3>🎧 听音填空</h3>听英文句子，选出填入（　）的词语。答错时会说明原因。<h3>🃏 反义词翻牌</h3>把 big ⇔ small 这种意思相反的两张牌凑成一对。<h3>∞ 无限模式・考试综合</h3>一直出题直到答错。考试综合会混合你玩过的单元。<h3>今天・计划・复习</h3>首页会显示当天视频的Part、从考试日倒推的「今天要做的单元」，以及答错题目的复习（1天・3天・1周后）。",
