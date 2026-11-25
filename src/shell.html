@@ -374,10 +374,10 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
 <script src="math.js?v={{VER}}"></script>
 <script>
 /* ===== 設定 ===== */
-const APP_VER="2026.11.26-2";
+const APP_VER="2026.11.26-3";
 const RELEASE="2026-11-29T07:00:00+09:00";   // この時刻まではお知らせだけ（?preview=1 で中を見られる）
 const SUPPORT_URL="https://ofuse.me/45tools";
-const CHANNEL_URL="https://www.youtube.com/@Isensei_Lab";
+const CHANNEL_URL="https://www.youtube.com/@Isensei_Lab/playlists";  // 伊先生Labの再生リスト一覧
 const GUIDE={ ja:"", en:"", zh:"" };   // 使い方（日本語→note、英語・繁体字→ショート）。公開後に入れる
 // 動画の毎日の投稿（伊先生Lab）。例文は毎日7:00、単語クイズは毎日18:00
 const SCHED=[ {vk:"gram",from:"2026-10-27",p0:1,n:36,at:"7:00"}, {vk:"kaiwa",from:"2026-12-02",p0:37,n:18,at:"7:00"},
@@ -437,7 +437,7 @@ const I18N={
   next:"次へ",seeResult:"結果を見る",skip:"わからない",retry:"もう一度",close:"とじる",share:"共有",
   resScore:"正解",resTime:"時間",resStreak:"連続正解",resBestU:"この単元の最高",resBestAll:"全体の最高",newBest:"記録更新！",stampGet:"スタンプ獲得！",mistakes:"まちがえた問題",
   memoMoves:"ためした回数",memoClear:"ぜんぶそろった！",memoTap:"反対の意味の2枚をタップしよう",memoPair:"{a} ⇔ {b}",memoNo:"ペアではありません",
-  helpLong:"使い方・このアプリについて",channel:"伊先生Lab（YouTube）",guide:"使い方の記事",optRev:"日本語→英語で出す",optTimer:"制限時間（クイズ）",optTimerInf:"制限時間（無限モード）",tlQuiz:"制限時間",tlInf:"無限モード",tl_video:"動画のテンポ",tl_x2:"ゆっくり（2倍）",tl_x3:"もっとゆっくり（3倍）",tl_off:"なし",optExam:"入試日",
+  helpLong:"使い方・このアプリについて",channel:"伊先生Labの動画（再生リスト）",guide:"使い方の記事",optRev:"日本語→英語で出す",optTimer:"制限時間（クイズ）",optTimerInf:"制限時間（無限モード）",tlQuiz:"制限時間",tlInf:"無限モード",tl_video:"動画のテンポ",tl_x2:"ゆっくり（2倍）",tl_x3:"もっとゆっくり（3倍）",tl_off:"なし",optExam:"入試日",
   exKuma:"3/4（熊本 一般選抜）",exFeb:"2/25",exMar:"3/10",sound:"効果音",on:"ON",off:"OFF",resetRec:"記録をリセット",resetAsk:"もう一度押すと、すべての記録を消します",resetDone:"記録を消しました",
   langLbl:"言語",support:"このアプリを応援する",srcTitle:"出典・データについて",copied:"コピーしました",
   notyet:"<b>45 Study は 11月29日（日）朝7:00 に公開します</b><br>伊先生Labの動画と同じ単語・例文で、1日1分の英語学習ゲーム。",
@@ -465,7 +465,7 @@ const I18N={
   next:"Next",seeResult:"See result",skip:"Skip",retry:"Again",close:"Close",share:"Share",
   resScore:"Correct",resTime:"Time",resStreak:"Streak",resBestU:"Unit best",resBestAll:"Overall best",newBest:"New record!",stampGet:"Stamp earned!",mistakes:"Missed",
   memoMoves:"Tries",memoClear:"All matched!",memoTap:"Tap two words with opposite meanings",memoPair:"{a} ⇔ {b}",memoNo:"Not a pair",
-  helpLong:"How to use · about",channel:"Isensei Lab (YouTube)",guide:"How-to video",optRev:"Japanese → English",optTimer:"Time limit (quizzes)",optTimerInf:"Time limit (Endless)",tlQuiz:"Time limit",tlInf:"Endless",tl_video:"Video pace",tl_x2:"Slow (×2)",tl_x3:"Slower (×3)",tl_off:"None",optExam:"Exam date",
+  helpLong:"How to use · about",channel:"Isensei Lab videos (playlists)",guide:"How-to video",optRev:"Japanese → English",optTimer:"Time limit (quizzes)",optTimerInf:"Time limit (Endless)",tlQuiz:"Time limit",tlInf:"Endless",tl_video:"Video pace",tl_x2:"Slow (×2)",tl_x3:"Slower (×3)",tl_off:"None",optExam:"Exam date",
   exKuma:"Mar 4 (Kumamoto)",exFeb:"Feb 25",exMar:"Mar 10",sound:"Sound effects",on:"ON",off:"OFF",resetRec:"Reset records",resetAsk:"Tap again to erase all records",resetDone:"Records erased",
   langLbl:"Language",support:"Support this app",srcTitle:"Sources & data",copied:"Copied",
   notyet:"<b>45 Study opens on Sun, Nov 29, 7:00 (JST)</b><br>1-minute English study games with the same words and sentences as the Isensei Lab videos.",
@@ -493,7 +493,7 @@ const I18N={
   next:"下一題",seeResult:"看結果",skip:"不知道",retry:"再一次",close:"關閉",share:"分享",
   resScore:"答對",resTime:"時間",resStreak:"連續答對",resBestU:"本單元最高",resBestAll:"全部最高",newBest:"刷新紀錄！",stampGet:"獲得印章！",mistakes:"答錯的題目",
   memoMoves:"嘗試次數",memoClear:"全部配對完成！",memoTap:"點選意思相反的兩個字",memoPair:"{a} ⇔ {b}",memoNo:"不是一對",
-  helpLong:"使用方法・關於本程式",channel:"伊先生Lab（YouTube）",guide:"使用方法影片",optRev:"日文→英文出題",optTimer:"時間限制（測驗）",optTimerInf:"時間限制（無限模式）",tlQuiz:"時間限制",tlInf:"無限模式",tl_video:"影片節奏",tl_x2:"慢（2倍）",tl_x3:"更慢（3倍）",tl_off:"無",optExam:"考試日",
+  helpLong:"使用方法・關於本程式",channel:"伊先生Lab的影片（播放清單）",guide:"使用方法影片",optRev:"日文→英文出題",optTimer:"時間限制（測驗）",optTimerInf:"時間限制（無限模式）",tlQuiz:"時間限制",tlInf:"無限模式",tl_video:"影片節奏",tl_x2:"慢（2倍）",tl_x3:"更慢（3倍）",tl_off:"無",optExam:"考試日",
   exKuma:"3/4（熊本）",exFeb:"2/25",exMar:"3/10",sound:"音效",on:"開",off:"關",resetRec:"清除紀錄",resetAsk:"再按一次會清除所有紀錄",resetDone:"已清除紀錄",
   langLbl:"語言",support:"支持這個程式",srcTitle:"出處・資料說明",copied:"已複製",
   notyet:"<b>45 Study 將於 11月29日（日）早上7:00（日本時間）公開</b><br>用和伊先生Lab影片相同的單字・例句，每天1分鐘的英文學習遊戲。",
@@ -883,7 +883,11 @@ $$("#uSeg button").forEach(b=>b.onclick=()=>{ uTab=b.dataset.v; renderUnits(); }
 document.addEventListener("visibilitychange",()=>{ if(document.hidden&&Z) clearTimeout(Z.tt); });
 applyLang();
 if(Date.now()<Date.parse(RELEASE)&&!PREVIEW){ $("#notyetMsg").innerHTML=t("notyet"); show("notyet","",false); $("#menuBtn").hidden=true; }
-else goHome();
+else { goHome(); openFromVideo(); }
+/* 伊先生Labの動画の概要欄から：?v=gram_29（シリーズ_Part）でそのPartをすぐ始める */
+function openFromVideo(){ try{ const v=new URLSearchParams(location.search).get("v"); const m=v&&v.match(/^([a-z]+)_(\d+)$/); if(!m) return;
+  const u=unitOfPart(m[1],+m[2]); if(!u) return; const q=new URL(location.href); q.searchParams.delete("v"); history.replaceState(null,"",q.pathname+q.search);
+  playPart(u,+m[2]); }catch(e){} }
 if("serviceWorker" in navigator&&location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
