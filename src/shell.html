@@ -374,7 +374,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
 <script src="math.js?v={{VER}}"></script>
 <script>
 /* ===== 設定 ===== */
-const APP_VER="2026.11.26-1";
+const APP_VER="2026.11.26-2";
 const RELEASE="2026-11-29T07:00:00+09:00";   // この時刻まではお知らせだけ（?preview=1 で中を見られる）
 const SUPPORT_URL="https://ofuse.me/45tools";
 const CHANNEL_URL="https://www.youtube.com/@Isensei_Lab";
@@ -551,7 +551,7 @@ const ANT=(()=>{ const pairs=[]; for(const o of V.adj){ if(o.pip&&o.w<o.ant){ co
   const sets=[]; for(let i=0;i<pairs.length;i+=6) sets.push(pairs.slice(i,i+6)); if(sets.length>1&&sets[sets.length-1].length<4){ const l=sets.pop(); sets[sets.length-1].push(...l); } return sets; })();
 U.ant.parts=ANT.map((_,i)=>i+1);
 // 教科：数学は公開日が決まるまでプレビューだけで表示
-const SUBJECTS=[{id:"en",n:"sEn",rel:null},{id:"math",n:"sMath",rel:"preview"}];
+const SUBJECTS=[{id:"en",n:"sEn",rel:null},{id:"math",n:"sMath",rel:"2026-12-06T07:00:00+09:00"}];
 const subjOpen=x=>!x.rel||PREVIEW||(x.rel!=="preview"&&Date.now()>=Date.parse(x.rel));
 UNITS.forEach(u=>u.s=u.s||"en");
 for(const mu of MATH.units){ UNITS.push(mu); U[mu.id]=mu; for(const p of mu.parts) mu.sk[p].forEach((fn,i)=>{ const id=`m-${mu.id}-${p}-${i}`; IT[id]={id,k:"math",u:mu.id,p,fn}; }); }
