@@ -1,7 +1,7 @@
 """45 Study の紹介ショート。45 Play の撮影スタジオ（play/tools/shorts/studio.py）を借りる。
 準備：python3 -m http.server 8770 --directory ~/projects/45tools ／ python3 -m http.server 8771 --directory ~/projects/45tools/play/tools/shorts
 使い方：uv run --with playwright python study_short.py en1 ja|en|zh-Hant   （BGM=曲.mp3 でBGM入り）
-  en1 = 11/29 公開（英語：2秒クイズ・聞いて埋める・反対語めくり）／math1 = 12/6 公開（数学：4択・図の問題・3秒○×）／sci1 = 12/13 公開（理科：図の問題・計算・3秒○×・なかま分け）
+  en1 = 11/29 公開（英語：2秒クイズ・聞いて埋める・反対語めくり）／math1 = 12/6 公開（数学：4択・図の問題・3秒○×）／sci1 = 12/13 公開（理科：図の問題・計算・3秒○×・なかま分け）／soc1 = 12/20 公開（社会：雨温図・時差・3秒○×・組み合わせカード）
 """
 import asyncio, sys, os, json
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -349,6 +349,122 @@ async def run_sci1(lang, bgm=None):
     return s.finish(bgm)
 
 
+LSO = {
+ "ja": {"name": "45 Study 社会", "tag": "地理も歴史も、選んで覚える。",
+  "t": ["45 Study に、社会が加わりました。中1の地理と歴史、5単元・22 Partです。",
+        "ホームで社会に切りかえ。今日やるPartが出ます。",
+        "雨温図を見て、気候を答える問題もあります。",
+        "まちがえたら、えらんだ答えがなぜちがうかを一言で教えてくれます。",
+        "時差の計算は、数字が毎回かわります。",
+        "3秒○×で、年号やできごとをすばやく確認。",
+        "組み合わせカードは、表向きのカードから、組になる2枚を選ぶゲームです。",
+        "45 Study。無料・広告なし。毎週日曜に、教科が増えます。"],
+  "end": ("無料・広告なし・登録不要", ["中1の地理・歴史", "5単元・22 Part"], "毎週日曜、教科が増えます"),
+ },
+ "en": {"name": "45 Study Social Studies", "tag": "Geography and history, one tap at a time.",
+  "t": ["Social studies is now in 45 Study. Grade seven geography and history: five units, twenty-two parts.",
+        "Switch to Social studies on the home screen to see today's parts.",
+        "Read a climate graph and name the climate.",
+        "Pick a wrong answer, and it tells you why, in one line.",
+        "Time-zone problems get new numbers every time.",
+        "Three-second true or false, for dates and events.",
+        "Match pairs: all cards face up. Tap two that go together.",
+        "45 Study. Free, no ads. A new subject every Sunday."],
+  "end": ("Free · No ads · No sign-up", ["Geography & history", "5 units · 22 parts"], "A new subject every Sunday"),
+ },
+ "zh-Hant": {"name": "45 Study 社會", "tag": "地理和歷史，選一選就記住。",
+  "t": ["45 Study 新增社會科，國一的地理和歷史，5個單元、22個Part。",
+        "在首頁切換到社會，就會顯示今天要練的Part。",
+        "看氣溫雨量圖，回答是哪一種氣候。",
+        "答錯時，用一句話告訴你為什麼不對。",
+        "時差的計算題，數字每次都不同。",
+        "三秒是非題，快速複習年份和事件。",
+        "配對卡，卡片全部正面朝上，選出可以配對的兩張。",
+        "45 Study，免費、無廣告。每週日新增科目。"],
+  "end": ("免費・無廣告・免註冊", ["國一地理・歷史", "5個單元・22個Part"], "每週日新增科目"),
+ },
+}
+
+
+def soc_quiz(uid, p, test):
+    """社会の Part を、決まった型の問題だけで始める（撮影用）。test は fn を受ける JS の式"""
+    return (f"store.set('s_mm','mc'); (()=>{{const u=U.{uid}; const it=unitItems(u,{p}).filter(o=>o.fn&&({test})(o.fn));"
+            f" startQuiz({{u,p:{p},items:it.slice(0,1).concat(it.slice(0,1)),title:uname(u)+' Part {p}'}}); }})(); 1")
+
+
+def card(j, side):
+    return f"(()=>P.cards.findIndex(c=>c.pi==={j}&&c.s==={side}))()"
+
+
+async def run_soc1(lang, bgm=None):
+    D = LSO[lang]; T = D["t"]
+    async with Studio(f"study_soc1_{lang}", lang, "#C06A1F") as s:
+        await s.page.clock.set_system_time("2026-12-20T07:30:00+09:00")
+        await s.stage(f"document.querySelector('#top .chip').innerHTML='<i>45</i>Study'")
+        await s.scene("title")
+        title = (f'{CHIP}<img src="{ICON}" style="width:330px;height:330px;border-radius:78px;box-shadow:0 16px 40px rgba(30,36,69,.25)">'
+                 f'<div class=big style="font-size:{96 if lang == "en" else 112}px">{D["name"]}</div><div class=tag>{D["tag"]}</div>')
+        await s.stage(f"__card({json.dumps(title)})")
+        await s.hold(0.2)
+        await s.say(T[0], caption=""); await s.wait_speech(0.3)
+        await s.stage(f"__app({json.dumps(APP)})"); await s.page.clock.run_for(1500); await s.page.wait_for_timeout(1500)
+        await s.page.frame(name="app").wait_for_selector('[data-pane="home"].act', timeout=15000)
+        await s.js(MUTE + "1")
+        await s.stage(f"__card(''); __title({json.dumps(D['name'])}); __finger(true)")
+        # ホーム → 社会
+        await s.scene("home")
+        await s.say(T[1]); await s.hold(0.6)
+        await s.tap('#subjSeg [data-sj="soc"]', after=1.0)
+        await s.wait_speech(0.2)
+        # 雨温図 → まちがえて理由
+        await s.scene("fig")
+        await s.js(soc_quiz("wgeo", 4, "f=>String(f).includes('uon(k)')")); await app_wait(s, 300)
+        await s.say(T[2]); await s.hold(1.0)
+        await s.wait_speech(0.1)
+        await pick(s, False)
+        await s.say(T[3]); await s.hold(0.6)
+        await s.wait_speech(0.8)
+        await s.js("stopTimer(); Z=null; goHome(); 1"); await app_wait(s)
+        # 時差
+        await s.scene("calc")
+        await s.js(soc_quiz("wgeo", 3, "f=>f.name==='tzDiff'")); await app_wait(s, 300)
+        await s.say(T[4]); await s.hold(1.6)
+        await pick(s, True)
+        await s.wait_speech(0.8)
+        await s.js("stopTimer(); Z=null; goHome(); 1"); await app_wait(s)
+        # 3秒○×（飛鳥時代）
+        await s.scene("tf")
+        await s.tap('#games [data-go="tf"]', after=0.5)
+        await s.tap('#uList [data-u="anc"]', after=0.5)
+        await s.tap('#uBody [data-p="3"]', after=0.3)
+        await s.say(T[5]); await s.hold(0.3)
+        for _ in range(3):
+            await pick(s, True); await s.hold(1.25)
+        await s.wait_speech(0.4)
+        await s.js("stopTimer(); Z=null; store.set('s_mm','mc'); goHome(); 1"); await app_wait(s)
+        # 組み合わせカード（人物と行ったこと）：1回まちがえて、3組そろえる
+        await s.scene("pair")
+        await s.tap('#games [data-go="pair"]', after=0.5)
+        await s.tap('#uBody [data-p="4"]', after=0.5)
+        await s.say(T[6]); await s.hold(0.4)
+        await s.tap(f'#mGrid [data-m="{await s.js(card(0, 0))}"]', after=0.3)
+        await s.tap(f'#mGrid [data-m="{await s.js(card(1, 1))}"]', after=1.5)
+        for j in range(3):
+            await s.tap(f'#mGrid [data-m="{await s.js(card(j, 0))}"]', after=0.3)
+            await s.tap(f'#mGrid [data-m="{await s.js(card(j, 1))}"]', after=0.9)
+        await s.wait_speech(0.4)
+        await s.js("clearInterval(memoTick); P=null; goHome(); 1")
+        # 終わり
+        await s.scene("end")
+        await s.stage("__finger(false); __cap('')")
+        x, pills, wk = D["end"]
+        html = (f'{CHIP}<div class=tag>{x}</div><div class=url>45tools.github.io/study</div>'
+                f'<div class=pills>{"".join(f"<span>{p}</span>" for p in pills)}</div><div class=small>{wk}</div>')
+        await s.stage(f"__card({json.dumps(html)})")
+        await s.say(T[-1], caption=""); await s.wait_speech(0.8)
+    return s.finish(bgm)
+
+
 if __name__ == "__main__":
     kind, lang = sys.argv[1], sys.argv[2]
-    print(asyncio.run({"en1": run_en1, "math1": run_math1, "sci1": run_sci1}[kind](lang, os.environ.get("BGM"))))
+    print(asyncio.run({"en1": run_en1, "math1": run_math1, "sci1": run_sci1, "soc1": run_soc1}[kind](lang, os.environ.get("BGM"))))

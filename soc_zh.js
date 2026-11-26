@@ -123,6 +123,7 @@ const w2=[antipode,antipode,antipode,
 /* Part3 时差（标准时子午线を问题に书く。サマータイムは考えない） */
 const CITY=[["ロンドン|London|伦敦",0],["カイロ|Cairo|开罗",30],["ペキン|Beijing|北京",120],["シドニー|Sydney|雪梨",150],["ニューヨーク|New York|纽约",-75],["ロサンゼルス|Los Angeles|洛杉矶",-120],["ホノルル|Honolulu|檀香山",-150]];
 const LON=d=>d===0?X("経度0度|0°|经度0度"):d>0?LONS(d,"E"):LONS(-d,"W");
+const HE=n=>n===1?"1 hour":n+" hours";
 const HR=n=>X(`${n}时间|${n} hours|${n}小时`).replace(/^1 hours/,"1 hour");
 const MON=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const DT=(m,d,h)=>{ while(h<0){ h+=24; d--; } while(h>=24){ h-=24; d++; } return X(`${m}月${d}日 ${h}时|${MON[m]} ${d}, ${h}:00|${m}月${d}日 ${h}:00`); };
@@ -131,11 +132,11 @@ function tzDiff(){ const c=pick(CITY),n=Math.abs(135-c[1])/15,nm=X(c[0]),deg=Mat
   const q=X(`东京と${nm}の时差は何时间？|What is the time difference between Tokyo and ${nm}?|东京与${nm}的时差是几小时？`)+"<br><small>"+TZQ(c)+"</small>";
   const ws=[]; if(c[1]<0){ const v=Math.abs(135+c[1])/15; if(v!==n&&v>0) ws.push({v:HR(v),why:X(`西経は东経とは反対侧です。経度の差は 135＋${-c[1]}＝${deg}度になります。|West longitude is on the other side: the difference is 135+${-c[1]}=${deg}°.|西经在东经的另一侧，经度差是135＋${-c[1]}＝${deg}度。`)}); }
   for(const d of [1,-1,2,-2,3]){ if(ws.length>=3) break; const v=n+d; if(v>0&&!ws.some(w=>w.v===HR(v))) ws.push({v:HR(v),why:X("経度の差を15でわろう。|Divide the longitude difference by 15.|把经度差除以15。")}); }
-  return {q,ans:HR(n),wrongs:ws.filter(w=>w.v!==HR(n)).slice(0,3),exp:X(`経度の差：${c[1]>=135?`${c[1]}−135`:c[1]>=0?`135−${c[1]}`:`135＋${-c[1]}`}＝${deg}度。${deg}÷15＝${n}时间。|Longitude difference: ${deg}°. ${deg}÷15 = ${n} hours.|经度差：${deg}度；${deg}÷15＝${n}小时。`),tf:v=>`${q}<br>→ ${v}`,kind:"calc"}; }
+  return {q,ans:HR(n),wrongs:ws.filter(w=>w.v!==HR(n)).slice(0,3),exp:X(`経度の差：${c[1]>=135?`${c[1]}−135`:c[1]>=0?`135−${c[1]}`:`135＋${-c[1]}`}＝${deg}度。${deg}÷15＝${n}时间。|Longitude difference: ${deg}°. ${deg}÷15 = ${HE(n)}.|经度差：${deg}度；${deg}÷15＝${n}小时。`),tf:v=>`${q}<br>→ ${v}`,kind:"calc"}; }
 function tzClock(){ const c=pick(CITY),nm=X(c[0]),m=R(1,12),d=R(2,27),h=R(0,23),off=(c[1]-135)/15,ans=DT(m,d,h+off),deg=Math.abs(135-c[1]),n=Math.abs(off),east=off>0;
   const q=X(`东京が ${DT(m,d,h)} のとき、${nm}は何月何日の何时？|When it is ${DT(m,d,h)} in Tokyo, what is the date and time in ${nm}?|东京为 ${DT(m,d,h)} 时，${nm}是几月几日几点？`)+"<br><small>"+TZQ(c)+"</small>";
-  const ws=[{v:DT(m,d,h-off),why:east?X(`${nm}は东京より东なので、时刻は${n}时间进んでいます（引くのではなく足す）。|${nm} is east of Tokyo, so it is ${n} hour(s) ahead (add, don't subtract).|${nm}在东京以东，时间快${n}小时（要加，不是减）。`)
-      :X(`${nm}は东京より西なので、时刻は${n}时间おくれています（足すのではなく引く）。|${nm} is west of Tokyo, so it is ${n} hours behind (subtract, don't add).|${nm}在东京以西，时间慢${n}小时（要减，不是加）。`)}];
+  const ws=[{v:DT(m,d,h-off),why:east?X(`${nm}は东京より东なので、时刻は${n}时间进んでいます（引くのではなく足す）。|${nm} is east of Tokyo, so it is ${HE(n)} ahead (add, don't subtract).|${nm}在东京以东，时间快${n}小时（要加，不是减）。`)
+      :X(`${nm}は东京より西なので、时刻は${n}时间おくれています（足すのではなく引く）。|${nm} is west of Tokyo, so it is ${HE(n)} behind (subtract, don't add).|${nm}在东京以西，时间慢${n}小时（要减，不是加）。`)}];
   if(c[1]<0){ const o2=(-c[1]-135)/15; ws.push({v:DT(m,d,h+o2),why:X(`西経${-c[1]}度は东経とは反対侧です。経度の差は 135＋${-c[1]}＝${deg}度です。|${-c[1]}°W is on the other side: the difference is 135+${-c[1]}=${deg}°.|西经${-c[1]}度在东经的另一侧，经度差是135＋${-c[1]}＝${deg}度。`)}); }
   const hh=((h+off)%24+24)%24; ws.push({v:X(`${m}月${d}日 ${hh}时|${MON[m]} ${d}, ${hh}:00|${m}月${d}日 ${hh}:00`),why:X("时刻は合っていますが、日付が変わることを忘れています。|The time is right, but the date changes.|时间对了，但忘了日期会改变。")});
   const re=X("経度の差を15でわって、时差を出し直そう。|Recalculate: longitude difference ÷ 15.|重新用经度差除以15计算时差。");
@@ -146,7 +147,7 @@ function tzClock(){ const c=pick(CITY),nm=X(c[0]),m=R(1,12),d=R(2,27),h=R(0,23),
   return {q,ans,wrongs:wr,exp:ex+` → ${ans}`,tf:v=>`${q}<br>→ ${v}`,kind:"calc"}; }
 // 「东京より n 时间おくれている都市」の标准时子午线（西経にまわりこむ）
 function tzBack(){ const n=pick([1,2,3,4,5,6,8,9,10,13,14,15,16,17,19]),L=135-15*n,ans=LON(L);
-  const q=X(`ある都市の时刻は、东京（东経135度）より${n}时间おくれている。この都市の标准时子午线は？|A city is ${n} hours behind Tokyo (135°E). What is its standard meridian?|某城市的时间比东京（东经135度）慢${n}小时，此城市的标准时子午线是？`);
+  const q=X(`ある都市の时刻は、东京（东経135度）より${n}时间おくれている。この都市の标准时子午线は？|A city is ${HE(n)} behind Tokyo (135°E). What is its standard meridian?|某城市的时间比东京（东经135度）慢${n}小时，此城市的标准时子午线是？`);
   let L2=135+15*n; if(L2>180) L2-=360;
   const ws=[{v:LON(L2),why:X("おくれている都市は东京より西にあります。135度から引きます。|A city behind Tokyo is to the west: subtract from 135°.|时间较慢的城市在东京以西，要从135度减。")},
     {v:LON(15*n),why:X(`${15*n}度は时差の分の経度で、东京（135度）からの差です。|${15*n}° is only the difference from 135°.|${15*n}度只是与东京（135度）的经度差。`)},
