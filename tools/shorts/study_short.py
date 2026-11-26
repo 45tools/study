@@ -72,7 +72,7 @@ async def pick(s, ok=True):
     """正解（ok=True）か、まちがい（ok=False）の選択肢を押す"""
     if ok: i = await s.js("Z.q.ch.findIndex(c=>c.ok)")
     else:  # 数学は「計算ミスです」以外の、具体的な理由がある誤答を選ぶ
-        i = await s.js("(()=>{const ch=Z.q.ch; let k=ch.findIndex(c=>!c.ok&&c.why&&!/^計算ミス/.test(c.why)); return k<0?ch.findIndex(c=>!c.ok):k})()")
+        i = await s.js("(()=>{const ch=Z.q.ch; let k=ch.findIndex(c=>!c.ok&&c.why&&!/^(計算ミス|Calculation slip|計算錯誤)/.test(c.why)); return k<0?ch.findIndex(c=>!c.ok):k})()")
     await s.tap(f'#qBody [data-c="{i}"]', after=0.2)
 
 
@@ -168,7 +168,7 @@ LM = {
         "Even figure and graph questions work without scratch paper.",
         "Three-second true or false: is the equation right? Decide in three seconds.",
         "45 Study. Free, no ads. A new subject every Sunday."],
-  "end": ("Free · No ads · No sign-up", ["Junior high math", "21 units · 95 parts"], "A new subject every Sunday · Japanese explanations"),
+  "end": ("Free · No ads · No sign-up", ["Junior high math", "21 units · 95 parts"], "A new subject every Sunday"),
  },
  "zh-Hant": {"name": "45 Study 數學", "tag": "不用紙筆的數學。",
   "t": ["45 Study 新增數學，國一到國三，共21個單元。",
@@ -178,7 +178,7 @@ LM = {
         "圖形和圖表的題目，也不用計算紙就能作答。",
         "三秒是非題，看算式，三秒內判斷對不對。",
         "45 Study，免費、無廣告。每週日新增科目。"],
-  "end": ("免費・無廣告・免註冊", ["國中數學", "21個單元・95個Part"], "每週日新增科目・解說為日文"),
+  "end": ("免費・無廣告・免註冊", ["國中數學", "21個單元・95個Part"], "每週日新增科目"),
  },
 }
 
