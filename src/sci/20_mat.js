@@ -6,10 +6,10 @@ const FIG_GB=SV(220,220,`<path d="M100 38 Q92 18 100 4 Q108 18 100 38 Z" class="
 const MV="|g/cm³|";   // 単位
 const mat1=[
   ()=>{ const a=pick(["A","B"]); const nm={A:"空気調節ねじ|Air adjustment screw|空氣調節輪",B:"ガス調節ねじ|Gas adjustment screw|瓦斯調節輪"};
-    return {q:X(`図のガスバーナーで、${a} のねじの名前は？|In the burner, what is screw ${a}?|圖中瓦斯燈的 ${a} 是？`)+FIG_GB,ans:X(nm[a]),
+    return {q:X(`図のガスバーナーで、${a} のねじの名前は？|In the burner, what is screw ${a}?|圖中本生燈的 ${a} 是？`)+FIG_GB,ans:X(nm[a]),
       wrongs:[{v:X(nm[a==="A"?"B":"A"]),why:X(`上が空気調節ねじ、下がガス調節ねじです。|The upper one adjusts air, the lower one gas.|上面是空氣調節輪，下面是瓦斯調節輪。`)},{v:X("元栓|Main gas valve|總開關"),why:X("元栓はガス管の口にある栓です。|The main valve is at the gas outlet.|總開關在瓦斯管的出口。")},{v:X("コック|Cock (stopcock)|旋塞","コック"),why:X("コックはバーナーにつながるガスの通り道を開け閉めするものです。|The cock opens the gas line to the burner.|旋塞是開關通往燈的瓦斯通道。")}],
       exp:X("上：空気調節ねじ（炎の色）、下：ガス調節ねじ（炎の大きさ）。|Upper: air (flame color). Lower: gas (flame size).|上：空氣調節輪（火焰顏色），下：瓦斯調節輪（火焰大小）。"),tf:v=>X(`図の ${a} は|Screw ${a} is|圖中的 ${a} 是`)+FIG_GB+`→ ${v}`,kind:"fig"}; },
-  Q("ガスバーナーの炎がオレンジ色でゆらゆらしている。どうする？|The flame is orange and flickering. What do you do?|瓦斯燈的火焰是橘色、搖搖晃晃。該怎麼做？","空気調節ねじを開いて空気を入れ、青い炎にする|Open the air screw to make a blue flame|打開空氣調節輪讓空氣進入，變成藍色火焰",
+  Q("ガスバーナーの炎がオレンジ色でゆらゆらしている。どうする？|The flame is orange and flickering. What do you do?|本生燈的火焰是橘色、搖搖晃晃。該怎麼做？","空気調節ねじを開いて空気を入れ、青い炎にする|Open the air screw to make a blue flame|打開空氣調節輪讓空氣進入，變成藍色火焰",
     [["ガス調節ねじを開いてガスを増やす|Open the gas screw for more gas|打開瓦斯調節輪增加瓦斯","ガスを増やすと炎が大きくなるだけで、空気は足りないままです。|More gas only makes it bigger; air is still lacking.|增加瓦斯只會讓火焰變大，空氣還是不足。"],["空気調節ねじを閉めて空気を減らす|Close the air screw|關緊空氣調節輪","空気が足りないのでオレンジ色になっています。減らすと逆です。|It is orange because air is lacking.|是因為空氣不足才變橘色，減少空氣會更糟。"],["すぐに元栓を閉める|Close the main valve at once|馬上關掉總開關","火を消す必要はありません。空気を調節します。|No need to turn it off; adjust the air.|不必熄火，調節空氣就好。"]],
     "オレンジ色の炎＝空気不足。空気調節ねじを開いて青い炎に。|Orange flame = not enough air. Open the air screw for a blue flame.|橘色火焰＝空氣不足。打開空氣調節輪變成藍色火焰。",FIG_GB),
   Q("有機物の説明で正しいのは？|Which describes organic matter?|關於有機物，正確的是？","炭素をふくみ、燃えると二酸化炭素が出る|Contains carbon; burning gives carbon dioxide|含有碳，燃燒會產生二氧化碳",
@@ -73,7 +73,7 @@ const FIG_GAS=SV(330,175,
   `<rect x="6" y="96" width="100" height="56" class="o"/><rect x="7" y="104" width="98" height="47" class="wa"/><path d="M56 128 L56 52 Q66 38 76 52 L76 128 Z" class="wa"/><path d="M56 128 L56 52 Q66 38 76 52 L76 128" class="o"/><path d="M0 76 L30 76 L30 140 L66 140 L66 124" class="o"/>`+
   `<path d="M150 112 L150 46 Q160 32 170 46 L170 112" class="o"/><path d="M120 150 L160 150 L160 52" class="o"/>`+
   `<path d="M260 36 L260 110 Q270 124 280 110 L280 36" class="o"/><path d="M228 18 L270 18 L270 108" class="o"/>`+T(56,170,"A")+T(160,170,"B")+T(270,170,"C"));
-const GAS_NM={A:"水上置換法|Water displacement|排水集氣法",B:"上方置換法|Upward displacement|向下排空氣法",C:"下方置換法|Downward displacement|向上排空氣法"};
+const GAS_NM={A:"水上置換法|Water displacement|排水集氣法",B:"上方置換法|Upward delivery|向下排空氣法",C:"下方置換法|Downward delivery|向上排空氣法"};
 const GAS_DO={A:"水にとけにくい気体|gases that barely dissolve in water|難溶於水的氣體",B:"水にとけやすく、空気より軽い気体|soluble gases lighter than air|易溶於水、比空氣輕的氣體",C:"水にとけやすく、空気より重い気体|soluble gases heavier than air|易溶於水、比空氣重的氣體"};
 function gasWay(){ const a=pick(["A","B","C"]); const ws=["A","B","C"].filter(k=>k!==a).map(k=>({v:X(GAS_NM[k]),why:X(`${X(GAS_NM[k])}は図の ${k}（${X(GAS_DO[k])}を集める）。|${X(GAS_NM[k])} is ${k} (for ${X(GAS_DO[k])}).|${X(GAS_NM[k])}是圖中的 ${k}（收集${X(GAS_DO[k])}）。`)}));
   ws.push({v:X("ろ過|Filtration|過濾"),why:X("ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。")});
@@ -99,16 +99,16 @@ const mat3=[gasWay,gasWay,
     "酸素：物を燃やすはたらき（助燃性）がある。気体そのものは燃えない。|Oxygen supports burning but doesn't burn itself.|氧氣有助燃性，本身不會燃燒。"),
   gq("水にとけやすく、空気より軽く、においのある気体は？|Which gas is very soluble, lighter than air and smelly?|極易溶於水、比空氣輕、有刺激性氣味的氣體是？","N",
     [["H","水素は水にとけにくく、においもありません。|Hydrogen barely dissolves and has no smell.|氫氣難溶於水，也沒有氣味。"],["C","二酸化炭素は空気より重く、においがありません。|CO₂ is heavier than air and odorless.|二氧化碳比空氣重，沒有氣味。"],["O","酸素は水にとけにくく、においがありません。|Oxygen barely dissolves and is odorless.|氧氣難溶於水，沒有氣味。"]],
-    "アンモニア：刺激臭、水にとけやすい（アルカリ性）、空気より軽い → 上方置換法。|Ammonia: sharp smell, very soluble (alkaline), lighter than air → upward displacement.|氨：刺激性氣味、極易溶於水（鹼性）、比空氣輕 → 向下排空氣法。"),
+    "アンモニア：刺激臭、水にとけやすい（アルカリ性）、空気より軽い → 上方置換法。|Ammonia: sharp smell, very soluble (alkaline), lighter than air → upward delivery.|氨：刺激性氣味、極易溶於水（鹼性）、比空氣輕 → 向下排空氣法。"),
   gq("空気中にいちばん多くふくまれている気体は？|Which gas makes up most of the air?|空氣中含量最多的氣體是？","Z",
     [["O","酸素は約21%で2番目です。|Oxygen is about 21%, second.|氧氣約21%，排第二。"],["C","二酸化炭素は約0.04%しかありません。|CO₂ is only about 0.04%.|二氧化碳只有約0.04%。"],["H","水素は空気中にほとんどありません。|Air has almost no hydrogen.|空氣中幾乎沒有氫氣。"]],
     "空気：窒素 約78%、酸素 約21%。|Air: nitrogen ~78%, oxygen ~21%.|空氣：氮氣約78%、氧氣約21%。"),
   gq("最も密度が小さい（いちばん軽い）気体は？|Which is the least dense (lightest) gas?|密度最小（最輕）的氣體是？","H",
     [["N","アンモニアも空気より軽いですが、水素ほどではありません。|Ammonia is lighter than air, but not as light as hydrogen.|氨也比空氣輕，但沒有氫氣那麼輕。"],["O","酸素は空気より少し重いです。|Oxygen is slightly heavier than air.|氧氣比空氣稍重。"],["C","二酸化炭素は空気より重いです。|CO₂ is heavier than air.|二氧化碳比空氣重。"]],
     "水素：物質の中で最も密度が小さい。水にとけにくいので水上置換法。|Hydrogen: the least dense substance; collect by water displacement.|氫氣：密度最小的物質；難溶於水，用排水集氣法。"),
-  Q("アンモニアを集めるのに適した方法は？|Which method is best for collecting ammonia?|收集氨最適合的方法是？","上方置換法|Upward displacement|向下排空氣法",
-    [["水上置換法|Water displacement|排水集氣法","アンモニアは水にとけやすいので水上置換法は使えません。|Ammonia dissolves in water, so you can't use water.|氨極易溶於水，不能用排水集氣法。"],["下方置換法|Downward displacement|向上排空氣法","下方置換法は空気より重い気体用です。アンモニアは軽い。|That is for heavier gases; ammonia is lighter.|那是比空氣重的氣體用的，氨比較輕。"],["ろ過|Filtration|過濾","ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。"]],
-    "水にとけやすく空気より軽い → 上方置換法。|Soluble and lighter than air → upward displacement.|易溶於水且比空氣輕 → 向下排空氣法。",FIG_GAS),
+  Q("アンモニアを集めるのに適した方法は？|Which method is best for collecting ammonia?|收集氨最適合的方法是？","上方置換法|Upward delivery|向下排空氣法",
+    [["水上置換法|Water displacement|排水集氣法","アンモニアは水にとけやすいので水上置換法は使えません。|Ammonia dissolves in water, so you can't use water.|氨極易溶於水，不能用排水集氣法。"],["下方置換法|Downward delivery|向上排空氣法","下方置換法は空気より重い気体用です。アンモニアは軽い。|That is for heavier gases; ammonia is lighter.|那是比空氣重的氣體用的，氨比較輕。"],["ろ過|Filtration|過濾","ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。"]],
+    "水にとけやすく空気より軽い → 上方置換法。|Soluble and lighter than air → upward delivery.|易溶於水且比空氣輕 → 向下排空氣法。",FIG_GAS),
 ];
 
 // 水溶液

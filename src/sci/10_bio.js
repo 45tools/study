@@ -150,35 +150,38 @@ const bioSpore=[plantKey,plantKey,
     "胞子は胞子のうの中でつくられる。|Spores form inside sporangia.|孢子在孢子囊裡形成。"),
   Q("シダ植物の特徴は？|What is true of ferns?|蕨類植物的特徵是？","根・茎・葉の区別がある|They have roots, stems and leaves|有根、莖、葉的區別",
     [["根・茎・葉の区別がない|No roots, stems or leaves|沒有根、莖、葉的區別","それはコケ植物の特徴です。|That is mosses.|那是苔蘚的特徵。"],["花をさかせて種子をつくる|They flower and make seeds|開花產生種子","シダ植物は花をさかせず、胞子でふえます。|Ferns have no flowers; they use spores.|蕨類不開花，用孢子繁殖。"],["体の表面全体から水を吸収する|They take in water through the whole surface|從整個身體表面吸水","それはコケ植物です。シダ植物は根から吸収します。|That is mosses; ferns use roots.|那是苔蘚，蕨類用根吸水。"]],
-    "シダ植物：根・茎・葉の区別あり、胞子でふえる（イヌワラビ・スギナ）。|Ferns: roots, stems, leaves; spores (e.g. lady fern, horsetail).|蕨類：有根莖葉，用孢子繁殖（例如蹄蓋蕨、問荊）。"),
+    "シダ植物：根・茎・葉の区別あり、胞子でふえる（イヌワラビ・スギナ）。|Ferns: roots, stems, leaves; spores (e.g. Japanese painted fern, horsetail).|蕨類：有根莖葉，用孢子繁殖（例如蹄蓋蕨、問荊）。"),
   Q("コケ植物の「仮根」のおもなはたらきは？|What do moss rhizoids mainly do?|苔蘚「假根」的主要功能是？","体を地面などに固定する|Hold the plant to the ground|把身體固定在地面等處",
     [["水を吸収する|Absorb water|吸收水分","コケ植物は水を体の表面全体から吸収します。|Mosses absorb water through their whole surface.|苔蘚從整個身體表面吸收水分。"],["胞子をつくる|Make spores|製造孢子","胞子は胞子のうでつくられます。|Spores form in sporangia.|孢子在孢子囊中形成。"],["栄養分をたくわえる|Store food|儲存養分","仮根は体を固定するためのものです。|Rhizoids anchor the plant.|假根是用來固定身體的。"]],
     "コケ植物：根・茎・葉の区別なし。仮根で体を固定し、水は体の表面から。|Mosses: no true roots/stems/leaves; rhizoids anchor; water through the surface.|苔蘚：沒有根莖葉的區別，用假根固定，從表面吸水。"),
-  Q("イヌワラビの茎はどこにある？|Where is the stem of a lady fern?|蹄蓋蕨的莖在哪裡？","地下（地下茎）|Underground (rhizome)|地下（地下莖）",
+  Q("イヌワラビの茎はどこにある？|Where is the stem of a Japanese painted fern?|蹄蓋蕨的莖在哪裡？","地下（地下茎）|Underground (rhizome)|地下（地下莖）",
     [["地上にまっすぐ立っている|Standing up above ground|直立在地面上","地上に出ているのは葉です。茎は地下にあります。|What you see above ground are leaves; the stem is underground.|地面上的是葉，莖在地下。"],["葉の先|At the leaf tip|葉子的尖端","葉の先にあるのは葉の一部です。|The tip is part of the leaf.|葉尖是葉子的一部分。"],["茎はない|It has no stem|沒有莖","シダ植物には根・茎・葉の区別があります。|Ferns do have stems.|蕨類有根、莖、葉的區別。"]],
-    "イヌワラビは地下茎。地上に出ているのは葉。|Lady fern: the stem is a rhizome; above ground is leaves.|蹄蓋蕨的莖是地下莖，地面上的是葉。"),
+    "イヌワラビは地下茎。地上に出ているのは葉。|Japanese painted fern: the stem is a rhizome; above ground is leaves.|蹄蓋蕨的莖是地下莖，地面上的是葉。"),
   Q("ゼニゴケで、胞子のうがあるのは？|In liverworts (Marchantia), where are the sporangia?|地錢的孢子囊在哪一株？","雌株|Female plants|雌株",
     [["雄株|Male plants|雄株","雄株は精子をつくります。胞子のうは雌株です。|Male plants make sperm; sporangia are on females.|雄株產生精子，孢子囊在雌株。"],["両方|Both|兩者都有","胞子のうができるのは雌株だけです。|Only female plants make sporangia.|只有雌株會形成孢子囊。"],["仮根|The rhizoids|假根","仮根は体を固定する部分です。|Rhizoids anchor the plant.|假根是固定身體的部分。"]],
     "ゼニゴケ・スギゴケは雌株と雄株があり、雌株に胞子のうができる。|Liverworts/mosses have male and female plants; sporangia form on females.|地錢、杉葉蘚分雌株和雄株，雌株會形成孢子囊。"),
   Q("シダ植物はどれ？|Which is a fern?|哪一個是蕨類植物？","スギナ|Horsetail|問荊",
-    [["スギゴケ|Haircap moss|杉葉蘚","スギゴケはコケ植物です。|Haircap moss is a moss.|杉葉蘚是苔蘚。"],["スギ|Japanese cedar|日本柳杉","スギは種子をつくる裸子植物です。|Cedar is a seed-making gymnosperm.|柳杉是會產生種子的裸子植物。"],["ゼニゴケ|Liverwort|地錢","ゼニゴケはコケ植物です。|Liverwort is a moss plant.|地錢是苔蘚植物。"]],
-    "シダ植物：イヌワラビ・スギナ・ゼンマイ。コケ植物：ゼニゴケ・スギゴケ。|Ferns: lady fern, horsetail, royal fern. Mosses: liverwort, haircap moss.|蕨類：蹄蓋蕨、問荊、紫萁。苔蘚：地錢、杉葉蘚。"),
+    [["スギゴケ|Haircap moss|杉葉蘚","スギゴケはコケ植物です。|Haircap moss is a moss.|杉葉蘚是苔蘚。"],["スギ|Japanese cedar|日本柳杉","スギは種子をつくる裸子植物です。|Cedar is a seed-making gymnosperm.|柳杉是會產生種子的裸子植物。"],["ゼニゴケ|Liverwort|地錢","ゼニゴケはコケ植物です。|Liverwort is a bryophyte (moss group).|地錢是苔蘚植物。"]],
+    "シダ植物：イヌワラビ・スギナ・ゼンマイ。コケ植物：ゼニゴケ・スギゴケ。|Ferns: Japanese painted fern, horsetail, royal fern. Mosses: liverwort, haircap moss.|蕨類：蹄蓋蕨、問荊、紫萁。苔蘚：地錢、杉葉蘚。"),
 ];
 
 // 動物の分類：特徴の表（1つかくす）
 const ANI=["魚類|Fish|魚類","両生類|Amphibians|兩生類","は虫類|Reptiles|爬蟲類","鳥類|Birds|鳥類","哺乳類|Mammals|哺乳類"];
-const ANI_R=[["呼吸|Breathing|呼吸",["えら|Gills|鰓","子:えら 親:肺|Young: gills→lungs|幼:鰓 成:肺","肺|Lungs|肺","肺|Lungs|肺","肺|Lungs|肺"],["気管|Tracheae|氣管"]],
+// セルの「/」は図では改行、選択肢では「 / 」
+const ANI_R=[["呼吸|Breathing|呼吸",["えら|Gills|鰓","子:えら・皮膚/親:肺・皮膚|Young: gills, skin/Adult: lungs, skin|幼:鰓、皮膚/成:肺、皮膚","肺|Lungs|肺","肺|Lungs|肺","肺|Lungs|肺"],["気管|Tracheae|氣管"]],
   ["体表|Body cover|體表",["うろこ|Scales|鱗片","しめった皮膚|Moist skin|濕潤的皮膚","かたいうろこ|Hard scales|硬鱗片","羽毛|Feathers|羽毛","毛|Hair|毛"],[]],
   ["子のうまれ方|Birth|生殖方式",["卵（水中・殻なし）|Eggs in water|卵（水中・無殼）","卵（水中・殻なし）|Eggs in water|卵（水中・無殼）","卵（陸上・殻あり）|Shelled eggs, land|卵（陸上・有殼）","卵（陸上・殻あり）|Shelled eggs, land|卵（陸上・有殼）","胎生|Live birth|胎生"],["卵（陸上・殻なし）|Unshelled eggs, land|卵（陸上・無殼）"]]];
 // 表は「なかま（行）× 特徴（列）」。A は r=特徴, c=なかま
 function aniFig(r,c){ let b=""; const x0=70,cw=110,y0=26,rh=30;
   ANI_R.forEach(([rn],ri)=>{ b+=T(x0+cw*ri+cw/2,18,X(rn),"xs"); });
   ANI.forEach((n,ci)=>{ const y=y0+rh*ci; b+=`<rect x="2" y="${y}" width="${x0-4}" height="${rh-4}" rx="4" class="bx"/>`+T(x0/2,y+rh/2+2,X(n),"xs");
-    ANI_R.forEach(([,cells],ri)=>{ const on=ri===r&&ci===c; b+=`<rect x="${x0+cw*ri+2}" y="${y}" width="${cw-4}" height="${rh-4}" rx="4" class="${on?"ac":"bx"}"/>`+T(x0+cw*ri+cw/2,y+rh/2+2,on?"A":X(cells[ci]),on?"lb":"xs"); }); });
+    ANI_R.forEach(([,cells],ri)=>{ const on=ri===r&&ci===c,cx=x0+cw*ri+cw/2,ln=X(cells[ci]).split("/"); b+=`<rect x="${x0+cw*ri+2}" y="${y}" width="${cw-4}" height="${rh-4}" rx="4" class="${on?"ac":"bx"}"/>`+
+      (on?T(cx,y+rh/2+2,"A","lb"):ln.length>1?T(cx,y+11,ln[0],"xs")+T(cx,y+23,ln[1],"xs"):T(cx,y+rh/2+2,ln[0],"xs")); }); });
   return SV(x0+cw*3+4,y0+rh*5+4,b); }
-function aniTable(){ const r=R(0,2),c=R(0,4); const [rn,cells,extra]=ANI_R[r]; const ans=X(cells[c]); const fig=aniFig(r,c);
-  const opts=[...new Set([...cells.map(X),...extra.map(X)])].filter(v=>v!==ans);
-  const ws=shuf(opts).slice(0,3).map(v=>{ const who=cells.map((x,i)=>X(x)===v?X(ANI[i]):null).filter(Boolean);
+const ANI_S=s=>X(s).replace("/"," / ");
+function aniTable(){ const r=R(0,2),c=R(0,4); const [rn,cells,extra]=ANI_R[r]; const ans=ANI_S(cells[c]); const fig=aniFig(r,c);
+  const opts=[...new Set([...cells.map(ANI_S),...extra.map(ANI_S)])].filter(v=>v!==ans);
+  const ws=shuf(opts).slice(0,3).map(v=>{ const who=cells.map((x,i)=>ANI_S(x)===v?X(ANI[i]):null).filter(Boolean);
     return {v,why:who.length?X(`「${v}」は${who.join("・")}の特徴です。|"${v}" fits ${who.join(", ")}.|「${v}」是${who.join("、")}的特徵。`):X(`「${v}」は脊椎動物のなかまの特徴ではありません。|"${v}" is not a feature of these vertebrates.|「${v}」不是這些脊椎動物的特徵。`)}; });
   return {q:X(`表の A に入るのは？（${X(ANI[c])}の${X(rn)}）|What goes in A? (${X(rn)} of ${X(ANI[c])})|表中 A 應填入什麼？（${X(ANI[c])}的${X(rn)}）`)+fig,ans,wrongs:ws,
     exp:X(`${X(ANI[c])}の${X(rn)}は「${ans}」。|${X(ANI[c])}: ${X(rn).toLowerCase()} = "${ans}".|${X(ANI[c])}的${X(rn)}是「${ans}」。`),tf:v=>X("表の A は|A in the table is|表中的 A 是")+fig+`→ ${v}`,kind:"fig"}; }

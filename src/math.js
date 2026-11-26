@@ -114,7 +114,7 @@ function eq2(){ const x=NZ(-6,6),a=NZ(-5,5),b=NZ(-9,9); if(a===1||a===-1) return
   return eqQ(q,x,[{v:(c+b)/a,why:J`移項すると符号が変わります。${num(b)} を右へ移すと ${num(-b)}。`},{v:c-b,why:J`最後に両辺を ${num(a)} でわるのを忘れています。`},{v:-x,why:J`両辺を ${num(a)} でわるときの符号に注意。`}],`${lin(a,0)} = ${num(c)} ${b>0?M:"+"} ${Math.abs(b)} = ${num(c-b)} → ${V("x")} = ${num(x)}`); }
 // ax+b=cx+d
 function eq3(){ const x=NZ(-6,6),a=NZ(-6,6),c=NZ(-6,6),b=NZ(-9,9); if(a===c) return eq3(); const d=a*x+b-c*x; const q=eq(lin(a,b),lin(c,d)); const k=a-c;
-  return eqQ(q,x,[{v:(d+b)/k,why:J`${num(b)} を右へ移項すると ${num(-b)} になります。`},{v:(d-b)/(a+c),why:J`${lin(c,0)} を左へ移項すると ${lin(-c,0)} になります。`},{v:d-b,why:J`最後に両辺を ${num(k)} でわります。`},{v:-x,why:J`符号を確かめよう。`}],`${lin(a,0)} ${lin(-c,0).startsWith(M)?"":"+"} ${lin(-c,0)} = ${num(d)} ${b>0?M:"+"} ${Math.abs(b)} → ${lin(k,0)} = ${num(d-b)} → ${V("x")} = ${num(x)}`); }
+  return eqQ(q,x,[{v:(d+b)/k,why:J`${num(b)} を右へ移項すると ${num(-b)} になります。`},{v:(d-b)/(a+c),why:J`${lin(c,0)} を左へ移項すると ${lin(-c,0)} になります。`},{v:d-b,why:J`最後に両辺を ${num(k)} でわります。`},{v:-x,why:J`符号を確かめよう。`}],`${poly([[a,"x"],[-c,"x"]])} = ${num(d)} ${b>0?M:"+"} ${Math.abs(b)} → ${lin(k,0)} = ${num(d-b)} → ${V("x")} = ${num(x)}`); }
 // かっこを含む
 function eq4(){ const x=NZ(-6,6),a=NZ(-4,4),b=NZ(-6,6); if(a===1||a===-1) return eq4(); const c=a*(x+b); const q=eq(`${a<0?`(${num(a)})`:a}(${lin(1,b)})`,num(c));
   return eqQ(q,x,[{v:Number.isInteger((c-b)/a)?(c-b)/a:null,why:J`かっこを外すとき、${num(b)} にも ${num(a)} をかけます。`},{v:c/a+b,why:J`移項すると符号が変わります。`},{v:c-a*b,why:J`最後に両辺を ${num(a)} でわります。`}],J`${lin(a,a*b)} = ${num(c)} → ${lin(a,0)} = ${num(c-a*b)} → ${V("x")} = ${num(x)}（または両辺を ${num(a)} でわって ${lin(1,b)} = ${num(c/a)}）`); }
@@ -650,7 +650,7 @@ function py2(){ const c=R(4,12),a=R(2,c-1),n=c*c-a*a,ans=SS(n),f=rtFig(a,XI,c);
 function py3(){ const k=R(2,8),t=pick(["45h","45l","30h","30l","30s"]); const T45=J`直角二等辺三角形（45°・45°・90°）`,T30=J`30°・60°・90° の直角三角形`;
   const C={"45h":[J`${T45}で、等しい2辺が ${k}cm のとき、斜辺は？`,SR(k,2),[[SR(k,3),J`直角二等辺三角形の辺の比は 1 : 1 : √2 です。`],[num(2*k),J`2倍になるのは 30°・60°・90° の斜辺です。`],[num(k),J`斜辺は、いちばん長い辺です。`]],"1 : 1 : √2"],
    "45l":[J`${T45}で、斜辺が ${2*k}cm のとき、等しい2辺の長さは？`,SR(k,2),[[num(k),J`斜辺 : 辺 = √2 : 1 です。`],[SR(2*k,2),J`それは斜辺より長くなってしまいます。`],[SR(k,3),J`辺の比は 1 : 1 : √2 です。`]],J`辺 = ${2*k}÷√2 = ${SR(k,2)}`],
-   "30h":[J`${T30}で、いちばん短い辺が ${k}cm のとき、斜辺は？`,num(2*k),[[SR(k,3),J`それは残りの辺（60° の角と向かい合わない辺）です。`],[SR(k,2),J`√2 は直角二等辺三角形の比です。`],[num(3*k),J`辺の比は 1 : 2 : √3 です。`]],J`1 : 2 : √3（斜辺は短い辺の2倍）`],
+   "30h":[J`${T30}で、いちばん短い辺が ${k}cm のとき、斜辺は？`,num(2*k),[[SR(k,3),J`それは残りの辺（60° の角と向かい合う辺）です。`],[SR(k,2),J`√2 は直角二等辺三角形の比です。`],[num(3*k),J`辺の比は 1 : 2 : √3 です。`]],J`1 : 2 : √3（斜辺は短い辺の2倍）`],
    "30l":[J`${T30}で、いちばん短い辺が ${k}cm のとき、残りの辺（斜辺でない方）は？`,SR(k,3),[[num(2*k),J`それは斜辺です。`],[SR(k,2),J`√2 は直角二等辺三角形の比です。`],[SR(2*k,3),J`辺の比は 1 : 2 : √3 です。`]],"1 : 2 : √3"],
    "30s":[J`${T30}で、斜辺が ${2*k}cm のとき、いちばん短い辺は？`,num(k),[[SR(k,3),J`それは残りの辺です。いちばん短い辺は斜辺の半分。`],[num(4*k),J`短い辺は斜辺より短くなります。`],[SR(k,2),J`辺の比は 1 : 2 : √3 です。`]],J`短い辺 = 斜辺 ÷ 2`]};
   const [q,ans,ws,ex]=C[t]; return {q,ans,wrongs:ws.map(([v,why])=>({v,why})),exp:ex,tf:v=>JA()?`${q.replace(/は？$/,J`は `)}${v}`:`${q}<br>→ ${v}`,kind:"word"}; }

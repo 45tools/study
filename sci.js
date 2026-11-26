@@ -189,35 +189,38 @@ const bioSpore=[plantKey,plantKey,
     "胞子は胞子のうの中でつくられる。|Spores form inside sporangia.|孢子在孢子囊裡形成。"),
   Q("シダ植物の特徴は？|What is true of ferns?|蕨類植物的特徵是？","根・茎・葉の区別がある|They have roots, stems and leaves|有根、莖、葉的區別",
     [["根・茎・葉の区別がない|No roots, stems or leaves|沒有根、莖、葉的區別","それはコケ植物の特徴です。|That is mosses.|那是苔蘚的特徵。"],["花をさかせて種子をつくる|They flower and make seeds|開花產生種子","シダ植物は花をさかせず、胞子でふえます。|Ferns have no flowers; they use spores.|蕨類不開花，用孢子繁殖。"],["体の表面全体から水を吸収する|They take in water through the whole surface|從整個身體表面吸水","それはコケ植物です。シダ植物は根から吸収します。|That is mosses; ferns use roots.|那是苔蘚，蕨類用根吸水。"]],
-    "シダ植物：根・茎・葉の区別あり、胞子でふえる（イヌワラビ・スギナ）。|Ferns: roots, stems, leaves; spores (e.g. lady fern, horsetail).|蕨類：有根莖葉，用孢子繁殖（例如蹄蓋蕨、問荊）。"),
+    "シダ植物：根・茎・葉の区別あり、胞子でふえる（イヌワラビ・スギナ）。|Ferns: roots, stems, leaves; spores (e.g. Japanese painted fern, horsetail).|蕨類：有根莖葉，用孢子繁殖（例如蹄蓋蕨、問荊）。"),
   Q("コケ植物の「仮根」のおもなはたらきは？|What do moss rhizoids mainly do?|苔蘚「假根」的主要功能是？","体を地面などに固定する|Hold the plant to the ground|把身體固定在地面等處",
     [["水を吸収する|Absorb water|吸收水分","コケ植物は水を体の表面全体から吸収します。|Mosses absorb water through their whole surface.|苔蘚從整個身體表面吸收水分。"],["胞子をつくる|Make spores|製造孢子","胞子は胞子のうでつくられます。|Spores form in sporangia.|孢子在孢子囊中形成。"],["栄養分をたくわえる|Store food|儲存養分","仮根は体を固定するためのものです。|Rhizoids anchor the plant.|假根是用來固定身體的。"]],
     "コケ植物：根・茎・葉の区別なし。仮根で体を固定し、水は体の表面から。|Mosses: no true roots/stems/leaves; rhizoids anchor; water through the surface.|苔蘚：沒有根莖葉的區別，用假根固定，從表面吸水。"),
-  Q("イヌワラビの茎はどこにある？|Where is the stem of a lady fern?|蹄蓋蕨的莖在哪裡？","地下（地下茎）|Underground (rhizome)|地下（地下莖）",
+  Q("イヌワラビの茎はどこにある？|Where is the stem of a Japanese painted fern?|蹄蓋蕨的莖在哪裡？","地下（地下茎）|Underground (rhizome)|地下（地下莖）",
     [["地上にまっすぐ立っている|Standing up above ground|直立在地面上","地上に出ているのは葉です。茎は地下にあります。|What you see above ground are leaves; the stem is underground.|地面上的是葉，莖在地下。"],["葉の先|At the leaf tip|葉子的尖端","葉の先にあるのは葉の一部です。|The tip is part of the leaf.|葉尖是葉子的一部分。"],["茎はない|It has no stem|沒有莖","シダ植物には根・茎・葉の区別があります。|Ferns do have stems.|蕨類有根、莖、葉的區別。"]],
-    "イヌワラビは地下茎。地上に出ているのは葉。|Lady fern: the stem is a rhizome; above ground is leaves.|蹄蓋蕨的莖是地下莖，地面上的是葉。"),
+    "イヌワラビは地下茎。地上に出ているのは葉。|Japanese painted fern: the stem is a rhizome; above ground is leaves.|蹄蓋蕨的莖是地下莖，地面上的是葉。"),
   Q("ゼニゴケで、胞子のうがあるのは？|In liverworts (Marchantia), where are the sporangia?|地錢的孢子囊在哪一株？","雌株|Female plants|雌株",
     [["雄株|Male plants|雄株","雄株は精子をつくります。胞子のうは雌株です。|Male plants make sperm; sporangia are on females.|雄株產生精子，孢子囊在雌株。"],["両方|Both|兩者都有","胞子のうができるのは雌株だけです。|Only female plants make sporangia.|只有雌株會形成孢子囊。"],["仮根|The rhizoids|假根","仮根は体を固定する部分です。|Rhizoids anchor the plant.|假根是固定身體的部分。"]],
     "ゼニゴケ・スギゴケは雌株と雄株があり、雌株に胞子のうができる。|Liverworts/mosses have male and female plants; sporangia form on females.|地錢、杉葉蘚分雌株和雄株，雌株會形成孢子囊。"),
   Q("シダ植物はどれ？|Which is a fern?|哪一個是蕨類植物？","スギナ|Horsetail|問荊",
-    [["スギゴケ|Haircap moss|杉葉蘚","スギゴケはコケ植物です。|Haircap moss is a moss.|杉葉蘚是苔蘚。"],["スギ|Japanese cedar|日本柳杉","スギは種子をつくる裸子植物です。|Cedar is a seed-making gymnosperm.|柳杉是會產生種子的裸子植物。"],["ゼニゴケ|Liverwort|地錢","ゼニゴケはコケ植物です。|Liverwort is a moss plant.|地錢是苔蘚植物。"]],
-    "シダ植物：イヌワラビ・スギナ・ゼンマイ。コケ植物：ゼニゴケ・スギゴケ。|Ferns: lady fern, horsetail, royal fern. Mosses: liverwort, haircap moss.|蕨類：蹄蓋蕨、問荊、紫萁。苔蘚：地錢、杉葉蘚。"),
+    [["スギゴケ|Haircap moss|杉葉蘚","スギゴケはコケ植物です。|Haircap moss is a moss.|杉葉蘚是苔蘚。"],["スギ|Japanese cedar|日本柳杉","スギは種子をつくる裸子植物です。|Cedar is a seed-making gymnosperm.|柳杉是會產生種子的裸子植物。"],["ゼニゴケ|Liverwort|地錢","ゼニゴケはコケ植物です。|Liverwort is a bryophyte (moss group).|地錢是苔蘚植物。"]],
+    "シダ植物：イヌワラビ・スギナ・ゼンマイ。コケ植物：ゼニゴケ・スギゴケ。|Ferns: Japanese painted fern, horsetail, royal fern. Mosses: liverwort, haircap moss.|蕨類：蹄蓋蕨、問荊、紫萁。苔蘚：地錢、杉葉蘚。"),
 ];
 
 // 動物の分類：特徴の表（1つかくす）
 const ANI=["魚類|Fish|魚類","両生類|Amphibians|兩生類","は虫類|Reptiles|爬蟲類","鳥類|Birds|鳥類","哺乳類|Mammals|哺乳類"];
-const ANI_R=[["呼吸|Breathing|呼吸",["えら|Gills|鰓","子:えら 親:肺|Young: gills→lungs|幼:鰓 成:肺","肺|Lungs|肺","肺|Lungs|肺","肺|Lungs|肺"],["気管|Tracheae|氣管"]],
+// セルの「/」は図では改行、選択肢では「 / 」
+const ANI_R=[["呼吸|Breathing|呼吸",["えら|Gills|鰓","子:えら・皮膚/親:肺・皮膚|Young: gills, skin/Adult: lungs, skin|幼:鰓、皮膚/成:肺、皮膚","肺|Lungs|肺","肺|Lungs|肺","肺|Lungs|肺"],["気管|Tracheae|氣管"]],
   ["体表|Body cover|體表",["うろこ|Scales|鱗片","しめった皮膚|Moist skin|濕潤的皮膚","かたいうろこ|Hard scales|硬鱗片","羽毛|Feathers|羽毛","毛|Hair|毛"],[]],
   ["子のうまれ方|Birth|生殖方式",["卵（水中・殻なし）|Eggs in water|卵（水中・無殼）","卵（水中・殻なし）|Eggs in water|卵（水中・無殼）","卵（陸上・殻あり）|Shelled eggs, land|卵（陸上・有殼）","卵（陸上・殻あり）|Shelled eggs, land|卵（陸上・有殼）","胎生|Live birth|胎生"],["卵（陸上・殻なし）|Unshelled eggs, land|卵（陸上・無殼）"]]];
 // 表は「なかま（行）× 特徴（列）」。A は r=特徴, c=なかま
 function aniFig(r,c){ let b=""; const x0=70,cw=110,y0=26,rh=30;
   ANI_R.forEach(([rn],ri)=>{ b+=T(x0+cw*ri+cw/2,18,X(rn),"xs"); });
   ANI.forEach((n,ci)=>{ const y=y0+rh*ci; b+=`<rect x="2" y="${y}" width="${x0-4}" height="${rh-4}" rx="4" class="bx"/>`+T(x0/2,y+rh/2+2,X(n),"xs");
-    ANI_R.forEach(([,cells],ri)=>{ const on=ri===r&&ci===c; b+=`<rect x="${x0+cw*ri+2}" y="${y}" width="${cw-4}" height="${rh-4}" rx="4" class="${on?"ac":"bx"}"/>`+T(x0+cw*ri+cw/2,y+rh/2+2,on?"A":X(cells[ci]),on?"lb":"xs"); }); });
+    ANI_R.forEach(([,cells],ri)=>{ const on=ri===r&&ci===c,cx=x0+cw*ri+cw/2,ln=X(cells[ci]).split("/"); b+=`<rect x="${x0+cw*ri+2}" y="${y}" width="${cw-4}" height="${rh-4}" rx="4" class="${on?"ac":"bx"}"/>`+
+      (on?T(cx,y+rh/2+2,"A","lb"):ln.length>1?T(cx,y+11,ln[0],"xs")+T(cx,y+23,ln[1],"xs"):T(cx,y+rh/2+2,ln[0],"xs")); }); });
   return SV(x0+cw*3+4,y0+rh*5+4,b); }
-function aniTable(){ const r=R(0,2),c=R(0,4); const [rn,cells,extra]=ANI_R[r]; const ans=X(cells[c]); const fig=aniFig(r,c);
-  const opts=[...new Set([...cells.map(X),...extra.map(X)])].filter(v=>v!==ans);
-  const ws=shuf(opts).slice(0,3).map(v=>{ const who=cells.map((x,i)=>X(x)===v?X(ANI[i]):null).filter(Boolean);
+const ANI_S=s=>X(s).replace("/"," / ");
+function aniTable(){ const r=R(0,2),c=R(0,4); const [rn,cells,extra]=ANI_R[r]; const ans=ANI_S(cells[c]); const fig=aniFig(r,c);
+  const opts=[...new Set([...cells.map(ANI_S),...extra.map(ANI_S)])].filter(v=>v!==ans);
+  const ws=shuf(opts).slice(0,3).map(v=>{ const who=cells.map((x,i)=>ANI_S(x)===v?X(ANI[i]):null).filter(Boolean);
     return {v,why:who.length?X(`「${v}」は${who.join("・")}の特徴です。|"${v}" fits ${who.join(", ")}.|「${v}」是${who.join("、")}的特徵。`):X(`「${v}」は脊椎動物のなかまの特徴ではありません。|"${v}" is not a feature of these vertebrates.|「${v}」不是這些脊椎動物的特徵。`)}; });
   return {q:X(`表の A に入るのは？（${X(ANI[c])}の${X(rn)}）|What goes in A? (${X(rn)} of ${X(ANI[c])})|表中 A 應填入什麼？（${X(ANI[c])}的${X(rn)}）`)+fig,ans,wrongs:ws,
     exp:X(`${X(ANI[c])}の${X(rn)}は「${ans}」。|${X(ANI[c])}: ${X(rn).toLowerCase()} = "${ans}".|${X(ANI[c])}的${X(rn)}是「${ans}」。`),tf:v=>X("表の A は|A in the table is|表中的 A 是")+fig+`→ ${v}`,kind:"fig"}; }
@@ -255,10 +258,10 @@ const FIG_GB=SV(220,220,`<path d="M100 38 Q92 18 100 4 Q108 18 100 38 Z" class="
 const MV="|g/cm³|";   // 単位
 const mat1=[
   ()=>{ const a=pick(["A","B"]); const nm={A:"空気調節ねじ|Air adjustment screw|空氣調節輪",B:"ガス調節ねじ|Gas adjustment screw|瓦斯調節輪"};
-    return {q:X(`図のガスバーナーで、${a} のねじの名前は？|In the burner, what is screw ${a}?|圖中瓦斯燈的 ${a} 是？`)+FIG_GB,ans:X(nm[a]),
+    return {q:X(`図のガスバーナーで、${a} のねじの名前は？|In the burner, what is screw ${a}?|圖中本生燈的 ${a} 是？`)+FIG_GB,ans:X(nm[a]),
       wrongs:[{v:X(nm[a==="A"?"B":"A"]),why:X(`上が空気調節ねじ、下がガス調節ねじです。|The upper one adjusts air, the lower one gas.|上面是空氣調節輪，下面是瓦斯調節輪。`)},{v:X("元栓|Main gas valve|總開關"),why:X("元栓はガス管の口にある栓です。|The main valve is at the gas outlet.|總開關在瓦斯管的出口。")},{v:X("コック|Cock (stopcock)|旋塞","コック"),why:X("コックはバーナーにつながるガスの通り道を開け閉めするものです。|The cock opens the gas line to the burner.|旋塞是開關通往燈的瓦斯通道。")}],
       exp:X("上：空気調節ねじ（炎の色）、下：ガス調節ねじ（炎の大きさ）。|Upper: air (flame color). Lower: gas (flame size).|上：空氣調節輪（火焰顏色），下：瓦斯調節輪（火焰大小）。"),tf:v=>X(`図の ${a} は|Screw ${a} is|圖中的 ${a} 是`)+FIG_GB+`→ ${v}`,kind:"fig"}; },
-  Q("ガスバーナーの炎がオレンジ色でゆらゆらしている。どうする？|The flame is orange and flickering. What do you do?|瓦斯燈的火焰是橘色、搖搖晃晃。該怎麼做？","空気調節ねじを開いて空気を入れ、青い炎にする|Open the air screw to make a blue flame|打開空氣調節輪讓空氣進入，變成藍色火焰",
+  Q("ガスバーナーの炎がオレンジ色でゆらゆらしている。どうする？|The flame is orange and flickering. What do you do?|本生燈的火焰是橘色、搖搖晃晃。該怎麼做？","空気調節ねじを開いて空気を入れ、青い炎にする|Open the air screw to make a blue flame|打開空氣調節輪讓空氣進入，變成藍色火焰",
     [["ガス調節ねじを開いてガスを増やす|Open the gas screw for more gas|打開瓦斯調節輪增加瓦斯","ガスを増やすと炎が大きくなるだけで、空気は足りないままです。|More gas only makes it bigger; air is still lacking.|增加瓦斯只會讓火焰變大，空氣還是不足。"],["空気調節ねじを閉めて空気を減らす|Close the air screw|關緊空氣調節輪","空気が足りないのでオレンジ色になっています。減らすと逆です。|It is orange because air is lacking.|是因為空氣不足才變橘色，減少空氣會更糟。"],["すぐに元栓を閉める|Close the main valve at once|馬上關掉總開關","火を消す必要はありません。空気を調節します。|No need to turn it off; adjust the air.|不必熄火，調節空氣就好。"]],
     "オレンジ色の炎＝空気不足。空気調節ねじを開いて青い炎に。|Orange flame = not enough air. Open the air screw for a blue flame.|橘色火焰＝空氣不足。打開空氣調節輪變成藍色火焰。",FIG_GB),
   Q("有機物の説明で正しいのは？|Which describes organic matter?|關於有機物，正確的是？","炭素をふくみ、燃えると二酸化炭素が出る|Contains carbon; burning gives carbon dioxide|含有碳，燃燒會產生二氧化碳",
@@ -322,7 +325,7 @@ const FIG_GAS=SV(330,175,
   `<rect x="6" y="96" width="100" height="56" class="o"/><rect x="7" y="104" width="98" height="47" class="wa"/><path d="M56 128 L56 52 Q66 38 76 52 L76 128 Z" class="wa"/><path d="M56 128 L56 52 Q66 38 76 52 L76 128" class="o"/><path d="M0 76 L30 76 L30 140 L66 140 L66 124" class="o"/>`+
   `<path d="M150 112 L150 46 Q160 32 170 46 L170 112" class="o"/><path d="M120 150 L160 150 L160 52" class="o"/>`+
   `<path d="M260 36 L260 110 Q270 124 280 110 L280 36" class="o"/><path d="M228 18 L270 18 L270 108" class="o"/>`+T(56,170,"A")+T(160,170,"B")+T(270,170,"C"));
-const GAS_NM={A:"水上置換法|Water displacement|排水集氣法",B:"上方置換法|Upward displacement|向下排空氣法",C:"下方置換法|Downward displacement|向上排空氣法"};
+const GAS_NM={A:"水上置換法|Water displacement|排水集氣法",B:"上方置換法|Upward delivery|向下排空氣法",C:"下方置換法|Downward delivery|向上排空氣法"};
 const GAS_DO={A:"水にとけにくい気体|gases that barely dissolve in water|難溶於水的氣體",B:"水にとけやすく、空気より軽い気体|soluble gases lighter than air|易溶於水、比空氣輕的氣體",C:"水にとけやすく、空気より重い気体|soluble gases heavier than air|易溶於水、比空氣重的氣體"};
 function gasWay(){ const a=pick(["A","B","C"]); const ws=["A","B","C"].filter(k=>k!==a).map(k=>({v:X(GAS_NM[k]),why:X(`${X(GAS_NM[k])}は図の ${k}（${X(GAS_DO[k])}を集める）。|${X(GAS_NM[k])} is ${k} (for ${X(GAS_DO[k])}).|${X(GAS_NM[k])}是圖中的 ${k}（收集${X(GAS_DO[k])}）。`)}));
   ws.push({v:X("ろ過|Filtration|過濾"),why:X("ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。")});
@@ -348,16 +351,16 @@ const mat3=[gasWay,gasWay,
     "酸素：物を燃やすはたらき（助燃性）がある。気体そのものは燃えない。|Oxygen supports burning but doesn't burn itself.|氧氣有助燃性，本身不會燃燒。"),
   gq("水にとけやすく、空気より軽く、においのある気体は？|Which gas is very soluble, lighter than air and smelly?|極易溶於水、比空氣輕、有刺激性氣味的氣體是？","N",
     [["H","水素は水にとけにくく、においもありません。|Hydrogen barely dissolves and has no smell.|氫氣難溶於水，也沒有氣味。"],["C","二酸化炭素は空気より重く、においがありません。|CO₂ is heavier than air and odorless.|二氧化碳比空氣重，沒有氣味。"],["O","酸素は水にとけにくく、においがありません。|Oxygen barely dissolves and is odorless.|氧氣難溶於水，沒有氣味。"]],
-    "アンモニア：刺激臭、水にとけやすい（アルカリ性）、空気より軽い → 上方置換法。|Ammonia: sharp smell, very soluble (alkaline), lighter than air → upward displacement.|氨：刺激性氣味、極易溶於水（鹼性）、比空氣輕 → 向下排空氣法。"),
+    "アンモニア：刺激臭、水にとけやすい（アルカリ性）、空気より軽い → 上方置換法。|Ammonia: sharp smell, very soluble (alkaline), lighter than air → upward delivery.|氨：刺激性氣味、極易溶於水（鹼性）、比空氣輕 → 向下排空氣法。"),
   gq("空気中にいちばん多くふくまれている気体は？|Which gas makes up most of the air?|空氣中含量最多的氣體是？","Z",
     [["O","酸素は約21%で2番目です。|Oxygen is about 21%, second.|氧氣約21%，排第二。"],["C","二酸化炭素は約0.04%しかありません。|CO₂ is only about 0.04%.|二氧化碳只有約0.04%。"],["H","水素は空気中にほとんどありません。|Air has almost no hydrogen.|空氣中幾乎沒有氫氣。"]],
     "空気：窒素 約78%、酸素 約21%。|Air: nitrogen ~78%, oxygen ~21%.|空氣：氮氣約78%、氧氣約21%。"),
   gq("最も密度が小さい（いちばん軽い）気体は？|Which is the least dense (lightest) gas?|密度最小（最輕）的氣體是？","H",
     [["N","アンモニアも空気より軽いですが、水素ほどではありません。|Ammonia is lighter than air, but not as light as hydrogen.|氨也比空氣輕，但沒有氫氣那麼輕。"],["O","酸素は空気より少し重いです。|Oxygen is slightly heavier than air.|氧氣比空氣稍重。"],["C","二酸化炭素は空気より重いです。|CO₂ is heavier than air.|二氧化碳比空氣重。"]],
     "水素：物質の中で最も密度が小さい。水にとけにくいので水上置換法。|Hydrogen: the least dense substance; collect by water displacement.|氫氣：密度最小的物質；難溶於水，用排水集氣法。"),
-  Q("アンモニアを集めるのに適した方法は？|Which method is best for collecting ammonia?|收集氨最適合的方法是？","上方置換法|Upward displacement|向下排空氣法",
-    [["水上置換法|Water displacement|排水集氣法","アンモニアは水にとけやすいので水上置換法は使えません。|Ammonia dissolves in water, so you can't use water.|氨極易溶於水，不能用排水集氣法。"],["下方置換法|Downward displacement|向上排空氣法","下方置換法は空気より重い気体用です。アンモニアは軽い。|That is for heavier gases; ammonia is lighter.|那是比空氣重的氣體用的，氨比較輕。"],["ろ過|Filtration|過濾","ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。"]],
-    "水にとけやすく空気より軽い → 上方置換法。|Soluble and lighter than air → upward displacement.|易溶於水且比空氣輕 → 向下排空氣法。",FIG_GAS),
+  Q("アンモニアを集めるのに適した方法は？|Which method is best for collecting ammonia?|收集氨最適合的方法是？","上方置換法|Upward delivery|向下排空氣法",
+    [["水上置換法|Water displacement|排水集氣法","アンモニアは水にとけやすいので水上置換法は使えません。|Ammonia dissolves in water, so you can't use water.|氨極易溶於水，不能用排水集氣法。"],["下方置換法|Downward delivery|向上排空氣法","下方置換法は空気より重い気体用です。アンモニアは軽い。|That is for heavier gases; ammonia is lighter.|那是比空氣重的氣體用的，氨比較輕。"],["ろ過|Filtration|過濾","ろ過は液体と固体を分ける方法です。|Filtration separates solids from liquids.|過濾是分離固體和液體的方法。"]],
+    "水にとけやすく空気より軽い → 上方置換法。|Soluble and lighter than air → upward delivery.|易溶於水且比空氣輕 → 向下排空氣法。",FIG_GAS),
 ];
 
 // 水溶液
@@ -529,7 +532,7 @@ const WV={loud:[26,3],soft:[7,3],high:[14,6],low:[14,1.5]};
 const WV_N={loud:"大きい音|louder|較大聲",soft:"小さい音|softer|較小聲",high:"高い音|higher|較高",low:"低い音|lower|較低"};
 const WV_W={loud:"振幅が大きいので大きい音です（高さは同じ）。|Bigger amplitude: louder (same pitch).|振幅較大，所以是較大聲（音高相同）。",soft:"振幅が小さいので小さい音です（高さは同じ）。|Smaller amplitude: softer (same pitch).|振幅較小，所以是較小聲（音高相同）。",high:"振動数が多いので高い音です（大きさは同じ）。|More vibrations: higher (same loudness).|振動次數多，所以是較高的音（大小相同）。",low:"振動数が少ないので低い音です（大きさは同じ）。|Fewer vibrations: lower (same loudness).|振動次數少，所以是較低的音（大小相同）。"};
 function soundWave(){ const ks=shuf(Object.keys(WV)); const ask=pick(ks); const nm={}; ks.forEach((k,i)=>nm[k]=LET[i]);
-  let b=T(150,14,X("もとの音|original sound|原來的聲音"),"xs")+wave(80,46,140,14,3);
+  let b=T(150,14,X("もとの音|original sound|原來的聲音"),"xs")+wave(90,46,120,14,3);
   ks.forEach((k,i)=>{ const x=10+(i%2)*150,y=110+Math.floor(i/2)*72; b+=T(x+4,y-26,LET[i],"lb","start")+wave(x+18,y,120,WV[k][0],WV[k][1]); });
   const fig=SV(300,214,b);
   return {q:X(`オシロスコープで見た音の波形。もとの音より${X(WV_N[ask])}は？（横軸は時間、たて軸は振動の幅。目盛りは同じ）|Sound waveforms (horizontal: time, vertical: vibration; same scales). Which is ${X(WV_N[ask])} than the original?|用示波器看到的聲音波形（橫軸時間、縱軸振幅，刻度相同）。比原來的聲音${X(WV_N[ask])}的是？`)+fig,ans:nm[ask],
@@ -542,7 +545,7 @@ function soundDist(){ const echo=Math.random()<.4; const t=echo?pick([2,3,4,5,6]
   return C(X(`山に向かって大声を出すと、${t} 秒後に山びこが聞こえた。山までの距離は何 m？（音の速さ 340 m/s）|You shout at a mountain and hear the echo ${t} s later. How far is it? (sound: 340 m/s)|對著山大叫，${t} 秒後聽到回聲。山離這裡幾 m？（音速 340 m/s）`),d/2," m",
     [[d,X("山びこは山まで行って帰ってくる（往復）ので、2でわります。|The echo goes there and back; divide by 2.|回聲是來回（往返），要除以2。")],[340/t,X("距離 ＝ 速さ × 時間 ÷ 2 です。|Distance = speed × time ÷ 2.|距離 ＝ 速度 × 時間 ÷ 2。")],[d*2,X("往復なので2でわります。かけません。|Round trip: divide by 2, not multiply.|往返要除以2，不是乘以2。")]],
     X(`往復 ${d} m なので、片道は ${d} ÷ 2 ＝ ${d/2} m|Round trip ${d} m, so one way = ${d} ÷ 2 = ${d/2} m|往返 ${d} m，所以單程 ＝ ${d} ÷ 2 ＝ ${d/2} m`)); }
-function soundHz(){ const f=pick([100,200,250,400,500,800,1000]); const n=pick([1,2,4,5]); const s=n/f;
+function soundHz(){ const f=pick([100,200,250,400,500,1000]); const n=pick([1,2,4,5]); const s=n/f;
   return C(X(`ある音は ${fm(s,4)} 秒間に ${n} 回振動する。振動数は何 Hz？|A sound vibrates ${n} time(s) in ${fm(s,4)} s. What is its frequency in Hz?|某聲音在 ${fm(s,4)} 秒內振動 ${n} 次，振動頻率是幾 Hz？`),f," Hz",
     [[f/n,X(`${n} 回振動しているので、1回あたりの時間ではなく回数で考えます。|It vibrates ${n} times; count all of them.|振動了 ${n} 次，要算全部的次數。`)],[f*n,X("振動数 ＝ 回数 ÷ 時間 です。|Frequency = count ÷ time.|頻率 ＝ 次數 ÷ 時間。")],[f*10,X("小数の位どりを確かめよう。|Check the decimal places.|檢查小數點的位數。")]],
     X(`振動数 ＝ 1秒間に振動する回数 ＝ ${n} ÷ ${fm(s,4)} ＝ ${f} Hz|Frequency = vibrations per second = ${n} ÷ ${fm(s,4)} = ${f} Hz|頻率 ＝ 每秒振動次數 ＝ ${n} ÷ ${fm(s,4)} ＝ ${f} Hz`)); }
@@ -593,7 +596,8 @@ const phys4=[forceArrow,forceArrow,weightMass,weightMass,weightMass,
 ];
 
 // ばね・2力のつり合い
-function springText(){ const F1=pick([1,2]),x1=pick([1.5,2,3,4]),F2=pick([0.5,1.5,2.5,3,4,5,6].filter(v=>v!==F1)); const x2=+(x1*F2/F1).toFixed(2); const tot=Math.random()<.4; const L0=pick([8,10,12,15]);
+function springText(){ let F1,x1,F2,x2; do{ F1=pick([1,2]); x1=pick([1.5,2,3,4]); F2=pick([0.5,1.5,2.5,3,4,5,6].filter(v=>v!==F1)); x2=x1*F2/F1; }while(Math.abs(x2*10-Math.round(x2*10))>1e-9);   // 答えは小数第1位まで（0.375 のような丸めを出さない）
+  x2=+x2.toFixed(1); const tot=Math.random()<.4; const L0=pick([8,10,12,15]);
   if(!tot) return C(X(`${F1} N の力で ${x1} cm のびるばねに、${F2} N の力を加えると何 cm のびる？|A spring stretches ${x1} cm with ${F1} N. How much with ${F2} N?|一彈簧受 ${F1} N 的力伸長 ${x1} cm。受 ${F2} N 的力會伸長幾 cm？`),x2," cm",
     [[x1*F2,X(`${F1} N で ${x1} cm なので、1 N あたりにしてからかけます。|First find the stretch per 1 N.|先算出每 1 N 伸長多少。`)],[x1+F2-F1,X("ふえた力の分だけたすのではなく、比例で考えます。|It is proportional, not additive.|是成正比，不是相加。")],[F2/x1,X("のびは力に比例します（のび ＝ 1 N あたりののび × 力）。|Stretch is proportional to force.|伸長量和力成正比。")]],
     X(`フックの法則：のびは力に比例。${x1} ÷ ${F1} × ${F2} ＝ ${fm(x2)} cm|Hooke's law: stretch ∝ force. ${x1} ÷ ${F1} × ${F2} = ${fm(x2)} cm|虎克定律：伸長量和力成正比。${x1} ÷ ${F1} × ${F2} ＝ ${fm(x2)} cm`));
@@ -739,8 +743,8 @@ const earth3=[strata,strata,strata,strata,
     [["冷たくて深い海|A cold, deep sea|寒冷的深海","サンゴはあたたかく浅い海にすみます。|Coral lives in warm, shallow seas.|珊瑚生活在溫暖的淺海。"],["湖や河口|A lake or river mouth|湖泊或河口","湖や河口を示すのはシジミの化石です。|Freshwater clams (shijimi) show lakes or river mouths.|表示湖泊或河口的是蜆的化石。"],["陸上の森|A forest on land|陸地上的森林","サンゴは海の生物です。|Coral is a sea creature.|珊瑚是海洋生物。"]],
     "示相化石：当時の環境が分かる（サンゴ→あたたかく浅い海、シジミ→河口や湖）。|Facies fossils show past environments (coral → warm shallow sea; shijimi clam → river mouth/lake).|指相化石：可知當時環境（珊瑚→溫暖淺海，蜆→河口或湖泊）。"),
   Q("アンモナイトの化石が見つかった地層ができた時代は？|A layer with ammonite fossils formed in which era?|發現菊石化石的地層，是在哪個時代形成的？","中生代|Mesozoic|中生代",
-    [["古生代|Paleozoic|古生代","古生代の示準化石は三葉虫やフズリナです。|Paleozoic index fossils: trilobites, fusulinids.|古生代的標準化石是三葉蟲、紡錘蟲。"],["新生代|Cenozoic|新生代","新生代の示準化石はビカリアやナウマンゾウです。|Cenozoic: Vicarya, Naumann's elephant.|新生代的標準化石是維卡里亞螺、諾氏古象。"],["どの時代か分からない|Can't tell|無法判斷","アンモナイトは時代が分かる示準化石です。|Ammonites are index fossils.|菊石是可判斷年代的標準化石。"]],
-    "示準化石：古生代＝三葉虫・フズリナ、中生代＝アンモナイト・恐竜、新生代＝ビカリア・ナウマンゾウ。|Index fossils: Paleozoic = trilobites, fusulinids; Mesozoic = ammonites, dinosaurs; Cenozoic = Vicarya, Naumann's elephant.|標準化石：古生代＝三葉蟲、紡錘蟲；中生代＝菊石、恐龍；新生代＝維卡里亞螺、諾氏古象。"),
+    [["古生代|Paleozoic|古生代","古生代の示準化石は三葉虫やフズリナです。|Paleozoic index fossils: trilobites, fusulinids.|古生代的標準化石是三葉蟲、紡錘蟲。"],["新生代|Cenozoic|新生代","新生代の示準化石はビカリアやナウマンゾウです。|Cenozoic: Vicarya, Naumann's elephant.|新生代的標準化石是維卡里亞螺、諾氏古菱齒象。"],["どの時代か分からない|Can't tell|無法判斷","アンモナイトは時代が分かる示準化石です。|Ammonites are index fossils.|菊石是可判斷年代的標準化石。"]],
+    "示準化石：古生代＝三葉虫・フズリナ、中生代＝アンモナイト・恐竜、新生代＝ビカリア・ナウマンゾウ。|Index fossils: Paleozoic = trilobites, fusulinids; Mesozoic = ammonites, dinosaurs; Cenozoic = Vicarya, Naumann's elephant.|標準化石：古生代＝三葉蟲、紡錘蟲；中生代＝菊石、恐龍；新生代＝維卡里亞螺、諾氏古菱齒象。"),
   Q("うすい塩酸をかけると気体（二酸化炭素）が出る岩石は？|Which rock gives off gas (CO₂) with dilute hydrochloric acid?|滴上稀鹽酸會產生氣體（二氧化碳）的岩石是？","石灰岩|Limestone|石灰岩",
     [["チャート|Chert|燧石","チャートは塩酸と反応せず、とてもかたい岩石です。|Chert doesn't react and is very hard.|燧石不和鹽酸反應，非常堅硬。"],["花こう岩|Granite|花崗岩","花こう岩は火成岩で、塩酸で気体は出ません。|Granite is igneous; no gas.|花崗岩是火成岩，滴鹽酸不會產生氣體。"],["凝灰岩|Tuff|凝灰岩","凝灰岩は火山灰が固まった岩石です。|Tuff is hardened volcanic ash.|凝灰岩是火山灰凝固的岩石。"]],
     "石灰岩：塩酸で二酸化炭素が出る。チャート：反応しない・鉄のくぎで傷がつかないほどかたい。|Limestone fizzes (CO₂) in acid. Chert doesn't, and is too hard to scratch with an iron nail.|石灰岩：遇鹽酸產生二氧化碳。燧石：不反應，硬到鐵釘也刮不出痕跡。"),
@@ -796,7 +800,7 @@ const SORTS=[
   ["金属|Metal|金屬","金属でない|Not metal|非金屬",[["鉄|Iron|鐵",0],["銅|Copper|銅",0],["アルミニウム|Aluminum|鋁",0],["金|Gold|金",0],["水銀|Mercury|水銀",0,"水銀は常温で液体の金属。|Mercury is a metal that is liquid at room temperature.|水銀是常溫下呈液態的金屬。"],["ガラス|Glass|玻璃",1],["プラスチック|Plastic|塑膠",1],["木|Wood|木頭",1],["ゴム|Rubber|橡膠",1],["食塩|Salt|食鹽",1]]],
   ["純物質|Pure substance|純物質","混合物|Mixture|混合物",[["水|Water|水",0],["酸素|Oxygen|氧氣",0],["鉄|Iron|鐵",0],["エタノール|Ethanol|乙醇",0],["塩化ナトリウム|Sodium chloride|氯化鈉",0],["空気|Air|空氣",1,"空気は窒素・酸素などの混合物。|Air is a mix of nitrogen, oxygen, etc.|空氣是氮氣、氧氣等的混合物。"],["海水|Seawater|海水",1],["食塩水|Salt water|食鹽水",1],["牛乳|Milk|牛奶",1],["花こう岩|Granite|花崗岩",1,"岩石はいろいろな鉱物の混合物。|Rocks are mixtures of minerals.|岩石是多種礦物的混合物。"]]],
   ["火山岩|Volcanic rock|火山岩","深成岩|Plutonic rock|深成岩",[["流紋岩|Rhyolite|流紋岩",0],["安山岩|Andesite|安山岩",0],["玄武岩|Basalt|玄武岩",0],["斑状組織|Porphyritic texture|斑狀組織",0],["地表近くで急に冷えた|Cooled fast near the surface|在地表附近快速冷卻",0],["花こう岩|Granite|花崗岩",1],["せん緑岩|Diorite|閃長岩",1],["斑れい岩|Gabbro|輝長岩",1],["等粒状組織|Equigranular texture|等粒狀組織",1],["地下深くでゆっくり冷えた|Cooled slowly deep underground|在地下深處慢慢冷卻",1]]],
-  ["示相化石|Facies fossil|指相化石","示準化石|Index fossil|標準化石",[["サンゴ|Coral|珊瑚",0,"サンゴはあたたかく浅い海を示す。|Coral shows a warm, shallow sea.|珊瑚表示溫暖的淺海。"],["シジミ|Shijimi clam|蜆",0,"シジミは河口や湖を示す。|Shijimi shows a river mouth or lake.|蜆表示河口或湖泊。"],["ブナの葉|Beech leaf|山毛櫸的葉",0],["三葉虫|Trilobite|三葉蟲",1],["フズリナ|Fusulinid|紡錘蟲",1],["アンモナイト|Ammonite|菊石",1],["恐竜|Dinosaur|恐龍",1],["ビカリア|Vicarya|維卡里亞螺",1],["ナウマンゾウ|Naumann's elephant|諾氏古象",1]]],
+  ["示相化石|Facies fossil|指相化石","示準化石|Index fossil|標準化石",[["サンゴ|Coral|珊瑚",0,"サンゴはあたたかく浅い海を示す。|Coral shows a warm, shallow sea.|珊瑚表示溫暖的淺海。"],["シジミ|Shijimi clam|蜆",0,"シジミは河口や湖を示す。|Shijimi shows a river mouth or lake.|蜆表示河口或湖泊。"],["ブナの葉|Beech leaf|山毛櫸的葉",0],["三葉虫|Trilobite|三葉蟲",1],["フズリナ|Fusulinid|紡錘蟲",1],["アンモナイト|Ammonite|菊石",1],["恐竜|Dinosaur|恐龍",1],["ビカリア|Vicarya|維卡里亞螺",1],["ナウマンゾウ|Naumann's elephant|諾氏古菱齒象",1]]],
   ["有色鉱物|Dark mineral|有色礦物","無色鉱物|Light mineral|無色礦物",[["クロウンモ|Biotite|黑雲母",0],["カクセン石|Hornblende|角閃石",0],["キ石|Pyroxene|輝石",0],["カンラン石|Olivine|橄欖石",0],["磁鉄鉱|Magnetite|磁鐵礦",0],["セキエイ|Quartz|石英",1],["チョウ石|Feldspar|長石",1]]],
   ["反射|Reflection|反射","屈折|Refraction|折射",[["鏡に自分の姿がうつる|You see yourself in a mirror|在鏡子裡看到自己",0],["水面に景色がうつる|Scenery mirrored on water|水面映出景色",0],["光ファイバーで光が進む|Light travels in an optical fiber|光在光纖中前進",0,"光ファイバーは全反射を利用している。|Optical fibers use total internal reflection.|光纖利用全反射。"],["ものが見える（乱反射）|Seeing objects (diffuse light)|看得見物體（漫反射）",0],["コップのストローが折れて見える|A straw looks bent in a glass|杯中吸管看起來折斷",1],["水中のコインが浮いて見える|A coin underwater looks raised|水中的硬幣看起來浮起",1],["虫めがねで大きく見える|A magnifier makes things bigger|放大鏡讓東西變大",1],["プリズムで光が色に分かれる|A prism splits light into colors|三稜鏡把光分成顏色",1]]],
   ["はなれていてもはたらく|Acts at a distance|不接觸也能作用","ふれてはたらく|Acts by contact|接觸才能作用",[["重力|Gravity|重力",0],["磁石の力|Magnetic force|磁力",0],["電気の力|Electric force|電力",0],["摩擦力|Friction|摩擦力",1],["弾性力|Elastic force|彈力",1],["垂直抗力|Normal force|正向力",1],["手でおす力|Pushing by hand|用手推的力",1]]],

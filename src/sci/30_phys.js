@@ -81,7 +81,7 @@ const WV={loud:[26,3],soft:[7,3],high:[14,6],low:[14,1.5]};
 const WV_N={loud:"大きい音|louder|較大聲",soft:"小さい音|softer|較小聲",high:"高い音|higher|較高",low:"低い音|lower|較低"};
 const WV_W={loud:"振幅が大きいので大きい音です（高さは同じ）。|Bigger amplitude: louder (same pitch).|振幅較大，所以是較大聲（音高相同）。",soft:"振幅が小さいので小さい音です（高さは同じ）。|Smaller amplitude: softer (same pitch).|振幅較小，所以是較小聲（音高相同）。",high:"振動数が多いので高い音です（大きさは同じ）。|More vibrations: higher (same loudness).|振動次數多，所以是較高的音（大小相同）。",low:"振動数が少ないので低い音です（大きさは同じ）。|Fewer vibrations: lower (same loudness).|振動次數少，所以是較低的音（大小相同）。"};
 function soundWave(){ const ks=shuf(Object.keys(WV)); const ask=pick(ks); const nm={}; ks.forEach((k,i)=>nm[k]=LET[i]);
-  let b=T(150,14,X("もとの音|original sound|原來的聲音"),"xs")+wave(80,46,140,14,3);
+  let b=T(150,14,X("もとの音|original sound|原來的聲音"),"xs")+wave(90,46,120,14,3);
   ks.forEach((k,i)=>{ const x=10+(i%2)*150,y=110+Math.floor(i/2)*72; b+=T(x+4,y-26,LET[i],"lb","start")+wave(x+18,y,120,WV[k][0],WV[k][1]); });
   const fig=SV(300,214,b);
   return {q:X(`オシロスコープで見た音の波形。もとの音より${X(WV_N[ask])}は？（横軸は時間、たて軸は振動の幅。目盛りは同じ）|Sound waveforms (horizontal: time, vertical: vibration; same scales). Which is ${X(WV_N[ask])} than the original?|用示波器看到的聲音波形（橫軸時間、縱軸振幅，刻度相同）。比原來的聲音${X(WV_N[ask])}的是？`)+fig,ans:nm[ask],
@@ -94,7 +94,7 @@ function soundDist(){ const echo=Math.random()<.4; const t=echo?pick([2,3,4,5,6]
   return C(X(`山に向かって大声を出すと、${t} 秒後に山びこが聞こえた。山までの距離は何 m？（音の速さ 340 m/s）|You shout at a mountain and hear the echo ${t} s later. How far is it? (sound: 340 m/s)|對著山大叫，${t} 秒後聽到回聲。山離這裡幾 m？（音速 340 m/s）`),d/2," m",
     [[d,X("山びこは山まで行って帰ってくる（往復）ので、2でわります。|The echo goes there and back; divide by 2.|回聲是來回（往返），要除以2。")],[340/t,X("距離 ＝ 速さ × 時間 ÷ 2 です。|Distance = speed × time ÷ 2.|距離 ＝ 速度 × 時間 ÷ 2。")],[d*2,X("往復なので2でわります。かけません。|Round trip: divide by 2, not multiply.|往返要除以2，不是乘以2。")]],
     X(`往復 ${d} m なので、片道は ${d} ÷ 2 ＝ ${d/2} m|Round trip ${d} m, so one way = ${d} ÷ 2 = ${d/2} m|往返 ${d} m，所以單程 ＝ ${d} ÷ 2 ＝ ${d/2} m`)); }
-function soundHz(){ const f=pick([100,200,250,400,500,800,1000]); const n=pick([1,2,4,5]); const s=n/f;
+function soundHz(){ const f=pick([100,200,250,400,500,1000]); const n=pick([1,2,4,5]); const s=n/f;
   return C(X(`ある音は ${fm(s,4)} 秒間に ${n} 回振動する。振動数は何 Hz？|A sound vibrates ${n} time(s) in ${fm(s,4)} s. What is its frequency in Hz?|某聲音在 ${fm(s,4)} 秒內振動 ${n} 次，振動頻率是幾 Hz？`),f," Hz",
     [[f/n,X(`${n} 回振動しているので、1回あたりの時間ではなく回数で考えます。|It vibrates ${n} times; count all of them.|振動了 ${n} 次，要算全部的次數。`)],[f*n,X("振動数 ＝ 回数 ÷ 時間 です。|Frequency = count ÷ time.|頻率 ＝ 次數 ÷ 時間。")],[f*10,X("小数の位どりを確かめよう。|Check the decimal places.|檢查小數點的位數。")]],
     X(`振動数 ＝ 1秒間に振動する回数 ＝ ${n} ÷ ${fm(s,4)} ＝ ${f} Hz|Frequency = vibrations per second = ${n} ÷ ${fm(s,4)} = ${f} Hz|頻率 ＝ 每秒振動次數 ＝ ${n} ÷ ${fm(s,4)} ＝ ${f} Hz`)); }
@@ -145,7 +145,8 @@ const phys4=[forceArrow,forceArrow,weightMass,weightMass,weightMass,
 ];
 
 // ばね・2力のつり合い
-function springText(){ const F1=pick([1,2]),x1=pick([1.5,2,3,4]),F2=pick([0.5,1.5,2.5,3,4,5,6].filter(v=>v!==F1)); const x2=+(x1*F2/F1).toFixed(2); const tot=Math.random()<.4; const L0=pick([8,10,12,15]);
+function springText(){ let F1,x1,F2,x2; do{ F1=pick([1,2]); x1=pick([1.5,2,3,4]); F2=pick([0.5,1.5,2.5,3,4,5,6].filter(v=>v!==F1)); x2=x1*F2/F1; }while(Math.abs(x2*10-Math.round(x2*10))>1e-9);   // 答えは小数第1位まで（0.375 のような丸めを出さない）
+  x2=+x2.toFixed(1); const tot=Math.random()<.4; const L0=pick([8,10,12,15]);
   if(!tot) return C(X(`${F1} N の力で ${x1} cm のびるばねに、${F2} N の力を加えると何 cm のびる？|A spring stretches ${x1} cm with ${F1} N. How much with ${F2} N?|一彈簧受 ${F1} N 的力伸長 ${x1} cm。受 ${F2} N 的力會伸長幾 cm？`),x2," cm",
     [[x1*F2,X(`${F1} N で ${x1} cm なので、1 N あたりにしてからかけます。|First find the stretch per 1 N.|先算出每 1 N 伸長多少。`)],[x1+F2-F1,X("ふえた力の分だけたすのではなく、比例で考えます。|It is proportional, not additive.|是成正比，不是相加。")],[F2/x1,X("のびは力に比例します（のび ＝ 1 N あたりののび × 力）。|Stretch is proportional to force.|伸長量和力成正比。")]],
     X(`フックの法則：のびは力に比例。${x1} ÷ ${F1} × ${F2} ＝ ${fm(x2)} cm|Hooke's law: stretch ∝ force. ${x1} ÷ ${F1} × ${F2} = ${fm(x2)} cm|虎克定律：伸長量和力成正比。${x1} ÷ ${F1} × ${F2} ＝ ${fm(x2)} cm`));
