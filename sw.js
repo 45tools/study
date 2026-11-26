@@ -1,4 +1,4 @@
-const C="study-2026.11.26-5";
+const C="study-2026.11.27-1";
 const FILES=["./", "index.html", "data.js", "math_i18n.js", "math.js", "sci.js", "sci_zh.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(FILES.map(u=>new Request(u,{cache:"reload"})))).catch(()=>{}));self.skipWaiting();});
 // 音声（audio/）は版をまたいで残す
