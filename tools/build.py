@@ -1,5 +1,5 @@
 """45 Study を組み立てる。
-  src/shell.html（画面とゲーム）＋ src/data/*（問題・音声の対応表・動画の記録）から公開用のファイルを書き出す。
+  src/shell.html（画面とゲーム）＋ src/math.js・src/sci/*.js（数学・理科）＋ src/data/*（問題・音声の対応表・動画の記録）から公開用のファイルを書き出す。
   index.html / data.js / manifest.json / sw.js
 使い方：src/shell.html の APP_VER を上げてから python3 tools/build.py
 （簡体字は繁体字から自動変換。pip install opencc-python-reimplemented）
@@ -83,7 +83,12 @@ open(S("manifest.json"), "w", encoding="utf-8").write(json.dumps({
 import shutil
 shutil.copy(S("src", "math.js"), S("math.js"))
 shutil.copy(S("src", "math_i18n.js"), S("math_i18n.js"))
-files = ["./", "index.html", "data.js", "math_i18n.js", "math.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"]
+# 理科：src/sci/*.js をつなげる。簡体字は全体を変換した sci_zh.js（日本語の文も変わるが、簡体字のときは表示しない）
+import glob
+sci = "/* 45 Study 理科（tools/build.py が src/sci/*.js から作る。直接編集しない） */\n" + "".join(open(f, encoding="utf-8").read() for f in sorted(glob.glob(S("src", "sci", "*.js"))))
+open(S("sci.js"), "w", encoding="utf-8").write(sci)
+open(S("sci_zh.js"), "w", encoding="utf-8").write(OpenCC("tw2sp").convert(sci))
+files = ["./", "index.html", "data.js", "math_i18n.js", "math.js", "sci.js", "sci_zh.js", "manifest.json", "icon-180.png", "icon-192.png", "icon-512.png"]
 sw = f'''const C="study-{ver}";
 const FILES={json.dumps(files)};
 self.addEventListener("install",e=>{{e.waitUntil(caches.open(C).then(c=>c.addAll(FILES.map(u=>new Request(u,{{cache:"reload"}})))).catch(()=>{{}}));self.skipWaiting();}});

@@ -18,16 +18,16 @@
 :root{
   --bg:#FFF6EE; --dot:#FBE6D4; --panel:#FFFFFF; --ink:#2A2233; --muted:#6F6680; --line:#F0DDCC; --soft:#FFF1E6;
   --strong:#2A2233; --strong-ink:#FFFFFF; --danger:#E5484D; --star:#FFB21E; --ok:#1DA563;
-  --c-quiz:#F26B1D; --c-listen:#2F6FEB; --c-memo:#9B5CF6; --c-inf:#E5484D; --c-math:#12A594;
+  --c-quiz:#F26B1D; --c-listen:#2F6FEB; --c-memo:#9B5CF6; --c-inf:#E5484D; --c-math:#12A594; --c-sci:#3E9B3A;
   --h0:#E9E2EE; --h1:#F2857A; --h2:#FFB45C; --h3:#F2D24B; --h4:#4CC27F;
   --accent:#F26B1D; --accent-ink:#FFFFFF;
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#17141D; --dot:#221D2B; --panel:#211C29; --ink:#F2EEF7; --muted:#A99FB8; --line:#3A3246; --soft:#2B2434; --strong:#F2EEF7; --strong-ink:#17141D;
-    --danger:#FF6B6F; --star:#FFC23D; --ok:#3CCB84; --c-quiz:#FF8A45; --c-listen:#6E9BFF; --c-memo:#B38BFF; --c-inf:#FF6B6F; --c-math:#2CC4AE;
+    --danger:#FF6B6F; --star:#FFC23D; --ok:#3CCB84; --c-quiz:#FF8A45; --c-listen:#6E9BFF; --c-memo:#B38BFF; --c-inf:#FF6B6F; --c-math:#2CC4AE; --c-sci:#6CC665;
     --h0:#332B3E; --h1:#C9574F; --h2:#D98A35; --h3:#C9AA2E; --h4:#2FA466; --accent:#FF8A45; color-scheme:dark; }
 }
-body[data-g="listen"]{--accent:var(--c-listen)} body[data-g="memo"]{--accent:var(--c-memo)} body[data-g="inf"]{--accent:var(--c-inf)} body[data-g="math"]{--accent:var(--c-math)}
+body[data-g="listen"]{--accent:var(--c-listen)} body[data-g="memo"]{--accent:var(--c-memo)} body[data-g="inf"]{--accent:var(--c-inf)} body[data-g="math"]{--accent:var(--c-math)} body[data-g="sci"]{--accent:var(--c-sci)}
 *,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{overscroll-behavior:none;touch-action:manipulation;-webkit-text-size-adjust:100%;background:var(--bg);height:100%;overflow:hidden}
 html,body{margin:0}
@@ -186,6 +186,11 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
 .tlrow select{margin-left:auto;min-width:0;max-width:62%;font:inherit;font-weight:800;color:var(--ink);background:transparent;border:0;text-align:right}
 .qm .sys{display:inline-flex;flex-direction:column;align-items:flex-start;border-left:2.5px solid var(--ink);border-radius:12px 0 0 12px;padding:2px 0 2px 12px;margin:6px 0;font-family:"Fredoka","M PLUS Rounded 1c",sans-serif;font-size:clamp(19px,5.6vw,24px);line-height:1.55}
 .qm .dl2{display:block;margin-top:6px;font-family:"Fredoka",sans-serif;font-size:clamp(18px,5.4vw,22px);letter-spacing:.02em}
+.fig .o{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.fig .os{fill:color-mix(in srgb,var(--ink) 9%,transparent);stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round}
+.fig .ac{fill:color-mix(in srgb,var(--accent) 24%,transparent);stroke:var(--accent);stroke-width:2;stroke-linejoin:round}.fig .bx{fill:var(--panel);stroke:var(--ink);stroke-width:1.3}.fig .wa{fill:color-mix(in srgb,#2F6FEB 18%,transparent);stroke:none}
+.fig .k{stroke:var(--ink);stroke-width:1.4;fill:none}.fig .kf{fill:var(--ink)}.fig .ar{stroke:var(--accent);stroke-width:2.6;fill:none}.fig .ah{fill:var(--accent)}.fig .sm{font-size:12px;font-weight:700}.fig .xs{font-size:10.5px}
+.chs.srt2 .ch{min-height:96px;font-size:17px;line-height:1.3}
+.qm .srt{font-size:28px;font-weight:800;text-align:center;padding:14px 0 6px;line-height:1.3}
 .fig .ln2{stroke:var(--ink);stroke-width:2.2;fill:none;stroke-dasharray:7 4}
 .fb .ans{margin-top:4px;font-weight:800;font-family:"Fredoka","M PLUS Rounded 1c",sans-serif}
 .subj{margin:0 0 2px}
@@ -283,7 +288,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
   <label class="mi"><span data-i="langLbl"></span>
     <select id="lang" aria-label="Language"><option value="ja">日本語</option><option value="en">English</option><option value="zh-Hant">繁體中文</option><option value="zh">简体中文</option></select></label>
   <button class="mi" id="srcBtn" style="font-size:13px"><span data-i="srcTitle"></span></button>
-  <div class="mi" style="min-height:30px;font-size:12px;color:var(--muted)">45tools · ver 2026.11.26-4</div>
+  <div class="mi" style="min-height:30px;font-size:12px;color:var(--muted)">45tools · ver 2026.11.26-5</div>
   <a class="mi accent" id="supportLink" target="_blank" rel="noopener"><i class="ic" data-ic="heart"></i><span data-i="support"></span></a>
 </div>
 
@@ -370,12 +375,13 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(
 <div class="toast" id="toast"></div>
 <audio id="au" preload="auto" playsinline></audio>
 
-<script src="data.js?v=2026.11.26-4"></script>
-<script src="math_i18n.js?v=2026.11.26-4"></script>
-<script src="math.js?v=2026.11.26-4"></script>
+<script src="data.js?v=2026.11.26-5"></script>
+<script src="math_i18n.js?v=2026.11.26-5"></script>
+<script src="math.js?v=2026.11.26-5"></script>
+<script>/* 理科：簡体字は sci_zh.js（build.py が変換） */(()=>{ let l=null; try{ l=JSON.parse(localStorage.getItem("s_lang")); }catch(e){} const n=(navigator.language||"").toLowerCase(); const zh=l?l==="zh":n.startsWith("zh")&&!/(tw|hk|mo|hant)/.test(n); document.write('<script src="'+(zh?"sci_zh.js":"sci.js")+'?v=2026.11.26-5"><\/script>'); })();</script>
 <script>
 /* ===== 設定 ===== */
-const APP_VER="2026.11.26-4";
+const APP_VER="2026.11.26-5";
 const RELEASE="2026-11-29T07:00:00+09:00";   // この時刻まではお知らせだけ（?preview=1 で中を見られる）
 const SUPPORT_URL="https://ofuse.me/45tools";
 const CHANNEL_URL="https://www.youtube.com/@Isensei_Lab/playlists";  // 伊先生Labの再生リスト一覧
@@ -423,7 +429,7 @@ function paintIcons(r=document){ r.querySelectorAll("[data-ic]").forEach(el=>{ e
 const I18N={
  ja:{todayTitle:"今日の1分",moreTitle:"まとめて勉強する",moreNext:"続きから",moreWeak:"苦手をもう一度",streak:"連続",days:"日",progTitle:"すすみ具合",progSum:"★{a}/{b}　遊んだ{c}",infBest:"∞ 最高",gQuiz:"2秒クイズ",gListen:"聞いて埋める",gMemo:"反対語めくり",
   byUnit:"単元で選ぶ",mix:"入試ミックス",free:"登録不要・広告なし・記録はこの端末の中だけ",byUnitTab:"単元で",byPartTab:"動画のPart番号で",
-  sEn:"英語",sMath:"数学",gA1:"数と式（1年）",gB1:"図形（1年）",gC1:"関数（1年）",gD1:"データの活用（1年）",gA2:"数と式（2年）",gB2:"図形（2年）",gC2:"関数（2年）",gD2:"データの活用（2年）",gA3:"数と式（3年）",gB3:"図形（3年）",gC3:"関数（3年）",gD3:"データの活用（3年）",gTf:"3秒○×",gMc:"4択",modeMc:"4択で解く",modeTf:"3秒で○×",unitLeadMath:"暗算で解ける数にしてあります（紙はいりません）。まちがえると、どこでまちがえたかが出ます。問題の数字は毎回かわります。",qkM:"答えを選ぼう",qk_calc:"計算しよう",qk_expr:"計算しよう",qk_note:"文字式で表すと？",qk_sub:"式の値は？",qk_eq:"方程式を解こう（x の値は？）",qk_word:"あてはまるものは？",qk_sys:"連立方程式を解こう",qk_trans:"式を変形しよう",qk_fig:"図や表を見て答えよう",qkTf:"正しい？",tfTrue:"正しいです。",ansIs2:"答え：",how2:"解き方：",
+  sEn:"英語",sMath:"数学",sSci:"理科",gLife:"生命（生物）",gPart:"粒子（物質）",gEne:"エネルギー（光・音・力）",gEarth:"地球（大地）",gSort:"なかま分け",unitLeadSci:"図を見て答える問題が多めです。まちがえると、選んだ答えがなぜちがうかが出ます。計算問題の数字は毎回かわります。",unitLeadSort:"出てくることばを、2つのなかまのどちらかにすばやく分けよう（1問6秒）。",qk_sort:"どっちのなかま？",gA1:"数と式（1年）",gB1:"図形（1年）",gC1:"関数（1年）",gD1:"データの活用（1年）",gA2:"数と式（2年）",gB2:"図形（2年）",gC2:"関数（2年）",gD2:"データの活用（2年）",gA3:"数と式（3年）",gB3:"図形（3年）",gC3:"関数（3年）",gD3:"データの活用（3年）",gTf:"3秒○×",gMc:"4択",modeMc:"4択で解く",modeTf:"3秒で○×",unitLeadMath:"暗算で解ける数にしてあります（紙はいりません）。まちがえると、どこでまちがえたかが出ます。問題の数字は毎回かわります。",qkM:"答えを選ぼう",qk_calc:"計算しよう",qk_expr:"計算しよう",qk_note:"文字式で表すと？",qk_sub:"式の値は？",qk_eq:"方程式を解こう（x の値は？）",qk_word:"あてはまるものは？",qk_sys:"連立方程式を解こう",qk_trans:"式を変形しよう",qk_fig:"図や表を見て答えよう",qkTf:"正しい？",tfTrue:"正しいです。",ansIs2:"答え：",how2:"解き方：",
   gVoc:"語い",gGram:"文法",gTalk:"会話",grade:"学年の目安 {g}年",grade13:"学年の目安 1〜3年",parts:"Part {a}〜{b}",stamps:"スタンプ {a}/{b}",acc:"正答率",best:"最高",
   lgNone:"まだ",lg1:"〜49%",lg2:"50〜69%",lg3:"70〜84%",lg4:"85%〜",lgTitle:"色＝正答率（苦手マップ）",
   sAdj:"形容詞クイズ",sVerb:"動詞クイズ",sNoun:"名詞クイズ（総復習）",sGram:"聞いて埋める英文法",sKaiwa:"聞いて埋める会話表現",
@@ -445,13 +451,13 @@ const I18N={
   rev:"日本語→英語",
   howTitle:"45 Study の使い方",
   how:"<p>YouTube「伊先生Lab」の英語ショートと<b>同じ番号・同じ文</b>で遊べる、1日1分の学習ゲームです。登録はいらず、記録はこの端末の中だけに保存されます。</p><h3>⚡ 2秒クイズ</h3>単語を見て、2秒で意味を選びます。動画と同じテンポで「すぐ思い出せる」まで練習できます。前回の自分の結果（○×）が上に出るので、前回の自分と勝負しよう。<h3>🎧 聞いて埋める</h3>英文を聞いて（　）に入る語句を選びます。まちがえると、えらんだ答えがなぜちがうのかが出ます。<h3>🃏 反対語めくり</h3>big ⇔ small のような反対の意味の2枚をそろえる神経衰弱です。<h3>∞ 無限モード・入試ミックス</h3>まちがえるまで続きます。入試ミックスは、遊んだことのある単元をまぜて出します（入試ではどの文法を使うか自分で見分ける力が必要です）。<h3>今日の1分・1周プラン・復習</h3>ホームには、その日に動画で公開された回、入試日から逆算した「今日やる単元」、まちがえた問題の復習（1日・3日・1週間後）が出ます。<h3>苦手マップ・スタンプ</h3>「単元で選ぶ」の色は正答率です。8割以上とれたPartにはスタンプ（★）がつきます。<h3>日本語→英語</h3>メニューで切り替えると、日本語を見て英語を選ぶ問題になります。<h3>記録のバックアップ</h3>記録はこの端末の中だけにあります。メニューの「記録のバックアップ」で、コードやファイルに保存して、機種変更のときにもどせます。",
-  src:"<p><b>単元の並びと名前</b>：文部科学省「中学校学習指導要領（平成29年告示）解説 外国語編」第2章第2節「英語」2 内容 の項目に合わせています。学習指導要領は文法事項を3学年まとめて示しているため、「学年の目安」は一般的な学習の順をもとにしたものです。</p><p><b>問題文</b>：伊先生Labのオリジナルです（教科書の文章は使っていません）。名言・ことわざは出典を表示しています。</p><p><b>音声</b>：Microsoft Edge の読み上げ音声で作った、動画と同じ音声です。</p><p><b>数学</b>：単元の並びは「中学校学習指導要領（平成29年告示）」数学 第1学年・第2学年（それぞれ A 数と式・B 図形・C 関数・D データの活用）に合わせています。問題はアプリがその場で作るオリジナルです。</p><p><a href=\"https://www.mext.go.jp/content/20210531-mxt_kyoiku01-100002608_010.pdf\" target=\"_blank\" rel=\"noopener\">学習指導要領 解説 外国語編（PDF）</a></p>",
+  src:"<p><b>単元の並びと名前</b>：文部科学省「中学校学習指導要領（平成29年告示）解説 外国語編」第2章第2節「英語」2 内容 の項目に合わせています。学習指導要領は文法事項を3学年まとめて示しているため、「学年の目安」は一般的な学習の順をもとにしたものです。</p><p><b>問題文</b>：伊先生Labのオリジナルです（教科書の文章は使っていません）。名言・ことわざは出典を表示しています。</p><p><b>音声</b>：Microsoft Edge の読み上げ音声で作った、動画と同じ音声です。</p><p><b>数学</b>：単元の並びは「中学校学習指導要領（平成29年告示）」数学 第1学年・第2学年（それぞれ A 数と式・B 図形・C 関数・D データの活用）に合わせています。問題はアプリがその場で作るオリジナルです。</p><p><b>理科</b>：単元の並びは「中学校学習指導要領（平成29年告示）」理科 第1学年（第1分野(1)(2)・第2分野(1)(2)）に合わせ、教科書でよく使われる順（生物→物質→光・音・力→大地）にしています。問題と図はアプリがその場で作るオリジナルです。</p><p><a href=\"https://www.mext.go.jp/content/20210531-mxt_kyoiku01-100002608_010.pdf\" target=\"_blank\" rel=\"noopener\">学習指導要領 解説 外国語編（PDF）</a></p>",
   bkTitle:"記録のバックアップ",bkSave:"記録を保存する",bkLoad:"保存した記録をもどす",bkCopy:"コードをコピー",bkFileBtn:"ファイルに保存",bkOpen:"ファイルを開く",bkRestore:"もどす",bkInfo:"<p>記録はこの端末のブラウザの中だけにあります（サーバーには送りません）。<b>機種変更・ブラウザのデータ消去</b>で消えるので、ときどき保存しておきましょう。コードはメモやLINEの自分あてなどに貼っておけます。</p>",bkHome:"<p class=\"hint\">iPhoneのSafariは、7日間開かないと記録を消すことがあります。共有ボタン →「ホーム画面に追加」から開くと消えにくくなります。</p>",bkPersist:"この端末の「消えにくい設定」：{v}",bkLast:"前回の保存：{d}",bkNever:"まだ保存していません",bkCopied:"コードをコピーしました",bkBad:"記録のコードではないようです",bkAsk:"今の記録を、保存した記録（{d}）に置きかえます。もう一度「もどす」を押してください",bkDone:"記録をもどしました",bkRemind:"記録のバックアップ",bkRemindSub:"{n}日保存していません（機種変更などにそなえて）",bkGo:"保存",homeHint:"ホーム画面に追加すると、記録が消えにくくなります",
   shareTxt:"45 Study {u} {s}",
  },
  en:{todayTitle:"Today's minute",moreTitle:"Study more",moreNext:"Next up",moreWeak:"Retry a weak Part",streak:"Streak",days:"d",progTitle:"Progress",progSum:"★{a}/{b} · played {c}",infBest:"∞ Best",gQuiz:"2-sec Quiz",gListen:"Listen & Fill",gMemo:"Opposites",
   byUnit:"Choose a unit",mix:"Exam mix",free:"No sign-up · no ads · records stay on this device",byUnitTab:"By unit",byPartTab:"By video Part",
-  sEn:"English",sMath:"Math",gA1:"Numbers & algebra (G1)",gB1:"Geometry (G1)",gC1:"Functions (G1)",gD1:"Data (G1)",gA2:"Numbers & algebra (G2)",gB2:"Geometry (G2)",gC2:"Functions (G2)",gD2:"Data (G2)",gA3:"Numbers & algebra (G3)",gB3:"Geometry (G3)",gC3:"Functions (G3)",gD3:"Data (G3)",gTf:"3-sec ○×",gMc:"Choose",modeMc:"Choose the answer",modeTf:"True or false in 3 s",unitLeadMath:"Numbers are small enough to solve in your head (no paper). Wrong answers show where the mistake is. Numbers change every time.",qkM:"Choose the answer",qk_calc:"Calculate",qk_expr:"Simplify",qk_note:"Write it as an expression",qk_sub:"Find the value",qk_eq:"Solve for x",qk_word:"Choose the answer",qk_sys:"Solve the system",qk_trans:"Rearrange the formula",qk_fig:"Look at the figure",qkTf:"True?",tfTrue:"This is correct.",ansIs2:"Answer: ",how2:"How: ",
+  sEn:"English",sMath:"Math",sSci:"Science",gLife:"Life (biology)",gPart:"Particles (matter)",gEne:"Energy (light, sound, force)",gEarth:"Earth (geology)",gSort:"Sort it!",unitLeadSci:"Many questions use figures. Wrong answers explain why. Numbers in calculations change every time.",unitLeadSort:"Sort each word into one of the two groups, fast (6 seconds each).",qk_sort:"Which group?",gA1:"Numbers & algebra (G1)",gB1:"Geometry (G1)",gC1:"Functions (G1)",gD1:"Data (G1)",gA2:"Numbers & algebra (G2)",gB2:"Geometry (G2)",gC2:"Functions (G2)",gD2:"Data (G2)",gA3:"Numbers & algebra (G3)",gB3:"Geometry (G3)",gC3:"Functions (G3)",gD3:"Data (G3)",gTf:"3-sec ○×",gMc:"Choose",modeMc:"Choose the answer",modeTf:"True or false in 3 s",unitLeadMath:"Numbers are small enough to solve in your head (no paper). Wrong answers show where the mistake is. Numbers change every time.",qkM:"Choose the answer",qk_calc:"Calculate",qk_expr:"Simplify",qk_note:"Write it as an expression",qk_sub:"Find the value",qk_eq:"Solve for x",qk_word:"Choose the answer",qk_sys:"Solve the system",qk_trans:"Rearrange the formula",qk_fig:"Look at the figure",qkTf:"True?",tfTrue:"This is correct.",ansIs2:"Answer: ",how2:"How: ",
   gVoc:"Vocabulary",gGram:"Grammar",gTalk:"Conversation",grade:"Grade {g} (guide)",grade13:"Grades 1–3",parts:"Part {a}–{b}",stamps:"Stamps {a}/{b}",acc:"Accuracy",best:"Best",
   lgNone:"Not yet",lg1:"–49%",lg2:"50–69%",lg3:"70–84%",lg4:"85%–",lgTitle:"Color = accuracy (weak-spot map)",
   sAdj:"Adjective Quiz",sVerb:"Verb Quiz",sNoun:"Noun Quiz (review)",sGram:"Listen & Fill Grammar",sKaiwa:"Listen & Fill Conversation",
@@ -472,14 +478,14 @@ const I18N={
   notyet:"<b>45 Study opens on Sun, Nov 29, 7:00 (JST)</b><br>1-minute English study games with the same words and sentences as the Isensei Lab videos.",
   rev:"JA → EN",
   howTitle:"How to use 45 Study",
-  how:"<p>1-minute study games that use <b>the same numbers and sentences</b> as the Isensei Lab English Shorts on YouTube. English: meanings and explanations are in Japanese (made for junior high students in Japan). Math: questions and explanations are in English. No sign-up; records stay on this device.</p><h3>⚡ 2-sec Quiz</h3>See a word and pick its meaning in 2 seconds. Your last result is shown on top — beat your past self.<h3>🎧 Listen & Fill</h3>Listen to a sentence and choose the words for the blank. Wrong answers show why.<h3>🃏 Opposites</h3>A memory game: match pairs like big ⇔ small.<h3>∞ Endless · Exam mix</h3>Keep going until you miss. Exam mix mixes every unit you have played.<h3>Today · plan · review</h3>Home shows today's video Parts, a plan that finishes every unit once before your exam date, and reviews of missed questions after 1, 3 and 7 days.",
-  src:"<p><b>Units</b>: ordered and named after the Course of Study for junior high schools (MEXT, 2017), Foreign Languages, Chapter 2 Section 2 “English” 2 Contents. Grade guides follow the usual order of study.</p><p><b>Questions</b>: original sentences by Isensei Lab. Quotes and proverbs show their sources.</p><p><b>Audio</b>: Microsoft Edge text-to-speech, the same audio as the videos.</p><p><a href=\"https://www.mext.go.jp/content/20210531-mxt_kyoiku01-100002608_010.pdf\" target=\"_blank\" rel=\"noopener\">Course of Study commentary (PDF, Japanese)</a></p>",
+  how:"<p>1-minute study games that use <b>the same numbers and sentences</b> as the Isensei Lab English Shorts on YouTube. English: meanings and explanations are in Japanese (made for junior high students in Japan). Math and science: questions and explanations are in English. No sign-up; records stay on this device.</p><h3>⚡ 2-sec Quiz</h3>See a word and pick its meaning in 2 seconds. Your last result is shown on top — beat your past self.<h3>🎧 Listen & Fill</h3>Listen to a sentence and choose the words for the blank. Wrong answers show why.<h3>🃏 Opposites</h3>A memory game: match pairs like big ⇔ small.<h3>∞ Endless · Exam mix</h3>Keep going until you miss. Exam mix mixes every unit you have played.<h3>Today · plan · review</h3>Home shows today's video Parts, a plan that finishes every unit once before your exam date, and reviews of missed questions after 1, 3 and 7 days.",
+  src:"<p><b>Units</b>: ordered and named after the Course of Study for junior high schools (MEXT, 2017), Foreign Languages, Chapter 2 Section 2 “English” 2 Contents. Grade guides follow the usual order of study.</p><p><b>Science</b>: Grade 7 units follow the Course of Study (2017), Science, Fields 1 and 2. Questions and figures are original and generated by the app.</p><p><b>Questions</b>: original sentences by Isensei Lab. Quotes and proverbs show their sources.</p><p><b>Audio</b>: Microsoft Edge text-to-speech, the same audio as the videos.</p><p><a href=\"https://www.mext.go.jp/content/20210531-mxt_kyoiku01-100002608_010.pdf\" target=\"_blank\" rel=\"noopener\">Course of Study commentary (PDF, Japanese)</a></p>",
   bkTitle:"Back up records",bkSave:"Save your records",bkLoad:"Restore saved records",bkCopy:"Copy code",bkFileBtn:"Save file",bkOpen:"Open file",bkRestore:"Restore",bkInfo:"<p>Records live only in this browser (nothing is sent to a server). They are lost if you <b>change phones or clear browser data</b>, so save them now and then. You can paste the code into a note or a message to yourself.</p>",bkHome:"<p class=\"hint\">Safari on iPhone may erase records if the site is not opened for 7 days. Open it from the Home Screen (Share → Add to Home Screen) to keep them safer.</p>",bkPersist:"Keep-data setting on this device: {v}",bkLast:"Last saved: {d}",bkNever:"Not saved yet",bkCopied:"Code copied",bkBad:"This does not look like a records code",bkAsk:"Replace current records with the saved ones ({d})? Tap Restore again",bkDone:"Records restored",bkRemind:"Back up records",bkRemindSub:"Not saved for {n} days",bkGo:"Save",homeHint:"Add to Home Screen to keep your records safer",
   shareTxt:"45 Study {u} {s}",
  },
  "zh-Hant":{todayTitle:"今天的1分鐘",moreTitle:"一次多學一點",moreNext:"接著做",moreWeak:"再練一次弱點",streak:"連續",days:"天",progTitle:"進度",progSum:"★{a}/{b}・玩過{c}",infBest:"∞ 最高",gQuiz:"2秒測驗",gListen:"聽音填空",gMemo:"反義詞翻牌",
   byUnit:"選擇單元",mix:"考試綜合",free:"免註冊・無廣告・紀錄只存在這台裝置",byUnitTab:"依單元",byPartTab:"依影片Part",
-  sEn:"英文",sMath:"數學",gA1:"數與式（1年級）",gB1:"圖形（1年級）",gC1:"函數（1年級）",gD1:"資料的運用（1年級）",gA2:"數與式（2年級）",gB2:"圖形（2年級）",gC2:"函數（2年級）",gD2:"資料的運用（2年級）",gA3:"數與式（3年級）",gB3:"圖形（3年級）",gC3:"函數（3年級）",gD3:"資料的運用（3年級）",gTf:"3秒○×",gMc:"四選一",modeMc:"四選一作答",modeTf:"3秒判斷○×",unitLeadMath:"數字都能心算（不需要紙）。答錯會顯示錯在哪裡。題目數字每次都會變。",qkM:"選出答案",qk_calc:"計算看看",qk_expr:"化簡",qk_note:"用文字式表示",qk_sub:"求式子的值",qk_eq:"解方程式（x 是多少？）",qk_word:"選出正確的答案",qk_sys:"解聯立方程式",qk_trans:"等式變形",qk_fig:"看圖表作答",qkTf:"正確嗎？",tfTrue:"這是正確的。",ansIs2:"答案：",how2:"解法：",
+  sEn:"英文",sMath:"數學",sSci:"自然",gLife:"生命（生物）",gPart:"粒子（物質）",gEne:"能量（光、聲、力）",gEarth:"地球（地科）",gSort:"分類遊戲",unitLeadSci:"很多題目要看圖作答。答錯會說明為什麼不對。計算題的數字每次都會變。",unitLeadSort:"把出現的詞語快速分到兩類中的一類（每題6秒）。",qk_sort:"屬於哪一類？",gA1:"數與式（1年級）",gB1:"圖形（1年級）",gC1:"函數（1年級）",gD1:"資料的運用（1年級）",gA2:"數與式（2年級）",gB2:"圖形（2年級）",gC2:"函數（2年級）",gD2:"資料的運用（2年級）",gA3:"數與式（3年級）",gB3:"圖形（3年級）",gC3:"函數（3年級）",gD3:"資料的運用（3年級）",gTf:"3秒○×",gMc:"四選一",modeMc:"四選一作答",modeTf:"3秒判斷○×",unitLeadMath:"數字都能心算（不需要紙）。答錯會顯示錯在哪裡。題目數字每次都會變。",qkM:"選出答案",qk_calc:"計算看看",qk_expr:"化簡",qk_note:"用文字式表示",qk_sub:"求式子的值",qk_eq:"解方程式（x 是多少？）",qk_word:"選出正確的答案",qk_sys:"解聯立方程式",qk_trans:"等式變形",qk_fig:"看圖表作答",qkTf:"正確嗎？",tfTrue:"這是正確的。",ansIs2:"答案：",how2:"解法：",
   gVoc:"單字",gGram:"文法",gTalk:"會話",grade:"參考年級 {g}年級",grade13:"參考年級 1〜3年級",parts:"Part {a}〜{b}",stamps:"印章 {a}/{b}",acc:"正確率",best:"最高",
   lgNone:"尚未",lg1:"〜49%",lg2:"50〜69%",lg3:"70〜84%",lg4:"85%〜",lgTitle:"顏色＝正確率（弱點地圖）",
   sAdj:"形容詞測驗",sVerb:"動詞測驗",sNoun:"名詞測驗（總複習）",sGram:"聽音填空 英文文法",sKaiwa:"聽音填空 會話表達",
@@ -500,13 +506,13 @@ const I18N={
   notyet:"<b>45 Study 將於 11月29日（日）早上7:00（日本時間）公開</b><br>用和伊先生Lab影片相同的單字・例句，每天1分鐘的英文學習遊戲。",
   rev:"日→英",
   howTitle:"45 Study 使用方法",
-  how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同編號・相同句子</b>的每天1分鐘學習遊戲。英文科的意思與說明以日文顯示（為日本國中生製作）；數學的題目與說明以中文顯示。免註冊，紀錄只存在這台裝置。</p><h3>⚡ 2秒測驗</h3>看到單字，在2秒內選出意思。上方會顯示上次的結果，和過去的自己比賽吧。<h3>🎧 聽音填空</h3>聽英文句子，選出填入（　）的詞語。答錯時會說明原因。<h3>🃏 反義詞翻牌</h3>把 big ⇔ small 這種意思相反的兩張牌湊成一對。<h3>∞ 無限模式・考試綜合</h3>一直出題直到答錯。考試綜合會混合你玩過的單元。<h3>今天・計畫・複習</h3>首頁會顯示當天影片的Part、從考試日倒推的「今天要做的單元」，以及答錯題目的複習（1天・3天・1週後）。",
-  src:"<p><b>單元</b>：依日本文部科學省「國中學習指導要領（2017年）解說 外語篇」第2章第2節「英語」2 內容 的項目排列與命名。參考年級依一般的學習順序。</p><p><b>題目</b>：伊先生Lab 原創句子。名言・諺語會標示出處。</p><p><b>音檔</b>：Microsoft Edge 語音合成，與影片相同。</p>",
+  how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同編號・相同句子</b>的每天1分鐘學習遊戲。英文科的意思與說明以日文顯示（為日本國中生製作）；數學、自然的題目與說明以中文顯示。免註冊，紀錄只存在這台裝置。</p><h3>⚡ 2秒測驗</h3>看到單字，在2秒內選出意思。上方會顯示上次的結果，和過去的自己比賽吧。<h3>🎧 聽音填空</h3>聽英文句子，選出填入（　）的詞語。答錯時會說明原因。<h3>🃏 反義詞翻牌</h3>把 big ⇔ small 這種意思相反的兩張牌湊成一對。<h3>∞ 無限模式・考試綜合</h3>一直出題直到答錯。考試綜合會混合你玩過的單元。<h3>今天・計畫・複習</h3>首頁會顯示當天影片的Part、從考試日倒推的「今天要做的單元」，以及答錯題目的複習（1天・3天・1週後）。",
+  src:"<p><b>單元</b>：依日本文部科學省「國中學習指導要領（2017年）解說 外語篇」第2章第2節「英語」2 內容 的項目排列與命名。參考年級依一般的學習順序。</p><p><b>自然</b>：國一（日本中學1年級）單元依「國中學習指導要領（2017年）」理科第1、第2領域排列。題目與圖由 App 自動產生，皆為原創。</p><p><b>題目</b>：伊先生Lab 原創句子。名言・諺語會標示出處。</p><p><b>音檔</b>：Microsoft Edge 語音合成，與影片相同。</p>",
   bkTitle:"紀錄備份",bkSave:"儲存紀錄",bkLoad:"還原儲存的紀錄",bkCopy:"複製代碼",bkFileBtn:"存成檔案",bkOpen:"開啟檔案",bkRestore:"還原",bkInfo:"<p>紀錄只存在這台裝置的瀏覽器中（不會傳到伺服器）。<b>換手機、清除瀏覽器資料</b>時會消失，請不時儲存。代碼可以貼在備忘錄或傳給自己的訊息裡。</p>",bkHome:"<p class=\"hint\">iPhone 的 Safari 若7天沒開啟，可能會刪除紀錄。從「分享 → 加入主畫面」開啟比較不會消失。</p>",bkPersist:"這台裝置的「不易刪除設定」：{v}",bkLast:"上次儲存：{d}",bkNever:"尚未儲存",bkCopied:"已複製代碼",bkBad:"這不是紀錄的代碼",bkAsk:"要把現在的紀錄換成儲存的紀錄（{d}）嗎？請再按一次「還原」",bkDone:"已還原紀錄",bkRemind:"紀錄備份",bkRemindSub:"已經{n}天沒有儲存",bkGo:"儲存",homeHint:"加入主畫面，紀錄比較不會消失",
   shareTxt:"45 Study {u} {s}",
  },"zh":{todayTitle:"今天的1分钟",moreTitle:"一次多学一点",moreNext:"接着做",moreWeak:"再练一次弱点",streak:"连续",days:"天",progTitle:"进度",progSum:"★{a}/{b}・玩过{c}",infBest:"∞ 最高",gQuiz:"2秒测验",gListen:"听音填空",gMemo:"反义词翻牌",
   byUnit:"选择单元",mix:"考试综合",free:"免注册・无广告・纪录只存在这台设备",byUnitTab:"依单元",byPartTab:"依视频Part",
-  sEn:"英文",sMath:"数学",gA1:"数与式（1年级）",gB1:"图形（1年级）",gC1:"函数（1年级）",gD1:"数据的运用（1年级）",gA2:"数与式（2年级）",gB2:"图形（2年级）",gC2:"函数（2年级）",gD2:"数据的运用（2年级）",gA3:"数与式（3年级）",gB3:"图形（3年级）",gC3:"函数（3年级）",gD3:"数据的运用（3年级）",gTf:"3秒○×",gMc:"四选一",modeMc:"四选一作答",modeTf:"3秒判断○×",unitLeadMath:"数字都能心算（不需要纸）。答错会显示错在哪里。题目数字每次都会变。",qkM:"选出答案",qk_calc:"计算看看",qk_expr:"化简",qk_note:"用文本式表示",qk_sub:"求式子的值",qk_eq:"解方程序（x 是多少？）",qk_word:"选出正确的答案",qk_sys:"解联立方程序",qk_trans:"等式变形",qk_fig:"看图表作答",qkTf:"正确吗？",tfTrue:"这是正确的。",ansIs2:"答案：",how2:"解法：",
+  sEn:"英文",sMath:"数学",sSci:"自然",gLife:"生命（生物）",gPart:"粒子（物质）",gEne:"能量（光、声、力）",gEarth:"地球（地科）",gSort:"分类游戏",unitLeadSci:"很多题目要看图作答。答错会说明为什么不对。计算题的数字每次都会变。",unitLeadSort:"把出现的词语快速分到两类中的一类（每题6秒）。",qk_sort:"属于哪一类？",gA1:"数与式（1年级）",gB1:"图形（1年级）",gC1:"函数（1年级）",gD1:"数据的运用（1年级）",gA2:"数与式（2年级）",gB2:"图形（2年级）",gC2:"函数（2年级）",gD2:"数据的运用（2年级）",gA3:"数与式（3年级）",gB3:"图形（3年级）",gC3:"函数（3年级）",gD3:"数据的运用（3年级）",gTf:"3秒○×",gMc:"四选一",modeMc:"四选一作答",modeTf:"3秒判断○×",unitLeadMath:"数字都能心算（不需要纸）。答错会显示错在哪里。题目数字每次都会变。",qkM:"选出答案",qk_calc:"计算看看",qk_expr:"化简",qk_note:"用文本式表示",qk_sub:"求式子的值",qk_eq:"解方程序（x 是多少？）",qk_word:"选出正确的答案",qk_sys:"解联立方程序",qk_trans:"等式变形",qk_fig:"看图表作答",qkTf:"正确吗？",tfTrue:"这是正确的。",ansIs2:"答案：",how2:"解法：",
   gVoc:"单字",gGram:"文法",gTalk:"会话",grade:"参考年级 {g}年级",grade13:"参考年级 1〜3年级",parts:"Part {a}〜{b}",stamps:"印章 {a}/{b}",acc:"正确率",best:"最高",
   lgNone:"尚未",lg1:"〜49%",lg2:"50〜69%",lg3:"70〜84%",lg4:"85%〜",lgTitle:"颜色＝正确率（弱点地图）",
   sAdj:"形容词测验",sVerb:"动词测验",sNoun:"名词测验（总复习）",sGram:"听音填空 英文文法",sKaiwa:"听音填空 会话表达",
@@ -527,8 +533,8 @@ const I18N={
   notyet:"<b>45 Study 将于 11月29日（日）早上7:00（日本时间）公开</b><br>用和伊先生Lab视频相同的单字・例句，每天1分钟的英文学习游戏。",
   rev:"日→英",
   howTitle:"45 Study 使用方法",
-  how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同编号・相同句子</b>的每天1分钟学习游戏。英文科的意思与说明以日文显示（为日本国中生制作）；数学的题目与说明以中文显示。免注册，纪录只存在这台设备。</p><h3>⚡ 2秒测验</h3>看到单字，在2秒内选出意思。上方会显示上次的结果，和过去的自己比赛吧。<h3>🎧 听音填空</h3>听英文句子，选出填入（　）的词语。答错时会说明原因。<h3>🃏 反义词翻牌</h3>把 big ⇔ small 这种意思相反的两张牌凑成一对。<h3>∞ 无限模式・考试综合</h3>一直出题直到答错。考试综合会混合你玩过的单元。<h3>今天・计划・复习</h3>首页会显示当天视频的Part、从考试日倒推的「今天要做的单元」，以及答错题目的复习（1天・3天・1周后）。",
-  src:"<p><b>单元</b>：依日本文部科学省「国中学习指导要领（2017年）解说 外语篇」第2章第2节「英语」2 内容 的项目排列与命名。参考年级依一般的学习顺序。</p><p><b>题目</b>：伊先生Lab 原创句子。名言・谚语会标示出处。</p><p><b>音档</b>：Microsoft Edge 语音合成，与视频相同。</p>",
+  how:"<p>和 YouTube「伊先生Lab」英文短片<b>相同编号・相同句子</b>的每天1分钟学习游戏。英文科的意思与说明以日文显示（为日本国中生制作）；数学、自然的题目与说明以中文显示。免注册，纪录只存在这台设备。</p><h3>⚡ 2秒测验</h3>看到单字，在2秒内选出意思。上方会显示上次的结果，和过去的自己比赛吧。<h3>🎧 听音填空</h3>听英文句子，选出填入（　）的词语。答错时会说明原因。<h3>🃏 反义词翻牌</h3>把 big ⇔ small 这种意思相反的两张牌凑成一对。<h3>∞ 无限模式・考试综合</h3>一直出题直到答错。考试综合会混合你玩过的单元。<h3>今天・计划・复习</h3>首页会显示当天视频的Part、从考试日倒推的「今天要做的单元」，以及答错题目的复习（1天・3天・1周后）。",
+  src:"<p><b>单元</b>：依日本文部科学省「国中学习指导要领（2017年）解说 外语篇」第2章第2节「英语」2 内容 的项目排列与命名。参考年级依一般的学习顺序。</p><p><b>自然</b>：国一（日本中学1年级）单元依「国中学习指导要领（2017年）」理科第1、第2领域排列。题目与图由 App 自动产生，皆为原创。</p><p><b>题目</b>：伊先生Lab 原创句子。名言・谚语会标示出处。</p><p><b>音档</b>：Microsoft Edge 语音合成，与视频相同。</p>",
   bkTitle:"纪录备份",bkSave:"保存纪录",bkLoad:"还原保存的纪录",bkCopy:"拷贝代码",bkFileBtn:"存成文件",bkOpen:"打开文件",bkRestore:"还原",bkInfo:"<p>纪录只存在这台设备的浏览器中（不会传到服务器）。<b>换手机、清除浏览器数据</b>时会消失，请不时保存。代码可以贴在备忘录或传给自己的消息里。</p>",bkHome:"<p class=\"hint\">iPhone 的 Safari 若7天没打开，可能会删除纪录。从「分享 → 加入主画面」打开比较不会消失。</p>",bkPersist:"这台设备的「不易删除设置」：{v}",bkLast:"上次保存：{d}",bkNever:"尚未保存",bkCopied:"已拷贝代码",bkBad:"这不是纪录的代码",bkAsk:"要把现在的纪录换成保存的纪录（{d}）吗？请再按一次「还原」",bkDone:"已还原纪录",bkRemind:"纪录备份",bkRemindSub:"已经{n}天没有保存",bkGo:"保存",homeHint:"加入主画面，纪录比较不会消失",
   shareTxt:"45 Study {u} {s}",
  }
@@ -580,10 +586,10 @@ const ANT=(()=>{ const pairs=[]; for(const o of V.adj){ if(o.pip&&o.w<o.ant){ co
   const sets=[]; for(let i=0;i<pairs.length;i+=6) sets.push(pairs.slice(i,i+6)); if(sets.length>1&&sets[sets.length-1].length<4){ const l=sets.pop(); sets[sets.length-1].push(...l); } return sets; })();
 U.ant.parts=ANT.map((_,i)=>i+1);
 // 教科：数学は公開日が決まるまでプレビューだけで表示
-const SUBJECTS=[{id:"en",n:"sEn",rel:null},{id:"math",n:"sMath",rel:"2026-12-06T07:00:00+09:00"}];
+const SUBJECTS=[{id:"en",n:"sEn",rel:null},{id:"math",n:"sMath",rel:"2026-12-06T07:00:00+09:00"},{id:"sci",n:"sSci",rel:"2026-12-13T07:00:00+09:00"}];
 const subjOpen=x=>!x.rel||PREVIEW||(x.rel!=="preview"&&Date.now()>=Date.parse(x.rel));
 UNITS.forEach(u=>u.s=u.s||"en");
-for(const mu of MATH.units){ UNITS.push(mu); U[mu.id]=mu; for(const p of mu.parts) mu.sk[p].forEach((fn,i)=>{ const id=`m-${mu.id}-${p}-${i}`; IT[id]={id,k:"math",u:mu.id,p,fn}; }); }
+for(const mu of [...MATH.units,...SCI.units]){ UNITS.push(mu); U[mu.id]=mu; for(const p of mu.parts) mu.sk[p].forEach((fn,i)=>{ const id=`m-${mu.id}-${p}-${i}`; IT[id]={id,k:"math",u:mu.id,p,fn}; }); }
 const SUBJ=()=>{ const v=store.get("s_subj","en"); const x=SUBJECTS.find(z=>z.id===v); return x&&subjOpen(x)?v:"en"; };
 const subjOf=o=>{ const u=unitOfItem(o); return u?u.s:"en"; };
 const MM=()=>store.get("s_mm","mc");   // 数学：4択(mc) か 3秒○×(tf)
@@ -626,11 +632,11 @@ function planToday(){ const {left}=examInfo(); if(left<=0) return [];
   for(const us of tracks){ const rest=[]; for(const u of us) for(const p of u.parts) if(!REC.stamped(u,p)||done[u.id+":"+p]===td) rest.push({u,p});
     const per=Math.max(1,Math.ceil(rest.length/left)); out.push(...rest.slice(0,per)); }
   return out.slice(0,3); }
-function renderHome(){ const sj=SUBJ(); document.body.dataset.g=sj==="math"?"math":"quiz";
+function renderHome(){ const sj=SUBJ(); document.body.dataset.g=sj==="en"?"quiz":sj;
   const vis=SUBJECTS.filter(subjOpen); const seg=$("#subjSeg"); seg.hidden=vis.length<2;
   seg.innerHTML=vis.map(x=>`<button data-sj="${x.id}" class="${x.id===sj?"on":""}">${esc(t(x.n))}</button>`).join("");
   $$("#subjSeg [data-sj]").forEach(b=>b.onclick=()=>{ store.set("s_subj",b.dataset.sj); renderHome(); });
-  const GM=sj==="math"?[["tf","--c-math","bolt","gTf"],["mc","--c-listen","check","gMc"]]:[["quiz","--c-quiz","bolt","gQuiz"],["listen","--c-listen","ear","gListen"],["memo","--c-memo","cards","gMemo"]];
+  const GM=sj!=="en"?[["tf",sj==="sci"?"--c-sci":"--c-math","bolt","gTf"],["mc","--c-listen","check","gMc"],...(sj==="sci"?[["sort","--c-memo","cards","gSort"]]:[])]:[["quiz","--c-quiz","bolt","gQuiz"],["listen","--c-listen","ear","gListen"],["memo","--c-memo","cards","gMemo"]];
   $("#games").innerHTML=GM.map(([g,c,ic,k])=>`<button class="game" data-go="${g}"><span class="gi" style="--c:var(${c})"><i class="ic" data-ic="${ic}"></i></span><b>${esc(t(k))}</b></button>`).join("");
   paintIcons($("#games")); $$("#games [data-go]").forEach(b=>b.onclick=()=>goGame(b.dataset.go));
   const rows=[]; const vids=todayVideos();
@@ -667,7 +673,7 @@ function renderProg(){ const us=UNITS.filter(u=>u.s===SUBJ()); let all=0,st=0,tr
     <div class="legend"><span><i></i>${esc(t("lgNone"))}</span><span><i class="h1"></i>${t("lg1")}</span><span><i class="h2"></i>${t("lg2")}</span><span><i class="h3"></i>${t("lg3")}</span><span><i class="h4"></i>${t("lg4")}</span></div>`;
   paintIcons($("#prog")); $$("#prog [data-pp]").forEach(b=>b.onclick=()=>{ const [id,p]=b.dataset.pp.split(":"); playPart(U[id],+p); }); }
 function infBest(){ const sj=SUBJ(); return Math.max(0,...Object.entries(REC.inf).filter(([k])=>k===(sj==="en"?"mix":"mix-"+sj)||(U[k]&&U[k].s===sj)).map(([,v])=>v)); }
-function goGame(g){ if(g==="memo") return openUnit(U.ant); if(g==="tf"||g==="mc"){ store.set("s_mm",g); return openUnits(); }
+function goGame(g){ if(g==="memo") return openUnit(U.ant); if(g==="sort") return openUnit(U.sort); if(g==="tf"||g==="mc"){ store.set("s_mm",g); return openUnits(); }
   uTab="unit"; renderUnits(); show("units",t(g==="quiz"?"gQuiz":"gListen")); const first=$(g==="quiz"?'#uList [data-u="adj"]':'#uList [data-u="cmp"]'); if(first) first.scrollIntoView({block:"start"}); }
 
 /* ===== 単元で選ぶ ===== */
@@ -676,7 +682,7 @@ function unitStat(u){ if(u.k==="ant"){ const n=u.parts.filter(p=>REC.stamped(u,p
   const items=unitItems(u); return {st:u.parts.filter(p=>REC.stamped(u,p)).length,of:u.parts.length,acc:REC.acc(items)}; }
 function renderUnits(){ const sj=SUBJ(); $("#uSeg").hidden=sj!=="en"; if(sj!=="en") uTab="unit"; $$("#uSeg button").forEach(b=>b.classList.toggle("on",b.dataset.v===uTab)); const el=$("#uList");
   if(uTab==="unit"){ const html=[]; let g="";
-    for(const u of UNITS.filter(u=>u.s===sj)){ if(u.g!==g){ g=u.g; html.push(`<div class="grp">${esc(t({voc:"gVoc",gram:"gGram",talk:"gTalk",A1:"gA1",B1:"gB1",C1:"gC1",D1:"gD1",A2:"gA2",B2:"gB2",C2:"gC2",D2:"gD2",A3:"gA3",B3:"gB3",C3:"gC3",D3:"gD3"}[g]))}</div>`); }
+    for(const u of UNITS.filter(u=>u.s===sj)){ if(u.g!==g){ g=u.g; html.push(`<div class="grp">${esc(t({voc:"gVoc",gram:"gGram",talk:"gTalk",A1:"gA1",B1:"gB1",C1:"gC1",D1:"gD1",A2:"gA2",B2:"gB2",C2:"gC2",D2:"gD2",A3:"gA3",B3:"gB3",C3:"gC3",D3:"gD3",life:"gLife",part:"gPart",ene:"gEne",earth:"gEarth",sort:"gSort"}[g]))}</div>`); }
       const s=unitStat(u); const inf=REC.inf[u.id];
       const sub=(u.gr==="1-3"?t("grade13"):t("grade",{g:u.gr}))+"・"+(u.k==="ant"?t("memoSet",{n:"1〜"+u.parts.length}):t("parts",{a:u.parts[0],b:u.parts[u.parts.length-1]}));
       html.push(`<button class="unit" data-u="${u.id}"><span class="hm ${heat(s.acc)}"></span><span class="un">${esc(uname(u))}<small>${esc(sub)}</small></span>
@@ -703,9 +709,9 @@ function renderUnit(u){ if(u.k==="math") return renderMathUnit(u); const memo=u.
   paintIcons($("#uBody"));
   $$("#uBody [data-p]").forEach(b=>b.onclick=()=>playPart(u,+b.dataset.p));
   if(!memo){ $("#uBody .ubtns").insertAdjacentHTML("afterend",tlRow()); paintIcons($("#uBody")); $("#uPrac").onclick=()=>startQuiz({u,items:shuffle(unitItems(u)).slice(0,10),title:uname(u)}); $("#uInf").onclick=()=>startInf({scope:u.id,items:unitItems(u),title:uname(u)}); } }
-function renderMathUnit(u){ document.body.dataset.g="math"; const s=unitStat(u); const mm=MM();
+function renderMathUnit(u){ document.body.dataset.g=u.s; const s=unitStat(u); const mm=MM();
   const rows=u.parts.map(p=>`<button class="unit" data-p="${p}"><span class="hm${REC.stamped(u,p)?" h4":""}"></span><span class="un"><span class="num">Part ${p}</span>　<span style="font-weight:700">${esc(u.pn[p])}</span></span><span class="ur">${REC.stamped(u,p)?"★":""}${REC.part[u.id+":"+p]!=null?`<br>${Math.round(REC.part[u.id+":"+p]*100)}%`:""}</span></button>`).join("");
-  $("#uBody").innerHTML=`<div class="uhead"><p>${esc(t("grade",{g:u.gr}))}・${esc(u.ref)}</p><p>${esc(t("unitLeadMath"))}</p></div>
+  $("#uBody").innerHTML=`<div class="uhead"><p>${esc(t("grade",{g:u.gr}))}・${esc(u.ref)}</p><p>${esc(t(u.s==="sci"?(u.id==="sort"?"unitLeadSort":"unitLeadSci"):"unitLeadMath"))}</p></div>
     <div class="urec"><span>${esc(t("acc"))} <b class="num">${s.acc&&s.acc.n>=3?s.acc.p+"%":"—"}</b></span><span>★ <b class="num">${s.st}/${s.of}</b></span><span>∞ ${esc(t("best"))} <b class="num">${REC.inf[u.id]||"—"}</b></span></div>
     <div class="mode" id="mMode"><button data-m="mc" class="${mm==="mc"?"on":""}">${esc(t("modeMc"))}</button><button data-m="tf" class="${mm==="tf"?"on":""}">${esc(t("modeTf"))}</button></div>
     <div class="ubtns"><button class="btn primary" id="uPrac"><i class="ic" data-ic="play"></i>${esc(t("practice"))}</button><button class="btn" id="uInf" style="color:var(--c-inf)"><i class="ic" data-ic="inf"></i>${esc(t("inf"))}</button></div>
@@ -722,8 +728,9 @@ function playPart(u,p){ if(u.k==="ant") return startMemo(p); if(u.k==="math") re
 /* ===== 問題を作る ===== */
 const REV=()=>store.get("s_rev",false);
 function mkQ(o){ const rev=REV();
-  if(o.k==="math"){ const g=MATH.make(o.fn); const tf=MM()==="tf";
+  if(o.k==="math"){ const g=(U[o.u].s==="sci"?SCI:MATH).make(o.fn); const tf=MM()==="tf";
     if(tf){ const w=Math.random()<.5?null:g.wrongs[rnd(g.wrongs.length)]; const v=w?w.v:g.ans; return {o,kind:"m",tf:true,g,stmt:g.tf(v),fwhy:w?w.why:"",ch:[{t:"○",ok:!w},{t:"×",ok:!!w}]}; }
+    if(g.opts) return {o,kind:"m",tf:false,g,ch:g.opts.map(x=>x===g.ans?{t:x,ok:true}:{t:x,ok:false,why:g.wrongs[0].why})};   // なかま分け：左右の位置は固定
     return {o,kind:"m",tf:false,g,ch:shuffle([{t:g.ans,ok:true},...g.wrongs.slice(0,3).map(w=>({t:w.v,ok:false,why:w.why}))])}; }
   if(o.k==="gram"){ const ch=shuffle(o.ch.slice()); return {o,kind:"g",rev,ch:ch.map(c=>({t:c,ok:c===o.b})),audio:o.id,text:o.en}; }
   const pool=V[o.k]; const field=rev?"w":"ja"; const used=new Set([o[field],o.w,o.ja]); const opts=[];
@@ -737,7 +744,7 @@ const sentHTML=(o,filled)=>{ const i=o.en.indexOf(o.b); return esc(o.en.slice(0,
 let Z=null;   // いま進めているクイズ
 function startQuiz(cfg){ if(!cfg.items.length) return; Z={...cfg,mode:"set",i:0,marks:[],miss:[],t0:Date.now(),id:Math.random()};
   const gk=cfg.u&&cfg.p!=null?`${cfg.u.id}:${cfg.p}:${cfg.u.k==="math"?MM():REV()?1:0}`:null; Z.gk=gk; Z.ghost=gk?REC.gh[gk]:null;
-  document.body.dataset.g=cfg.u&&cfg.u.k==="math"||SUBJ()==="math"&&!cfg.u?"math":cfg.u&&cfg.u.k==="gram"?"listen":"quiz"; show("quiz",cfg.title); ask(); }
+  document.body.dataset.g=cfg.u&&cfg.u.k==="math"?cfg.u.s:!cfg.u&&SUBJ()!=="en"?SUBJ():cfg.u&&cfg.u.k==="gram"?"listen":"quiz"; show("quiz",cfg.title); ask(); }
 function dueNow(){ return REC.due().filter(id=>subjOf(IT[id])===SUBJ()); }
 function startReview(){ const ids=shuffle(dueNow()).slice(0,10); startQuiz({items:ids.map(i=>IT[i]),title:t("review"),review:true}); }
 function startInf(cfg){ if(!cfg.items.length) return; Z={...cfg,mode:"inf",i:0,marks:[],miss:[],t0:Date.now(),id:Math.random(),bag:shuffle(cfg.items.slice())};
@@ -761,7 +768,7 @@ function startTimer(sec){ const bar=$("#qTbar i"); clearTimeout(Z.tt); const mul
 function stopTimer(){ clearTimeout(Z.tt); const bar=$("#qTbar i"); const w=getComputedStyle(bar).transform; bar.style.transition="none"; bar.style.transform=w==="none"?"scaleX(1)":w; }
 async function ask(){ const o=curItem(); const q=mkQ(o); Z.q=q; Z.qt=Date.now(); headQ(); const body=$("#qBody");
   if(q.kind==="m"){ body.innerHTML=`<div class="qcard"><div class="qk">${esc(t(q.tf?"qkTf":"qk_"+q.g.kind))}</div><div class="qm${q.tf||q.g.kind!=="calc"?" st":""}${/word|fig|sys|trans/.test(q.g.kind)?" wd":""}">${q.tf?q.stmt:q.g.q}</div></div>
-      <div class="chs ${q.tf?"tf":q.ch.some(c=>c.t.replace(/<[^>]*>/g,"").length>9)?"one":"v"}">${q.ch.map((c,i)=>`<button class="ch m${c.t.replace(/<[^>]*>/g,"").length>9?" lg":""}" data-c="${i}">${c.t}</button>`).join("")}</div><div id="qFb"></div>`; }
+      <div class="chs ${q.tf?"tf":q.g.opts?"v srt2":q.ch.some(c=>c.t.replace(/<[^>]*>/g,"").length>9)?"one":"v"}">${q.ch.map((c,i)=>`<button class="ch m${!q.g.opts&&c.t.replace(/<[^>]*>/g,"").length>9?" lg":""}" data-c="${i}">${c.t}</button>`).join("")}</div><div id="qFb"></div>`; }
   else if(q.kind==="v"){ body.innerHTML=`<div class="qcard"><div class="qk">${esc(t(q.rev?"qkVr":"qkV"))}</div><div class="qw">${esc(q.rev?o.ja:o.w)}</div>${q.rev?"":`<button class="btn icon replay" id="qRe" aria-label="${esc(t("replay"))}"><i class="ic" data-ic="speaker"></i></button>`}</div>
       <div class="chs v">${q.ch.map((c,i)=>`<button class="ch" data-c="${i}">${esc(c.t)}</button>`).join("")}</div><div id="qFb"></div>`; }
   else { body.innerHTML=`<div class="qcard"><div class="qk">${esc(t(q.rev?"qkGr":"qkG"))}</div>${q.rev?`<div class="qj big" style="margin-top:6px">${esc(o.ja)}</div>`:""}<div class="qs">${sentHTML(o,false)}</div>${q.rev?"":`<button class="btn icon replay" id="qRe" aria-label="${esc(t("replay"))}"><i class="ic" data-ic="speaker"></i></button>`}</div>
@@ -771,7 +778,7 @@ async function ask(){ const o=curItem(); const q=mkQ(o); Z.q=q; Z.qt=Date.now();
   const re=$("#qRe"); if(re) re.onclick=()=>say(q.audio,q.text);
   $("#qDock").innerHTML=`<button class="btn" id="qSkip">${esc(t("skip"))}</button>`; $("#qSkip").onclick=()=>answer(null);
   const id=Z.id;
-  if(q.kind==="m"){ startTimer(q.tf?3:20); }
+  if(q.kind==="m"){ startTimer(q.tf?3:(q.g.sec||20)); }
   else if(q.kind==="v"){ if(!q.rev) say(q.audio,q.text); startTimer(2); }
   else if(q.rev){ startTimer(8); }
   else { const bar=$("#qTbar i"); bar.style.transition="none"; bar.style.transform="scaleX(1)"; await say(q.audio,q.text); if(Z&&Z.id===id&&Z.q===q&&!q.done) startTimer(4); } }
@@ -796,8 +803,8 @@ function answer(ci){ const q=Z.q; if(!q||q.done) return; q.done=true; stopTimer(
   const last=Z.mode==="inf"?!ok:Z.i>=Z.items.length-1;
   $("#qDock").innerHTML=`<button class="btn primary big" id="qNext">${esc(t(last?"seeResult":"next"))}<i class="ic" data-ic="next"></i></button>`; paintIcons($("#qDock"));
   $("#qNext").onclick=()=>{ if(last) finish(); else { Z.i++; ask(); } };
-  if(ok&&!last&&(q.kind==="v"||q.tf)&&Z.mode!=="inf"){ const id=Z.id,qq=q; setTimeout(()=>{ if(Z&&Z.id===id&&Z.q===qq&&pane==="quiz") { Z.i++; ask(); } },1100); }
-  if(ok&&Z.mode==="inf"&&(q.kind==="v"||q.tf)){ const id=Z.id,qq=q; setTimeout(()=>{ if(Z&&Z.id===id&&Z.q===qq&&pane==="quiz") ask(); },900); }
+  if(ok&&!last&&(q.kind==="v"||q.tf||q.g&&q.g.kind==="sort")&&Z.mode!=="inf"){ const id=Z.id,qq=q; setTimeout(()=>{ if(Z&&Z.id===id&&Z.q===qq&&pane==="quiz") { Z.i++; ask(); } },1100); }
+  if(ok&&Z.mode==="inf"&&(q.kind==="v"||q.tf||q.g&&q.g.kind==="sort")){ const id=Z.id,qq=q; setTimeout(()=>{ if(Z&&Z.id===id&&Z.q===qq&&pane==="quiz") ask(); },900); }
   $("#qBody").scrollTop=$("#qBody").scrollHeight; }
 function finish(){ hush(); const z=Z; Z=null; const sec=Math.round((Date.now()-z.t0)/1000);
   if(z.mode==="inf"){ const n=z.marks.filter(Boolean).length; const prev=REC.inf[z.scope]||0; const all=Math.max(0,...Object.values(REC.inf));
